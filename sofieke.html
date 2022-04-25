@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function maakCategoryAan(){
+            var categoryName = {};
+            categoryName.cat_name = document.getElementById("category_name").value;
+            var jsonObject = JSON.stringify(categoryName);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+            }
+            xhr.open("POST", "http://localhost:8080/testpostsofieke/test", true)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.send(jsonObject);
+        }
+
+        function toonAlleCategories(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){ 
+                    // alert("terug van de backend")
+                    var antwoordJSON = this.responseText;
+                    var antwoord = JSON.parse(antwoordJSON);
+                    for(var x=0; x <antwoord.length; x++){
+                        document.getElementById("overzicht").innerHTML += antwoord[x].cat_name+"<br>";
+                    }
+                }
+            }
+            xhr.open("GET", "http://localhost:8080/categories",true)
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    Bestand van Sofieke
+    <button onclick="toonAlleCategories()"> Klik voor de Categories</button>
+    <div id="overzicht"></div>
+    <hr><hr>
+    <button onclick="maakCategoryAan()"> Nieuwe categorie</button>
+    <input type="text" id="category_name"
+</body>
+</html>
