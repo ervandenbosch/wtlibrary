@@ -1,0 +1,47 @@
+.img1 {
+    width: 300px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+}
+
+.tekstEnFoto {
+    display: flex;
+    left: 0;
+    color: white;
+    
+}
+
+body {
+    background-color: black;
+    border-style: solid;
+    border-color: #00e600;
+    border-width: 12px;
+}
+
+.over {
+    margin-bottom: 25px;
+}
+
+.categorie {
+    margin-bottom: 20px;
+}
+
+.metaInformatie {
+    margin-left: 2%;
+    color: white;
+}
+
+.knop {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.tekst {
+    margin-top: 2%;
+}
+
+.btn btn-success {
+    width: 100px;
+}
