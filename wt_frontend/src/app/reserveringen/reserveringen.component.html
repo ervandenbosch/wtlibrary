@@ -1,0 +1,17 @@
+<table>
+    <thead> 
+        <tr>
+            <th>Boek</th>
+            <th>User</th>
+            <th>Datum gereserveerd</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let tempReservering of reserveringlijst">
+            <td>{{ tempReservering.title }}</td>
+            <td>{{ tempReservering.firstName + " " + tempReservering.lastName }}</td>
+            <td>{{ tempReservering.dateReserved }}</td>
+        </tr>
+    </tbody>
+</table>
