@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Boek } from './boek';
 
 @Component({
   selector: 'app-boekenpagina',
@@ -8,6 +9,14 @@ import { Router } from '@angular/router';
 })
 
 export class BoekenpaginaComponent implements OnInit {
+
+  boekenlijst: Boek[] = [
+    new Boek(1, "3205173257987", "The Lord of the Rings", 5, 3, "ITS A RING TING", "../../assets/images/lotr.jpg"),
+    new Boek(2, "0648378181067", "The Bible", 10, 7, "Jesus", "../../assets/images/bible.jpg"),
+    new Boek(3, "4778995981189", "Words on Multiple Pages", 20, 12, "I present to you these words", "../../assets/images/words.jpeg"),
+    new Boek(4, "9556230610350", "The Full and Exciting History of the Potato", 3, 0, "There once was a potato..", "../../assets/images/potato.jpg"),
+    new Boek(5, "6628248015665", "How to Get Away With Stealing 2 Bananas", 6, 1, "you dont", "../../assets/images/banana.jpg")
+  ];
 
   titel = "Harry Potter and the Goblet of Fire"
   fotoPad = "../../assets/images/harry.jpg"
