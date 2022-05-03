@@ -1,3 +1,4 @@
+<!-- BOEK  -->
 <body>
     <div class="tekstEnFoto">
         <img src={{boekenlijst[id].path}} class="img1">
@@ -19,10 +20,45 @@
         <h6>Aantal exemplaren beschikbaar:</h6>
         <p> {{boekenlijst[id].n_available}}</p>
     </div>
+
+
+    <!-- KNOP -->
     <div class="knop">
-        <!--    pad moet nog gedefineerd worden  -->
-        <a *ngIf="is_beschikbaar" routerLink="/reservering"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
+        <a *ngIf="is_beschikbaar" (click)="open(mymodal)"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
         <a *ngIf="!is_beschikbaar"><button class="btn btn-failure" style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet Beschikbaar</button></a>
     </div>
     <br><br>
+    
+
+    <!-- POP UP 1-->
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Boek Reserveren</h4>
+          <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table id="boekenlijst" class="table table-hover">
+              <!-- TABEL -->
+              <thead class="thead-dark">
+                <p>Weet je zeker dat je dit boek wilt reserveren?</p>
+                  <tr>
+                      <th>Titel</th>
+                      <th>ISBN</th>
+                  </tr>
+              </thead>
+      
+              <tbody>
+                  <tr >
+                    <td>{{boekenlijst[id].title}}</td>
+                    <td>{{boekenlijst[id].isbn}}</td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Reservering bevestigen</button>
+        </div>
+      </ng-template>
 </body>

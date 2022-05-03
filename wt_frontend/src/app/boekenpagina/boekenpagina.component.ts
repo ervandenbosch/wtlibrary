@@ -1,9 +1,10 @@
-//imports
+// IMPORTS
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Boek } from './boek';
 
-//component eigenschappen
+// COMPONENT EIGENSCHAPPEN
 @Component({
   selector: 'app-boekenpagina',
   templateUrl: './boekenpagina.component.html',
@@ -12,8 +13,7 @@ import { Boek } from './boek';
 
 export class BoekenpaginaComponent implements OnInit {
 
-
-  //Lijst met boek-objecten
+  // LIJST MET BOEK-OBJECTEN
   boekenlijst: Boek[] = [
     new Boek(0, "3205173257987", "The Lord of the Rings", 5, 3, "ITS A RING TING", "../../assets/images/lotr.jpg", ["Fantasy", " Avontuur"]),
     new Boek(1, "0648378181067", "The Bible", 10, 7, "Jesus Jesus Jesus Jesus Jesus Jesus", "../../assets/images/bible.jpg", ["Religie", " Christendom"]),
@@ -33,14 +33,43 @@ export class BoekenpaginaComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private modalService: NgbModal
   ) { }
 
-    id = 0
+  
+  closeResult: string = '';
 
+  // POP UP METHODS
+  // Geen idee wat deze doen
+  open(content:any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  } 
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+
+
+
+  // URL METHOD
+  // Initialiseerd var "id", neemt ingevoerde waarde in URL en slaat deze op in var "id"
+    id = 0
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     
+    //Als n_available van Boek-object > 0, zet var is_beschikbaar op true
     if (this.boekenlijst[this.id].n_available > 0) {
       this.is_beschikbaar = true;
     }
