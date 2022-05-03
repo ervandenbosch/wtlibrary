@@ -8,12 +8,12 @@
 .tekstEnFoto {
     display: flex;
     left: 0;
-    color: white;
+    color: black;
     
 }
 
 body {
-    background-color: black;
+    background-color: white;
     border-style: solid;
     border-color: #00e600;
     border-width: 12px;
@@ -29,7 +29,7 @@ body {
 
 .metaInformatie {
     margin-left: 2%;
-    color: white;
+    color: black;
 }
 
 .knop {

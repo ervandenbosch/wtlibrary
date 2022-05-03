@@ -1,11 +1,11 @@
 <body>
     <div class="tekstEnFoto">
-        <img src={{fotoPad}} class="img1">
+        <img src={{boekenlijst[id].path}} class="img1">
         <div class="tekst">
-            <h1>{{boekenlijst[0].title}}</h1>
+            <h1>{{boekenlijst[id].title}}</h1>
             <h4>Beschrijving</h4>
             <p>
-                {{beschrijving}}
+                {{boekenlijst[id].description}}
             </p>
         </div>
     </div>
@@ -14,14 +14,15 @@
         <h4 class="over">Over dit boek</h4>
 
         <h6>Categorie(ën):</h6>
-        <p class="categorie">{{categorieen}}</p>
+        <p class="categorie">{{boekenlijst[id].categories}}</p>
 
-        <h6>Beschikbaarheid:</h6>
-        <p> {{beschikbaar}}</p>
+        <h6>Aantal exemplaren beschikbaar:</h6>
+        <p> {{boekenlijst[id].n_available}}</p>
     </div>
     <div class="knop">
         <!--    pad moet nog gedefineerd worden  -->
-        <a routerLink="/reservering"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
+        <a *ngIf="is_beschikbaar" routerLink="/reservering"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
+        <a *ngIf="!is_beschikbaar"><button class="btn btn-failure" style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet Beschikbaar</button></a>
     </div>
     <br><br>
 </body>

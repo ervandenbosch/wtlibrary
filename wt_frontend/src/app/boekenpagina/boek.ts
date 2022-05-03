@@ -7,6 +7,7 @@ export class Boek {
         public n_o_copies:  number,
         public n_available: number,
         public description: string,
-        public pad        : string) {
+        public path        : string,
+        public categories : Array<string>) {
         }
 }
