@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -10,6 +11,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +21,8 @@ import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
     LoginComponent,
     LogoutComponent,
     BoekenlijstComponent,
-    BoekenpaginaComponent
+    BoekenpaginaComponent,
+
   ],
   imports: [
     BrowserModule,
