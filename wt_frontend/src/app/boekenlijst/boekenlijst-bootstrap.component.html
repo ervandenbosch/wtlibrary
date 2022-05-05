@@ -1,0 +1,108 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="container">
+
+    <!-- Titel -->
+    <div class="item">
+        <h2> Boekenlijst</h2>
+    </div>
+
+    <div class="break"></div>
+
+    <!-- Zoekbalk -->
+    <div class="item-center">
+        <form class="example" action="action_page.php">
+        <input id="Input" onkeyup="searchBooks()" type="text" placeholder="Zoeken..." name="search" >
+        <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="break2"></div>
+    
+
+    <!-- Filter -->
+    <div class="item"> <h5>Veld voor Filter</h5>
+    </div>
+    
+    <!-- Tabel -->
+    <div class="item-center">
+        <table class="table table-hover" id="boekenlijst">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Titel</th>
+                    <th>Hoeveelheid exemplaren</th>
+                    <th>Beschikbaar</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let tempBoek of boekenlijst" [ngClass]="{'highlight_red': tempBoek.n_available == 0}">
+                    <td>{{ tempBoek.book_id }}</td>
+                    <td>{{ tempBoek.isbn }}</td>
+                    <td>{{ tempBoek.title }}</td>
+                    <td>{{ tempBoek.n_o_copies }}</td>
+                    <td>{{ tempBoek.n_available }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="break"></div>
+
+    <!-- Knoppen -->
+    <div class="item">
+    </div>
+    <div class="item2">
+        <button class="btn" (click)="open(mymodal)"><i class="fa fa-book" ></i> Boek Toevoegen</button>
+    </div>
+</div>
+    
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Boek Toevoegen</h4>
+    <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table id="boekenlijst" class="table table-hover">
+
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>ISBN</th>
+                <th>Titel</th>
+                <th>Hoeveelheid exemplaren</th>
+                <th>Beschikbaar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr >
+
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="open(mymodal2); modal.close('Save click')">Opslaan</button>
+  </div>
+</ng-template>
+
+<ng-template #mymodal2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Weet je het zeker?</h4>
+      <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-red" (click)="modal.close('Save click')">ja</button>
+      <button type="button" class="btn btn-outline-red" (click)="open(mymodal); modal.close('Save click')">Nee</button>
+    </div>
+  </ng-template>

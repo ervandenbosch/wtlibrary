@@ -12,6 +12,8 @@ import { ReserveringenComponent } from './reserveringen/reserveringen.component'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoedkeurModalComponent } from './reserveringen/modals/goedkeur-modal/goedkeur-modal.component';
 import { AfkeurModalComponent } from './reserveringen/modals/afkeur-modal/afkeur-modal.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { AfkeurModalComponent } from './reserveringen/modals/afkeur-modal/afkeur
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
