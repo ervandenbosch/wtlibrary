@@ -1,7 +1,9 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <nav class="navbar navbar-expand navbar-dark bg-light border">
     <div>
-      <a routerLink="/" class="navbar-brand">blabla</a>
+      <a routerLink="/" class="navbar-brand m-2">
+        <img src="../assets/images/wtlogo.svg" />
+      </a>
     </div>
     <ul class="navbar-nav">
       <li>
@@ -11,10 +13,13 @@
 
     <ul class="navbar-nav navbar-collapse justify-content-end">
       <li>
-        <a routerLink="/login" class="nav-link">Login</a>
+        <a routerLink="/profielpagina" class="nav-link text-dark">Profiel</a>
       </li>
       <li>
-        <a routerLink="/logout" class="nav-link">Logout</a>
+        <a routerLink="/login" class="nav-link text-dark">Login</a>
+      </li>
+      <li>
+        <a routerLink="/logout" class="nav-link text-dark">Logout</a>
       </li>
     </ul>
   </nav>

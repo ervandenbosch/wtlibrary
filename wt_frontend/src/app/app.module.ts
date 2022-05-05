@@ -12,6 +12,9 @@ import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
 
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
