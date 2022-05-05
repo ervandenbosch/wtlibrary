@@ -1,17 +1,29 @@
-<table>
-    <thead> 
-        <tr>
-            <th>Boek</th>
-            <th>User</th>
-            <th>Datum gereserveerd</th>
-        </tr>
-    </thead>
+<div class = "container">
+    <h1 class="item">Reserveringen ter goedkeuring</h1>
+    <table class = "table table-hover" id = "reserveringlijst">
+        <thead class = "table-light"> 
+            <tr>
+                <th>Boek</th>
+                <th>User</th>
+                <th>Datum gereserveerd</th>
+                <th>Nog beschikbaar </th>                
+                <th> </th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr *ngFor="let tempReservering of reserveringlijst">
+                <td class="align-middle">{{ tempReservering.title }}</td>
+                <td class="align-middle">{{ tempReservering.firstName + " " + tempReservering.lastName }}</td>
+                <td class="align-middle">{{ tempReservering.dateReserved }}</td>
+                <td class="align-middle">{{ tempReservering.available }}</td>
+                <td class="align-middle"> <button class="btn btn-secondary btn-sm" (click)="openGoedkeurModal(tempReservering)">Goedkeuren</button> 
+                <td class="align-middle"> <button class="btn btn-secondary btn-sm" (click)="openAfkeurModal(tempReservering)">Afkeuren</button> 
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-    <tbody>
-        <tr *ngFor="let tempReservering of reserveringlijst">
-            <td>{{ tempReservering.title }}</td>
-            <td>{{ tempReservering.firstName + " " + tempReservering.lastName }}</td>
-            <td>{{ tempReservering.dateReserved }}</td>
-        </tr>
-    </tbody>
-</table>
+
+  
+  

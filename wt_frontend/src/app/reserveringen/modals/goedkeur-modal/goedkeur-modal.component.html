@@ -1,0 +1,16 @@
+<!-- Pop-up goedkeuren -->
+<div class="modal-header">
+    <h5 class="modal-title"id="modal-basic-title">Reservering goedkeuren?</h5>
+        <button type="button" class="close" aria-label="Close" data-dissmiss="modal" (click)="closeModal('dismiss')">x</button>
+</div>
+<div class="modal-body">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Titel: {{fromParent.title}}</li>
+        <li class="list-group-item">User: {{fromParent.firstName}} {{fromParent.lastName}}</li>
+        <li class="list-group-item">Datum: {{fromParent.dateReserved}}</li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary">Ja</button>
+    <button type="button" class="btn btn-secondary">Nee</button>
+</div>

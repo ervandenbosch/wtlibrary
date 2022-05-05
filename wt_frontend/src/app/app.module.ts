@@ -8,6 +8,10 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
+import { ReserveringenComponent } from './reserveringen/reserveringen.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GoedkeurModalComponent } from './reserveringen/modals/goedkeur-modal/goedkeur-modal.component';
+import { AfkeurModalComponent } from './reserveringen/modals/afkeur-modal/afkeur-modal.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,19 @@ import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
     FooterComponent,
     LoginComponent,
     LogoutComponent,
-    BoekenlijstComponent
+    BoekenlijstComponent,
+    ReserveringenComponent,
+    GoedkeurModalComponent,
+    AfkeurModalComponent
+  ],
+  entryComponents:[
+    GoedkeurModalComponent,
+    AfkeurModalComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
