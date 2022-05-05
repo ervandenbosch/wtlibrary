@@ -1,4 +1,2 @@
 
-node_modules/@popperjs/core/lib/modifiers/applyStyles.d.ts
-*.scss
-node_modules/@popperjs/core/dist/cjs/enums.js
+node_modules/
