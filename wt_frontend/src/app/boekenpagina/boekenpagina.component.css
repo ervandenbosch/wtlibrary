@@ -46,3 +46,7 @@ body {
 .btn btn-success {
     width: 100px;
 }
+
+.mymodel {
+    z-index: 1050 !important;
+}
