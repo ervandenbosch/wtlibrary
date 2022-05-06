@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ReserveringModalComponent } from './reservering-modal.component';
 
-describe('GoedkeurModalComponent', () => {
+describe('ReserveringModalComponent', () => {
   let component: ReserveringModalComponent;
   let fixture: ComponentFixture<ReserveringModalComponent>;
 
