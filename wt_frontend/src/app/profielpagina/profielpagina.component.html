@@ -1,126 +1,646 @@
-<div class="container-fluid" style="min-height: 100vh">
-  <div class="d-flex flex-wrap">
-    <div class="m-auto">
-      <form class="form-inline">
-        <div class="d-flex flex-row">
-          <div class="m-2">
-            <input
-              class="form-control w-200"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              style="width: 300px"
-            />
-          </div>
-          <div class="mx-2">
-            <button class="btn btn-outline-success my-2" type="submit">
-              Search
-            </button>
-          </div>
+<ng-template #mymodal1 let-modal>
+  <div id="mymodal1">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel">Wijzigen</h4>
+      <button
+        type="button"
+        class="close"
+        (click)="modal.close()"
+        aria-label="Close"
+        id="close-modal1"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" id="main-container">
+      <form #editForm="ngForm">
+        <input
+          type="hidden"
+          ngModel="{{ editUser?.id }}"
+          name="id"
+          class="form-control"
+          id="id"
+        />
+        <input
+          type="hidden"
+          ngModel="{{ editUser?.user_id }}"
+          name="user_id"
+          class="form-control"
+          id="user_id"
+        />
+        <input
+          type="hidden"
+          ngModel="{{ editUser?.admin }}"
+          name="admin"
+          class="form-control"
+          id="admin"
+        />
+        <div class="mb-3 form-group">
+          <label for="name" class="form-label"><b>Name</b></label>
+          <input
+            type="text"
+            ngModel="{{ editUser?.name }}"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="..."
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="username" class="form-label"><b>Username</b></label>
+          <input
+            type="text"
+            ngModel="{{ editUser?.username }}"
+            class="form-control"
+            id="last_name"
+            placeholder="..."
+            name="username"
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="email" class="form-label"><b>Email</b></label>
+          <input
+            type="email"
+            ngModel="{{ editUser?.email }}"
+            class="form-control"
+            id="email"
+            placeholder="..."
+            name="email"
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="password" class="form-label"><b>Password</b></label>
+          <input
+            type="text"
+            ngModel="{{ editUser?.password }}"
+            class="form-control"
+            id="password"
+            placeholder="..."
+            name="password"
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="password" class="form-label"><b>Photo URL</b></label>
+          <input
+            type="text"
+            ngModel="{{ editUser?.photo }}"
+            class="form-control"
+            id="photo"
+            placeholder="..."
+            name="photo"
+          />
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="modal.close()"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="open(mymodal2)"
+          >
+            Save changes
+          </button>
+          <button
+            type="button"
+            data-dismiss="modal"
+            (click)="onEditUser(editForm.value)"
+            style="display: none"
+            id="hidden-button1"
+          ></button>
         </div>
       </form>
     </div>
-    <div class="d-flex flex-row m-auto">
-      <div class="col-sm">
-        <a routerLink="/trainees" class="link"
-          ><button
-            class="btn btn-secondary my-2"
-            style="width: 100px; margin-left: 8px"
-            type="button"
-          >
-            Trainees
-          </button>
-        </a>
-      </div>
+  </div>
+</ng-template>
 
-      <div class="col-sm">
-        <a routerLink="/boekenlijst" class="link"
-          ><button
-            class="btn btn-secondary my-2"
-            style="width: 100px; margin-left: 8px"
-            type="button"
-          >
-            Boeken
-          </button>
-        </a>
-      </div>
+<ng-template #mymodal2 let-modal>
+  <div id="mymodal2">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        Weet je het zeker, {{ editUser?.name }}?
+      </h4>
+      <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
 
-      <div class="col-sm">
-        <a routerLink="/reservations" class="link"
-          ><button
-            class="btn btn-secondary my-2"
-            style="width: 150px; margin-left: 8px"
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="editUser2()"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          color: white;
+          background-color: #11740c;
+        "
+      >
+        Ja
+      </button>
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="modal.close()"
+        id="close-modal2"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          background-color: red;
+          color: white;
+        "
+      >
+        Nee
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #mymodal3 let-modal>
+  <div id="mymodal3">
+    <div class="modal-header">
+      <h4 class="modal-title" id="exampleModalLabel">Add User</h4>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+        id="close-modal3"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
+        <input
+          type="hidden"
+          ngModel="{{ addUser?.id }}"
+          name="id"
+          class="form-control"
+          id="id"
+        />
+        <input
+          type="hidden"
+          ngModel="{{ addUser?.user_id }}"
+          name="id"
+          class="form-control"
+          id="id"
+        />
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.name }}"
+            name="name"
+            class="form-control"
+            id="name"
+            placeholder="Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            ngModel="{{ addUser?.email }}"
+            name="email"
+            class="form-control"
+            id="email"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.username }}"
+            name="username"
+            class="form-control"
+            id="username"
+            placeholder="Job title"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.password }}"
+            name="password"
+            class="form-control"
+            id="password"
+            placeholder="Phone"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="photo">Photo URL</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.photo }}"
+            name="imageUrl"
+            class="form-control"
+            id="imageUrl"
+            placeholder="Image URL"
+          />
+        </div>
+        <div class="form-group">
+          <label for="admin">admin</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.admin }}"
+            name="admin"
+            class="form-control"
+            id="admin"
+            placeholder="true/false"
+            required
+          />
+        </div>
+        <div class="modal-footer">
+          <button
             type="button"
+            id="add-user-form"
+            class="btn btn-secondary"
+            data-dismiss="modal"
           >
-            Reserveringen
+            Close
           </button>
-        </a>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="open(mymodal4)"
+            [disabled]="addForm.invalid"
+          >
+            Save changes
+          </button>
+          <button
+            data-dismiss="modal"
+            style="display: none"
+            id="hidden-button2"
+            type="submit"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #mymodal4 let-modal>
+  <div id="mymodal4">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        Weet je het zeker, {{ currentUser?.name }}?
+      </h4>
+      <button
+        type="button"
+        class="btn"
+        (click)="modal.dismiss('Cross click')"
+        id="close-modal4"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="addUser2()"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          color: white;
+          background-color: #11740c;
+        "
+      >
+        Ja
+      </button>
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="modal.close()"
+        id="close-modal2"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          background-color: red;
+          color: white;
+        "
+      >
+        Nee
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #mymodal5 let-modal>
+  <div id="mymodal5">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addBoekModalLabel">Add Boek</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+        id="close-modal5"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddBoek(addForm)">
+        <div class="form-group">
+          <label for="title">Titel</label>
+          <input
+            type="text"
+            ngModel
+            name="title"
+            class="form-control"
+            id="title"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="authors">Auteurs</label>
+          <input
+            type="text"
+            ngModel
+            name="authors"
+            class="form-control"
+            id="authors"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input
+            type="text"
+            ngModel
+            name="isbn"
+            class="form-control"
+            id="isbn"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="categories">Categorieën</label>
+          <input
+            type="text"
+            ngModel
+            name="categories"
+            class="form-control"
+            id="categories"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="authors">Exemplaren</label>
+          <input
+            type="number"
+            ngModel
+            name="copies"
+            class="form-control"
+            id="copies"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="thumbnailUrl">thumbnail </label>
+          <input
+            type="text"
+            ngModel
+            name="thumbnailUrl"
+            class="form-control"
+            id="thumbnailUrl"
+            placeholder="Voer URL in"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            id="add-boek-form"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            Sluiten
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-dismiss="modal"
+            (click)="open(mymodal6)"
+            [disabled]="addForm.invalid"
+          >
+            Boek toevoegen
+          </button>
+          <button
+            data-dismiss="modal"
+            style="display: none"
+            id="hidden-button3"
+            type="submit"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #mymodal6 let-modal>
+  <div id="mymodal6">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">
+        Weet je het zeker, {{ currentUser?.name }}?
+      </h4>
+      <button
+        type="button"
+        class="btn"
+        (click)="modal.dismiss('Cross click')"
+        id="close-modal6"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="addBoek2()"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          color: white;
+          background-color: #11740c;
+        "
+      >
+        Ja
+      </button>
+      <button
+        type="button"
+        class="font-weight-bold btn"
+        data-dismiss="modal"
+        (click)="modal.close()"
+        id="close-modal2"
+        style="
+          border: 1px solid;
+          border-radius: 5px;
+          background-color: red;
+          color: white;
+        "
+      >
+        Nee
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<div class="container-fluid" style="min-height: 100vh">
+  <div class="d-flex flex-wrap">
+    <div class="d-flex flex-row">
+      <div class="col-sm">
+        <button
+          class="btn btn-secondary my-2"
+          style="width: 100px; margin-left: 8px"
+          type="button"
+          *ngIf="currentUser?.admin"
+          (click)="open(mymodal3)"
+        >
+          Add User
+        </button>
+      </div>
+      <div class="col-sm">
+        <button
+          class="btn btn-secondary my-2"
+          style="width: 100px; margin-left: 8px"
+          type="button"
+          *ngIf="currentUser?.admin"
+          (click)="open(mymodal5)"
+        >
+          Add Boek
+        </button>
       </div>
     </div>
   </div>
 
   <div class="p-2 row">
     <div class="col-sm border rounded m-2">
-      <div class="column">
+      <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
-        <div class="container pt-2 pb-4">
+        <div class="pt-2 pb-4">
           <img
-            src="../assets/images/profilepic.png"
+            src="{{ currentUser?.photo }}"
             alt="profilepic"
-            style="width: 100px"
+            style="
+              display: block;
+              max-width: 150px;
+              border-radius: 50px;
+              margin: auto;
+            "
           />
         </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Naam:</td>
+              <td>
+                <b>{{ currentUser?.name }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>
+                <b>{{ currentUser?.email }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Username:</td>
+              <td>
+                <b>{{ currentUser?.username }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Admin Role:</td>
+              <td>
+                <b>{{ currentUser?.admin }}</b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
-        <div class="mx-1 row">
-          <div class="col-sm">
-            Voornaam: <br />
-            Achternaam: <br />
-            Email:
-          </div>
-          <div class="col-sm">
-            Dummy <br />
-            Dummy <br />
-            dummy@gmail.com
-          </div>
-        </div>
         <div class="mt-3 text-center">
-          <a routerLink="/profiel-wijzigen" class="link"
-            ><button
-              class="btn btn-secondary my-3"
-              style="width: 120px"
-              type="button"
-            >
-              Wijzigen
-            </button>
-          </a>
+          <button
+            class="btn btn-secondary my-3"
+            style="width: 120px"
+            type="button"
+            (click)="open(mymodal1)"
+          >
+            Wijzigen
+          </button>
         </div>
       </div>
     </div>
+
     <div class="m-2 col-sm border rounded position-relative">
       <h3 class="py-3 text-center">Mijn boeken</h3>
-      <div class="container p-2 my-3 border rounded" myBooks>
-        <a routerLink="/bookdescription" class="link text-dark">
-          <div class="d-flex flex-row pt-2">
-            <div class="px-1">
-              <img
-                src="../assets/images/dummybook.png"
-                alt="book"
-                style="width: 75px; border-radius: 10px"
-              />
+      <div class="col-sm mb-5">
+        <div *ngFor="let boek of boeken">
+          <a
+            routerLink="/bookdescription"
+            class="link text-dark"
+            style="cursor: pointer"
+          >
+            <div class="container p-2 my-3 border rounded">
+              <div class="d-flex flex-row pt-2">
+                <div class="px-1">
+                  <img
+                    src="{{ boek?.thumbnailUrl }}"
+                    alt="book"
+                    style="max-height: 75px; border-radius: 10px"
+                  />
+                </div>
+                <div class="px-2">
+                  <h6>{{ boek?.title }}</h6>
+                  <p class="mx-1">{{ boek?.authors }}</p>
+                </div>
+              </div>
             </div>
-            <div class="px-2">
-              <h6>Book title</h6>
+          </a>
+        </div>
 
-              <p class="mx-1">Book description, blablabalbal</p>
-            </div>
+        <div
+          *ngIf="boeken?.length == 0"
+          class="pb-5 col-lg-12 col-md-12 col-xl-12"
+        >
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Geen boeken!</h4>
+            <p>Er zijn geen boeken gevonden.</p>
           </div>
-        </a>
+        </div>
       </div>
+
       <a routerLink="/mijnboeken" class="link">
         <button
           type="button"
           class="btn btn-sm btn-warning position-absolute"
-          style="bottom: 6px; right: 6px"
+          style="bottom: 5px; right: 5px"
+          *ngIf="boeken?.length != 0"
         >
           More..
         </button>
@@ -129,29 +649,48 @@
 
     <div class="m-2 col-sm border rounded position-relative">
       <h3 class="py-3 text-center">Mijn geschiedenis</h3>
-      <div class="container p-2 my-3 border rounded" myhistory>
-        <a routerLink="/bookdescription" class="link text-dark">
-          <div class="d-flex flex-row pt-2">
-            <div class="px-1">
-              <img
-                src="../assets/images/dummybook.png"
-                alt="book"
-                style="width: 75px; border-radius: 10px"
-              />
+      <div class="col-sm mb-5">
+        <div *ngFor="let boek of boeken">
+          <a
+            routerLink="/bookdescription"
+            class="link text-dark"
+            style="cursor: pointer"
+          >
+            <div class="container p-2 my-3 border rounded">
+              <div class="d-flex flex-row pt-2">
+                <div class="px-1">
+                  <img
+                    src="{{ boek?.thumbnailUrl }}"
+                    alt="book"
+                    style="max-height: 75px; border-radius: 10px"
+                  />
+                </div>
+                <div class="px-2">
+                  <h6>{{ boek?.title }}</h6>
+                  <p class="mx-1">{{ boek?.authors }}</p>
+                </div>
+              </div>
             </div>
-            <div class="px-2">
-              <h6>Book title</h6>
+          </a>
+        </div>
 
-              <p class="mx-1">Book description, blablabalbal</p>
-            </div>
+        <div
+          *ngIf="boeken?.length == 0"
+          class="pb-5 col-lg-12 col-md-12 col-xl-12"
+        >
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">Geen reserveringen!</h4>
+            <p>Er zijn geen reserveringen gevonden.</p>
           </div>
-        </a>
+        </div>
       </div>
+
       <a routerLink="/mijnhistory" class="link">
         <button
           type="button"
           class="btn btn-sm btn-warning position-absolute"
           style="bottom: 5px; right: 5px"
+          *ngIf="boeken?.length != 0"
         >
           More..
         </button>

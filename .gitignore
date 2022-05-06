@@ -1,0 +1,5 @@
+
+node_modules/
+wt_frontend/src/app/app.module.ts
+wt_frontend/package.json
+wt_frontend/package-lock.json
