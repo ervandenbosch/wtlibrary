@@ -12,10 +12,10 @@ export class ReserveringenComponent implements OnInit {
 
   //Array van reserveringen maken
   reserveringlijst: Reservering[] = [
-    new Reservering("Boek nummer 1", "Sofieke", "Niekolaas", "02/05/2022", 2),
-    new Reservering("Boek nummer 2", "Tako", "Forsten", "31/04/2022", 5),
-    new Reservering("Boek nummer 3", "Winnie", "Hoogakker", "25/04/2022", 0),
-    new Reservering("Boek nummer 4", "Gijs", "van Riel", "01/05/2022", 1)
+    new Reservering(1, "Boek nummer 1", "Sofieke", "Niekolaas", "02/05/2022", 2, 1, 20),
+    new Reservering(5, "Boek nummer 2", "Tako", "Forsten", "31/04/2022", 5, 3, 12),
+    new Reservering(8, "Boek nummer 3", "Winnie", "Hoogakker", "25/04/2022", 0, 5, 10),
+    new Reservering(10, "Boek nummer 4", "Gijs", "van Riel", "01/05/2022", 1, 2, 50)
   ];
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class ReserveringenComponent implements OnInit {
   constructor(private modalService: NgbModal) {}
 
   closeResult: string = "";   
-  openBevestigingModal(tempReservering: Reservering, actie: string) {
+  public openBevestigingModal(tempReservering: Reservering, actie: string) {
     const modalRef = this.modalService.open(ReserveringModalComponent, {ariaLabelledBy: 'modal-basic-title', size: 'sm'});
     modalRef.componentInstance.fromParent = tempReservering;
     modalRef.componentInstance.actie = actie;
@@ -44,6 +44,11 @@ export class ReserveringenComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  public onGoedgekeurd(reservering: Reservering) {
+
+
   }
 
 }

@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReserveringModalComponent } from './reserveringen/modals/reservering-modal/reservering-modal.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BevestigingReserveringComponent } from './reserveringen/modals/bevestiging-reservering/bevestiging-reservering.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     LogoutComponent,
     BoekenlijstComponent,
     ReserveringenComponent,
-    ReserveringModalComponent
+    ReserveringModalComponent,
+    BevestigingReserveringComponent
   ],
   imports: [
     BrowserModule,
