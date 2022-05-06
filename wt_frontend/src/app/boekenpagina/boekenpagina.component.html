@@ -1,5 +1,6 @@
 <!-- BOEK  -->
 <body>
+  <div class="container" id="main-container">
     <div class="tekstEnFoto">
         <img src={{boekenlijst[id].path}} class="img1">
         <div class="tekst">
@@ -24,13 +25,47 @@
 
     <!-- KNOP -->
     <div class="knop">
-        <a *ngIf="is_beschikbaar" (click)="open(mymodal)"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
+        <a *ngIf="is_beschikbaar" (click)="onOpenModal()"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
         <a *ngIf="!is_beschikbaar"><button class="btn btn-failure" style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet Beschikbaar</button></a>
     </div>
     <br><br>
     
+<div>
+    <div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+           </div>
+           <div class="modal-body">
+            <p>Weet je zeker dat je het boek<p>
+            <p><b>{{boekenlijst[id].title}}</b>
+            <p>wilt reserveren?</p>
+            <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+             <button class="btn btn-success" data-dismiss="modal">Ja</button>
+            </div>
+           </div>
+        </div>
+       </div>
+       </div>
+    </div>
 
-    <!-- POP UP 1-->
+
+
+
+
+
+
+
+
+
+
+
+    <!-- POP UP 1
     <ng-template #mymodal let-modal>
         <div class="modal-header">
           <h4 class="modal-title" id="modal-basic-title">Boek Reserveren</h4>
@@ -40,8 +75,8 @@
         </div>
         <div class="modal-body">
           <table id="boekenlijst" class="table table-hover">
-              <!-- TABEL -->
-              <thead class="thead-dark">
+
+             <thead class="thead-dark">
                 <p>Weet je zeker dat je dit boek wilt reserveren?</p>
                   <tr>
                       <th>Titel</th>
@@ -60,5 +95,6 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Reservering bevestigen</button>
         </div>
-      </ng-template>
-</body>
+      </ng-template> -->
+    </div>
+  </body>

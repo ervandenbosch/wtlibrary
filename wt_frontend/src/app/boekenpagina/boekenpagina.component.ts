@@ -40,6 +40,23 @@ export class BoekenpaginaComponent implements OnInit {
   
   closeResult: string = '';
 
+
+
+
+  public onOpenModal(): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#deleteBoekModal');
+    container?.appendChild(button);
+    button.click();
+  }
+
+
+
+
   // POP UP METHODS
   // Geen idee wat deze doen
   open(content:any) {
