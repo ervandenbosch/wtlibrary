@@ -114,6 +114,7 @@
 		</div>
 	  </div>
 </div>
+
   <!-- Edit Boek Modal -->
 <div class="modal fade" id="editBoekModal" tabindex="-1" role="dialog" aria-labelledby="editBoekModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -158,7 +159,7 @@
 			  </div>
 				 <div class="modal-footer">
 					<button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Sluiten</button>
-					<button (click)="onUpdateBoek(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Opslaan</button>
+					<button onclick = "$('#confirmationModal').modal('toggle')" class="btn btn-primary" >Opslaan</button>
 				 </div>
 			  </form>
 		   </div>
@@ -166,6 +167,29 @@
 	 </div>
    </div>
 </div>
+
+  <!-- Confirmation Modal -->
+  <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		   <div class="modal-header">
+			  <h5 class="modal-title" id="deleteModelLabel">Weet je het zeker?</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			  </button>
+		   </div>
+		   <div class="modal-body">
+			  <p>Weet je zeker dat je de gegevens wilt opslaan?</p>
+			  <div class="modal-footer">
+				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+				 <button (click)="onUpdateBoek(editForm.value)" onclick="$('#editBoekModal').modal('hide');" class="btn btn-danger" data-dismiss="modal" >Ja</button>
+			  </div>
+		   </div>
+		</div>
+	 </div>
+   </div>
+</div>
+
   <!-- Delete Boek Modal -->
 <div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -186,12 +210,11 @@
 		</div>
 	 </div>
    </div>
-</div>
 
-<!-- Notification for no books -->
-<div *ngIf="boeken?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-	<div class="alert alert-info" role="alert">
-	  <h4 class="alert-heading">Geen boeken!</h4>
-	  <p>Er zijn geen boeken gevonden.</p>
+	<!-- Notification for no books -->
+	<div *ngIf="boeken?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+		<div class="alert alert-info" role="alert">
+			<h4 class="alert-heading">Geen boeken!</h4>
+	<p>Er zijn geen boeken gevonden.</p>
 	</div>
-	</div>
+</div>

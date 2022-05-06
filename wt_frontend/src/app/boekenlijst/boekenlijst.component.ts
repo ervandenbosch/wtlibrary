@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './boekenlijst.component.html',
   styleUrls: ['./boekenlijst.component.css'],
 })
+
 export class BoekenlijstComponent implements OnInit {
 
   public boeken: Boek[] | undefined;
@@ -126,9 +127,6 @@ export class BoekenlijstComponent implements OnInit {
     }
     if (mode === 'edit') {
       this.editBoek = boek;
-      console.log(this.editBoek.title);
-      console.log(this.editBoek.authors);
-      console.log(this.editBoek.isbn);
       button.setAttribute('data-target', '#editBoekModal');
     }
     if (mode === 'delete') {

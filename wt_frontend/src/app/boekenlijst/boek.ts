@@ -1,5 +1,4 @@
 export interface Boek {
-
     id: number;
     title: string;
     isbn: string;
@@ -12,8 +11,6 @@ export interface Boek {
     available: number;
     bookCode: string;
 }
-
-
 
 // export class Boek {
 
