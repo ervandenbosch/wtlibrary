@@ -1,62 +1,90 @@
 <div class="container" id="main-container">
-	<h2> Boekenlijst &nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="createBoek()" ><i class="fa fa book" ></i> Boek Toevoegen</button></h2>
-	<input type="search" (ngModelChange)="searchBoek(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Boek zoeken..." required>
+  <h2>
+    Boekenlijst &nbsp;&nbsp;&nbsp;<button
+      class="btn btn-primary"
+      (click)="createBoek()"
+    >
+      <i class="fa fa book"></i> Boek Toevoegen
+    </button>
+  </h2>
+  <input
+    type="search"
+    (ngModelChange)="searchBoek(key.value)"
+    #key="ngModel"
+    ngModel
+    name="key"
+    id="searchName"
+    class="form-control mr-sm-2"
+    placeholder="Boek zoeken..."
+    required
+  />
 
-	<div class="row" id="main-row">
-		<div class="col-lg-12">
-			<div class="main-box clearfix">
-				<div class="table-responsive">
-					<table class="table user-list">
-						<thead>
-							<tr>
-								<th><span>Titel</span></th>
-								<th><span>ISBN</span></th>
-								<th class="text-center"><span>Beschikbaarheid</span></th>
-								<th><span>Categorie</span></th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody *ngFor="let boek of boeken">
-							<tr>
-								<td>
-									<img src="{{boek?.thumbnailUrl}}" alt="">
-									<a href="/boek/{{boek?.title}}" class="user-link">{{boek?.title}}</a>
-									<span class="user-subhead">{{boek?.authors}}</span>
-								</td>
-								<td>
-									{{boek?.isbn}}
-								</td>
-								<td class="text-center">
-									<h3>
-										<span class="label label-default">{{boek?.available}}/{{boek?.copies}}</span>
-									</h3>
-								</td>
-								<td>
-									<a href="#">{{boek?.categories}}</a>
-								</td>
-								<td style="width: 25%;">
-									<button class="btn btn-outline-primary" (click)="setReserved()">Reserveer
-										<span class="fa-stack">
-											<i class="fa fa-book fa-stack-1x"></i>
-										</span>
-									</button>
-									<a class="table-link" (click)="onOpenModal(boek, 'edit')">
-										<span class="fa-stack">
-											<i class="fa fa-square fa-stack-2x"></i>
-											<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
-										</span>
-									</a>
-									<a class="table-link danger" (click)="onOpenModal(boek, 'delete')">
-										<span class="fa-stack">
-											<i class="fa fa-square fa-stack-2x"></i>
-											<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
-										</span>
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				<!-- </div>
+  <div class="row" id="main-row">
+    <div class="col-lg-12">
+      <div class="main-box clearfix">
+        <div class="table-responsive">
+          <table class="table user-list">
+            <thead>
+              <tr>
+                <th><span>Titel</span></th>
+                <th><span>ISBN</span></th>
+                <th class="text-center"><span>Beschikbaarheid</span></th>
+                <th><span>Categorie</span></th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let boek of boeken">
+              <tr>
+                <td>
+                  <img src="{{ boek?.thumbnailUrl }}" alt="" />
+                  <a href="/boek/{{ boek?.title }}" class="user-link">{{
+                    boek?.title
+                  }}</a>
+                  <span class="user-subhead">{{ boek?.authors }}</span>
+                </td>
+                <td>
+                  {{ boek?.isbn }}
+                </td>
+                <td class="text-center">
+                  <h3>
+                    <span class="label label-default"
+                      >{{ boek?.available }}/{{ boek?.copies }}</span
+                    >
+                  </h3>
+                </td>
+                <td>
+                  <a href="#">{{ boek?.categories }}</a>
+                </td>
+                <td style="width: 25%">
+                  <button
+                    class="btn btn-outline-primary"
+                    (click)="setReserved()"
+                  >
+                    Reserveer
+                    <span class="fa-stack">
+                      <i class="fa fa-book fa-stack-1x"></i>
+                    </span>
+                  </button>
+                  <a class="table-link" (click)="onOpenModal(boek, 'edit')">
+                    <span class="fa-stack">
+                      <i class="fa fa-square fa-stack-2x"></i>
+                      <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                  <a
+                    class="table-link danger"
+                    (click)="onOpenModal(boek, 'delete')"
+                  >
+                    <span class="fa-stack">
+                      <i class="fa fa-square fa-stack-2x"></i>
+                      <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- </div>
 				<ul class="pagination pull-right">
 					<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
 					<li><a href="#">1</a></li>
@@ -64,134 +92,360 @@
 					<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
 				</ul>
 			</div> -->
-		</div>
-	</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Boek Modal -->
+    <div
+      class="modal fade"
+      id="addBoekModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addBoekModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addBoekModalLabel">Add Boek</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddBoek(addForm)">
+              <div class="form-group">
+                <label for="title">Titel</label>
+                <input
+                  type="text"
+                  ngModel
+                  name="title"
+                  class="form-control"
+                  id="title"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="authors">Auteurs</label>
+                <input
+                  type="text"
+                  ngModel
+                  name="authors"
+                  class="form-control"
+                  id="authors"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input
+                  type="text"
+                  ngModel
+                  name="isbn"
+                  class="form-control"
+                  id="isbn"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="categories">Categorieën</label>
+                <input
+                  type="text"
+                  ngModel
+                  name="categories"
+                  class="form-control"
+                  id="categories"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="authors">Exemplaren</label>
+                <input
+                  type="number"
+                  ngModel
+                  name="copies"
+                  class="form-control"
+                  id="copies"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="thumbnailUrl">thumbnail </label>
+                <input
+                  type="text"
+                  ngModel
+                  name="thumbnailUrl"
+                  class="form-control"
+                  id="thumbnailUrl"
+                  placeholder="Voer URL in"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id="add-boek-form"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Sluiten
+                </button>
+                <button
+                  [disabled]="addForm.invalid"
+                  type="submit"
+                  class="btn btn-primary"
+                >
+                  Boek Toevoegen
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <<<<<<< HEAD ======= >>>>>>> master
+    <!-- Edit Boek Modal -->
+    <div
+      class="modal fade"
+      id="editBoekModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editBoekModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addBoekModalLabel">
+              Boekgegevens {{ editBoek?.title }} Wijzigen
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #editForm="ngForm">
+              <div class="form-group">
+                <label for="title">Titel</label>
+                <input
+                  type="text"
+                  ngModel="{{ editBoek?.title }}"
+                  name="title"
+                  class="form-control"
+                  id="title"
+                  required
+                />
+              </div>
+              <input
+                type="hidden"
+                ngModel="{{ editBoek?.id }}"
+                name="id"
+                class="form-control"
+                id="id"
+                placeholder="ISBN"
+              />
+              <input
+                type="hidden"
+                ngModel="{{ editBoek?.bookCode }}"
+                name="bookCode"
+                class="form-control"
+                id="userCode"
+              />
+              <div class="form-group">
+                <label for="authors">Auteurs</label>
+                <input
+                  type="text"
+                  ngModel="{{ editBoek?.authors }}"
+                  name="authors"
+                  class="form-control"
+                  id="authors"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <input
+                  type="isbn"
+                  ngModel="{{ editBoek?.isbn }}"
+                  name="isbn"
+                  class="form-control"
+                  id="isbn"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="categories">Categorieën</label>
+                <input
+                  type="text"
+                  ngModel="{{ editBoek?.categories }}"
+                  name="categories"
+                  class="form-control"
+                  id="categories"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="authors">Beschikbaar</label>
+                <input
+                  type="number"
+                  ngModel="{{ editBoek?.available }}"
+                  name="available"
+                  class="form-control"
+                  id="available"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="authors">Exemplaren</label>
+                <input
+                  type="number"
+                  ngModel="{{ editBoek?.copies }}"
+                  name="copies"
+                  class="form-control"
+                  id="copies"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="thumbnailUrl">thumbnail</label>
+                <input
+                  type="text"
+                  ngModel="{{ editBoek?.thumbnailUrl }}"
+                  name="thumbnailUrl"
+                  class="form-control"
+                  id="thumbnailUrl"
+                  placeholder="Voer URL in"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  id=""
+                  data-dismiss="modal"
+                  class="btn btn-secondary"
+                >
+                  Sluiten
+                </button>
+                <button
+                  onclick="$('#confirmationModal').modal('toggle')"
+                  class="btn btn-primary"
+                >
+                  Opslaan
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Modal -->
+  <div
+    class="modal fade"
+    id="confirmationModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="confirmationModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">Weet je het zeker?</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Weet je zeker dat je de gegevens wilt opslaan?</p>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Nee
+            </button>
+            <button
+              (click)="onUpdateBoek(editForm.value)"
+              onclick="$('#editBoekModal').modal('hide');"
+              class="btn btn-danger"
+              data-dismiss="modal"
+            >
+              Ja
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Add Boek Modal -->
-<div class="modal fade" id="addBoekModal" tabindex="-1" role="dialog" aria-labelledby="addBoekModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-		   <div class="modal-header">
-			  <h5 class="modal-title" id="addBoekModalLabel">Add Boek</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			  </button>
-		   </div>
-		   <div class="modal-body">
-			  <form #addForm="ngForm" (ngSubmit)="onAddBoek(addForm)">
-			  <div class="form-group">
-				 <label for="title">Titel</label>
-				 <input type="text" ngModel name="title" class="form-control" id="title" required>
-			  </div>
-			  <div class="form-group">
-				 <label for="authors">Auteurs</label>
-				 <input type="text" ngModel name="authors" class="form-control" id="authors" required>
-			  </div>
-			  <div class="form-group">
-				 <label for="isbn">ISBN</label>
-				 <input type="text" ngModel name="isbn" class="form-control" id="isbn" required>
-			  </div>
-			  <div class="form-group">
-				<label for="categories">Categorieën</label>
-				<input type="text" ngModel name="categories" class="form-control" id="categories" required>
-			 </div>
-			  <div class="form-group">
-				<label for="authors">Exemplaren</label>
-				<input type="number" ngModel name="copies" class="form-control" id="copies" required>
-			 </div>
-
-			  <div class="form-group">
-				 <label for="thumbnailUrl">thumbnail </label>
-				 <input type="text" ngModel name="thumbnailUrl" class="form-control" id="thumbnailUrl" placeholder="Voer URL in" >
-			  </div>
-			  <div class="modal-footer">
-				 <button type="button" id="add-boek-form" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-				 <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Boek Toevoegen</button>
-			  </div>
-			  </form>
-		   </div>
-		</div>
-	  </div>
-</div>
-  <!-- Edit Boek Modal -->
-<div class="modal fade" id="editBoekModal" tabindex="-1" role="dialog" aria-labelledby="editBoekModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-		   <div class="modal-header">
-			  <h5 class="modal-title" id="addBoekModalLabel">Boekgegevens {{editBoek?.title}} Wijzigen</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			  </button>
-		   </div>
-		   <div class="modal-body">
-			  <form #editForm="ngForm">
-			  <div class="form-group">
-				 <label for="title">Titel</label>
-				 <input type="text" ngModel="{{editBoek?.title}}" name="title" class="form-control" id="title" required>
-			  </div>
-			  <input type="hidden" ngModel="{{editBoek?.id}}" name="id" class="form-control" id="id" placeholder="ISBN">
-              <input type="hidden" ngModel="{{editBoek?.bookCode}}" name="bookCode" class="form-control" id="userCode" >
-			  <div class="form-group">
-				 <label for="authors">Auteurs</label>
-				 <input type="text" ngModel="{{editBoek?.authors}}" name="authors" class="form-control" id="authors" required>
-			  </div>
-			  <div class="form-group">
-				 <label for="isbn">ISBN</label>
-				 <input type="isbn" ngModel="{{editBoek?.isbn}}" name="isbn" class="form-control" id="isbn" required>
-			  </div>
-			  <div class="form-group">
-				<label for="categories">Categorieën</label>
-				<input type="text" ngModel="{{editBoek?.categories}}" name="categories" class="form-control" id="categories" required>
-			 </div>
-			  <div class="form-group">
-				<label for="authors">Beschikbaar</label>
-				<input type="number" ngModel="{{editBoek?.available}}" name="available" class="form-control" id="available" required>
-			 </div>
-			  <div class="form-group">
-				<label for="authors">Exemplaren</label>
-				<input type="number" ngModel="{{editBoek?.copies}}" name="copies" class="form-control" id="copies" required>
-			 </div>
-			  <div class="form-group">
-				 <label for="thumbnailUrl">thumbnail</label>
-				 <input type="text" ngModel="{{editBoek?.thumbnailUrl}}" name="thumbnailUrl" class="form-control" id="thumbnailUrl" placeholder="Voer URL in" >
-			  </div>
-				 <div class="modal-footer">
-					<button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Sluiten</button>
-					<button (click)="onUpdateBoek(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Opslaan</button>
-				 </div>
-			  </form>
-		   </div>
-		</div>
-	 </div>
-   </div>
-</div>
-  <!-- Delete Boek Modal -->
-<div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-		   <div class="modal-header">
-			  <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
-			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			  </button>
-		   </div>
-		   <div class="modal-body">
-			  <p>Weet je zeker dat je het boek {{deleteBoek?.title}} wilt verwijderen?</p>
-			  <div class="modal-footer">
-				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
-				 <button (click)="onDeleteBoek(deleteBoek?.id!)" class="btn btn-danger" data-dismiss="modal">Ja</button>
-			  </div>
-		   </div>
-		</div>
-	 </div>
-   </div>
+<!-- Delete Boek Modal -->
+<div
+  class="modal fade"
+  id="deleteBoekModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="deleteBoekModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Weet je zeker dat je het boek {{ deleteBoek?.title }} wilt
+          verwijderen?
+        </p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Nee
+          </button>
+          <button
+            (click)="onDeleteBoek(deleteBoek?.id!)"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Ja
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Notification for no books -->
 <div *ngIf="boeken?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-	<div class="alert alert-info" role="alert">
-	  <h4 class="alert-heading">Geen boeken!</h4>
-	  <p>Er zijn geen boeken gevonden.</p>
-	</div>
-	</div>
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">Geen boeken!</h4>
+    <p>Er zijn geen boeken gevonden.</p>
+  </div>
+</div>
