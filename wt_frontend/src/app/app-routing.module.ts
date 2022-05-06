@@ -6,7 +6,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: BoekenlijstComponent },
   { path: 'login', component: LoginComponent },
   { path: 'boekenlijst', component: BoekenlijstComponent },
   { path: 'profielpagina', component: ProfielpaginaComponent },
