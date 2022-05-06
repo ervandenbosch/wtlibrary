@@ -9,11 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReserveringModalComponent } from './reserveringen/modals/reservering-modal/reservering-modal.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { BevestigingReserveringComponent } from './reserveringen/modals/bevestiging-reservering/bevestiging-reservering.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 @NgModule({
   declarations: [
@@ -25,16 +26,17 @@ import { BevestigingReserveringComponent } from './reserveringen/modals/bevestig
     BoekenlijstComponent,
     ReserveringenComponent,
     ReserveringModalComponent,
-    BevestigingReserveringComponent
+    BevestigingReserveringComponent,
+    ProfielpaginaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

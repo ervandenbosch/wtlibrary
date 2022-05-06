@@ -9,31 +9,25 @@ import { NgForm } from '@angular/forms';
   templateUrl: './boekenlijst.component.html',
   styleUrls: ['./boekenlijst.component.css'],
 })
-
 export class BoekenlijstComponent implements OnInit {
-
   public boeken: Boek[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
-  
 
-    constructor(private boekService: boekService) {}
+  constructor(private boekService: boekService) {}
 
   public getBoeken(): void {
-
     this.boekService.getBoeken().subscribe(
-
-    (response: Boek[]) => {
-      this.boeken = response;
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    } 
-    )
+      (response: Boek[]) => {
+        this.boeken = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-
-  ngOnInit(){
+  ngOnInit() {
     this.getBoeken();
   }
 
@@ -48,14 +42,14 @@ export class BoekenlijstComponent implements OnInit {
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    )
+    );
   }
 
-  public setReserved(): void{
+  public setReserved(): void {
     const row = document.getElementById('main-row');
     const button = document.createElement('button');
     button.type = 'button';
-    button.style.backgroundColor = 'green'
+    button.style.backgroundColor = 'green';
     row?.appendChild(button);
     button.click();
   }
@@ -69,7 +63,7 @@ export class BoekenlijstComponent implements OnInit {
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    )
+    );
   }
 
   public onDeleteBoek(boekId: number): void {
@@ -81,7 +75,7 @@ export class BoekenlijstComponent implements OnInit {
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    )
+    );
   }
 
   public createBoek(): void {
@@ -91,21 +85,21 @@ export class BoekenlijstComponent implements OnInit {
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
 
-
     button.setAttribute('data-target', '#addBoekModal');
     container?.appendChild(button);
     button.click();
   }
 
-  public searchBoek(key: string): void{
+  public searchBoek(key: string): void {
     const results: Boek[] = [];
     for (const boek of this.boeken!) {
-      if (boek.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 
-      ||  boek.authors.toLowerCase().indexOf(key.toLowerCase()) !== -1 
-      ||  boek.isbn.toLowerCase().indexOf(key.toLowerCase()) !== -1 
-      ||  boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ||  boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1) 
-      {
+      if (
+        boek.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        boek.authors.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        boek.isbn.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1
+      ) {
         results.push(boek);
       }
     }
