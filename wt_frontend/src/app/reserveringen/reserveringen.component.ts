@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Reservering } from './reservering';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { GoedkeurModalComponent } from './modals/goedkeur-modal/goedkeur-modal.component';
-import { AfkeurModalComponent } from './modals/afkeur-modal/afkeur-modal.component';
+import { ReserveringModalComponent } from './modals/reservering-modal/reservering-modal.component';
 
 @Component({
   selector: 'app-reserveringen',
@@ -24,26 +23,18 @@ export class ReserveringenComponent implements OnInit {
 
   constructor(private modalService: NgbModal) {}
 
-  closeResult = "";   
-  openGoedkeurModal(tempReservering: Reservering) {
-    const modalRef = this.modalService.open(GoedkeurModalComponent, {ariaLabelledBy: 'modal-basic-title'});
+  closeResult: string = "";   
+  openBevestigingModal(tempReservering: Reservering, actie: string) {
+    const modalRef = this.modalService.open(ReserveringModalComponent, {ariaLabelledBy: 'modal-basic-title', size: 'sm'});
     modalRef.componentInstance.fromParent = tempReservering;
+    modalRef.componentInstance.actie = actie;
     modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-  } 
-
-  openAfkeurModal(tempReservering: Reservering) {
-    const modalRef = this.modalService.open(AfkeurModalComponent, {ariaLabelledBy: 'modal-basic-title'});
-    modalRef.componentInstance.fromParent = tempReservering;
-    modalRef.result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  } 
+  }
+ 
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {

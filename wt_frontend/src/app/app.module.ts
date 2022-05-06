@@ -10,8 +10,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GoedkeurModalComponent } from './reserveringen/modals/goedkeur-modal/goedkeur-modal.component';
-import { AfkeurModalComponent } from './reserveringen/modals/afkeur-modal/afkeur-modal.component';
+import { ReserveringModalComponent } from './reserveringen/modals/reservering-modal/reservering-modal.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -24,12 +23,7 @@ import { FormsModule } from '@angular/forms';
     LogoutComponent,
     BoekenlijstComponent,
     ReserveringenComponent,
-    GoedkeurModalComponent,
-    AfkeurModalComponent
-  ],
-  entryComponents:[
-    GoedkeurModalComponent,
-    AfkeurModalComponent
+    ReserveringModalComponent
   ],
   imports: [
     BrowserModule,
