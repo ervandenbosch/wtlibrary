@@ -4,13 +4,17 @@ import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
+import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: BoekenlijstComponent },
   { path: 'login', component: LoginComponent },
   { path: 'boekenlijst', component: BoekenlijstComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'useraccounts', component: UseraccountsComponent},
+  { path: 'boekenlijst', component: BoekenlijstComponent },
+  { path: 'profielpagina', component: ProfielpaginaComponent },
+  { path: 'logout', component: LogoutComponent },
 ];
 
 @NgModule({

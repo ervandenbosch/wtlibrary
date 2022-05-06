@@ -12,6 +12,7 @@ import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +23,16 @@ import { FormsModule } from '@angular/forms';
     LogoutComponent,
     BoekenlijstComponent,
     UseraccountsComponent,
+    ProfielpaginaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
