@@ -1,5 +1,8 @@
-import { getLocaleDateFormat } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit, Optional } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { UserAccountsService } from './useraccounts.service';
+import { UserBeta } from './userbeta';
 
 @Component({
   selector: 'app-useraccounts',
@@ -9,34 +12,107 @@ import { Component, OnInit } from '@angular/core';
 
 export class UseraccountsComponent implements OnInit {
 
-  //array van users
-  accountlist: User[] = [
-    new User(0, "Jorrit", "van der Kooi"),
-    new User(1, "Bert", "Achternaam 1"),
-    new User(2, "Sanne", "Achternaam 2"),
-    new User(3, "Klaas", "Achternaam 3"),
-    new User(4, "Tom", "Achternaam 4"),
-    new User(5, "Eva", "Achternaam 5"),
-  ];
+  public users: UserBeta[] | undefined;
+  public updateUser: UserBeta | undefined;
+  public deleteUser: UserBeta | undefined;
+
   
-  constructor() { }
+  constructor(private uas : UserAccountsService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getUsers();
+  }
+
+  public getUsers() : void {
+    this.uas.getUseracounts().subscribe(
+      (response : UserBeta[]) => {
+        this.users = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public onOpenModal(user:any, mode: string): void{
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add'){
+      button.setAttribute('data-target', '#addUserModal');
+    }if (mode === 'edit'){
+      this.updateUser = user;
+      button.setAttribute('data-target', '#editUserModal');
+    }
+    if (mode === 'delete'){
+      this.deleteUser = user;
+      button.setAttribute('data-target', '#deleteUserModal');
+    }
+    container?.appendChild(button);
+    button.click();
+  }
+
+
+
+  public onAddUser(addForm: NgForm): void {
+    document.getElementById('add-user-form')?.click();
+    this.uas.addUser(addForm.value).subscribe(
+      (response: UserBeta) => {
+        console.log(response);
+        this.getUsers();
+        addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public onDeleteUser(userID: number): void {
+    this.uas.deleteUser(userID).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+ 
+
+  public onUpdateUser(user: UserBeta): void {
+    this.uas.updateUser(user).subscribe(
+      (response: UserBeta) => {
+        console.log(response);
+        console.log(user);
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public searchUser(key: string): void{
+    const results: UserBeta[] = [];
+    for (const user of this.users!) {
+      if (user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 
+      ||  user.function.toLowerCase().indexOf(key.toLowerCase()) !== -1 
+      ||  user.phoneNumber.toLowerCase().indexOf(key.toLowerCase()) !== -1 
+      ||  user.email.toLowerCase().indexOf(key.toLowerCase()) !== -1 ) 
+      {
+        results.push(user);
+      }
+    }
+    this.users = results;
+    if (results.length === 0 || !key) {
+      setTimeout('', 5000);
+      this.getUsers();
+    }
   }
 
 }
 
-export class User{
-
-  userID: number = 0
-  firstName = ''
-  lastName = ''
-
-  constructor(userID : number, firstName: string, lastName: string){
-    this.userID = userID
-    this.firstName = firstName
-    this.lastName = lastName
-    
-  }
-
-}

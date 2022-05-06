@@ -1,47 +1,194 @@
-<html lang="en">
-<head >
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">User Accounts
-</head>
-
-<body>
-
-<div class="Search users">
-  <input type="text" placeholder="Search..">
-  <button type="button" onclick="searchUser()">Search</button>
-</div>
-
-<div class="container">
-  <h1 class="mt-3 mb-3">User Accounts</h1>
-<table class="table table-hover">
-  <thead class="thead-dark"> 
-  <tr>
-      <th>User ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
-    </tr>
-    <tr *ngFor="let User of accountlist"> 
-      <td>{{User.userID}}</td>
-      <td>{{User.firstName}}</td>
-      <td>{{User.lastName}}</td>
-    </tr>
-  </thead> 
-</table>
-</div>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 <div class="User link">
-  <button type="button" onclick="newUser()">New user</button>
-  <button type="button" onclick="oldUsers()">Old users</button>
+	<h2> Userlijst &nbsp;&nbsp;&nbsp;</h2>
+		<button id="topbttn" class="btn btn-primary"  (click)="onOpenModal(null, 'add')" ><i class="fa fa book" ></i> User Toevoegen</button>
+		<button id="topbttn" class="btn btn-primary"  ><i class="fa fa book" ></i> Oude Users</button>
+	<input type="search" (ngModelChange)="searchUser(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="User zoeken..." required>
 </div>
 
-<script src="./useraccounts/useraccounts.component.ts"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<div class="container" id="main-container">
+    <div class="row">
+        <div *ngFor= "let user of users" class ="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+                <div class="card-body row">
+                    <div class="col-6">
+                        <a href=""><img src="{{user?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+                    </div>
+                    <div class="col-6 card-naam align-self-center mb-0">
+                        <h5>{{user.name}}</h5>
+                        <p class="m-0">{{user.function}}</p>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}} <a href="#"></a></li>
+                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Nummer: {{user.phoneNumber}}</li>
+					<li *ngIf="user.admin"  class="list-group-item"><i ></i>Admin</li>
 
-</body>
 
-</html>
+                </ul>
+                <div class="card-body">
+                    <div class="float-right btn-group btn-group-sm">
+                        <a (click)="onOpenModal(user, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-naam="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(user, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-naam="Delete"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <ul class="social-links list-inline mb-0">
+						<style>
+							#toHover{
+								cursor: pointer;}
+						</style>
+						<!-- <li id="toHover" onclick=" window.open('https://www.linkedin.com/in/jvanderkooi/?originalSubdomain=nl','_blank')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li> -->
+						<li id="toHover" onclick="window.open('user.linkedinURL', 'new_window')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
+						<!-- <li id="toHover" onclick="window.open('user.linkedinURL', 'new_window')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li> -->
+					</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		   <div class="modal-header">
+			  <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			  </button>
+		   </div>
+		   <div class="modal-body">
+			  <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
+			  <div class="form-group">
+				 <label for="name">Naam</label>
+				 <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Naam" required>
+			  </div>
+			  <div class="form-group">
+				 <label for="password">Passwoord</label>
+				 <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Passwoord" required>
+			  </div>
+			  <div class="form-group">
+				 <label for="function">Functie</label>
+				 <input type="text" ngModel name="function" class="form-control" id="function" placeholder="Functie" required>
+			  </div>
+			  <div class="form-group">
+				<label for="admin">Admin</label>
+				<input type="boolean" ngModel name="admin" class="form-control" id="admin" placeholder="true/false" required>
+			 </div>
+			  <div class="form-group">
+				<label for="email">E-mail adres</label>
+				<input type="text" ngModel name="email" class="form-control" id="email" placeholder="E-mail adres" required>
+			 </div>
+			 <div class="form-group">
+				<label for="phoneNumber">Telefoon nummer</label>
+				<input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Telefoon nummer"required>
+			 </div>
+			  <div class="form-group">
+				 <label for="imageUrl">Profiel foto </label>
+				 <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Voer URL in" >
+			  </div>
+			  <div class="form-group">
+				<label for="linkedinURL">LinkedIn pagina </label>
+				<input type="text" ngModel name="linkedinURL" class="form-control" id="linkedinURL" placeholder="Voer URL in" >
+			 </div>
+			  <div class="modal-footer">
+				 <button type="button" id="add-user-form" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+				 <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >User Toevoegen</button>
+			  </div>
+			  </form>
+		   </div>
+		</div>
+	  </div>
+</div>
+  
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		   <div class="modal-header">
+			  <h5 class="modal-naam" id="addUserModalLabel">Usergegevens {{updateUser?.name}} Wijzigen</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			  </button>
+		   </div>
+		   <div class="modal-body">
+			  <form #editForm="ngForm">
+			  <div class="form-group">
+				 <label for="name">Naam</label>
+				 <input type="text" ngModel="{{updateUser?.name}}" name="name" class="form-control" id="name" placeholder="Naam"required>
+			  </div>
+
+			  <input type="hidden" ngModel="{{updateUser?.id}}" name="id" class="form-control" id="id" placeholder="ISBN">
+              <input type="hidden" ngModel="{{updateUser?.userID}}" name="userID" class="form-control" id="userID" >
+
+			  <div class="form-group">
+				 <label for="function">Functie</label>
+				 <input type="text" ngModel="{{updateUser?.function}}" name="function" class="form-control" id="function" placeholder="Functie" required>
+			  </div>
+			  <div class="form-group">
+				<label for="password">Passwoord</label>
+				<input type="password" ngModel="{{updateUser?.password}}" name="password" class="form-control" id="password" placeholder="Passwoord"required>
+			 </div>
+			  <div class="form-group">
+				 <label for="email">E-mail adres</label>
+				 <input type="email" ngModel="{{updateUser?.email}}" name="email" class="form-control" id="email" placeholder="E-mail adres"required>
+			  </div>
+			  <div class="form-group">
+				<label for="phoneNumber">Telefoon nummer</label>
+				<input type="text" ngModel="{{updateUser?.phoneNumber}}" name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Telefoon nummer" required>
+			 </div>
+			  <div class="form-group">
+				<label for="admin">Admin</label>
+				<input type="boolean" ngModel="{{updateUser?.admin}}" name="admin" class="form-control" id="admin" placeholder="true/false" required>
+			 </div>
+			  <div class="form-group">
+				 <label for="imageUrl">Profiel foto</label>
+				 <input type="text" ngModel="{{updateUser?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Voer URL in" >
+			  </div>
+			  <div class="form-group">
+				<label for="linkedinURL">LinkedIn pagina</label>
+				<input type="text" ngModel="{{updateUser?.linkedinURL}}" name="linkedinURL" class="form-control" id="linkedinURL" placeholder="Voer URL in" >
+			 </div>
+				 <div class="modal-footer">
+					<button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Sluiten</button>
+					<button (click)="onUpdateUser(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Opslaan</button>
+				 </div>
+			  </form>
+		   </div>
+		</div>
+	 </div>
+   </div>
+
+<!-- Delete User Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		   <div class="modal-header">
+			  <h5 class="modal-naam" id="deleteModelLabel">Delete {{deleteUser?.name}}</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			  </button>
+		   </div>
+		   <div class="modal-body">
+			  <p>Weet je zeker dat je deze user wilt verwijderen?</p>
+			  <div class="modal-footer">
+				 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+				 <button (click)="onDeleteUser(deleteUser?.id!)" class="btn btn-danger" data-dismiss="modal">Ja</button>
+			  </div>
+		   </div>
+		</div>
+	 </div>
+   </div>
+
+
+<!-- Notification for no books -->
+<div *ngIf="users?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+	<div class="alert alert-info" role="alert">
+	  <h4 class="alert-heading">Geen users!</h4>
+	  <p>Er zijn geen users gevonden.</p>
+	</div>
+	</div>

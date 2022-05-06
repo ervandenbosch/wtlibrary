@@ -10,7 +10,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
