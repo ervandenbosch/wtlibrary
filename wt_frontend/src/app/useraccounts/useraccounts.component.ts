@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Optional } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserAccountsService } from './useraccounts.service';
-import { UserBeta } from './userbeta';
+import { User } from '../service/user';
+import { UserDataService } from '../service/user-data.service';
+
 
 @Component({
   selector: 'app-useraccounts',
@@ -12,20 +13,20 @@ import { UserBeta } from './userbeta';
 
 export class UseraccountsComponent implements OnInit {
 
-  public users: UserBeta[] | undefined;
-  public updateUser: UserBeta | undefined;
-  public deleteUser: UserBeta | undefined;
+  public users: User[] | undefined;
+  public updateUser: User | undefined;
+  public deleteUser: User | undefined;
 
   
-  constructor(private uas : UserAccountsService) { }
+  constructor(private uds : UserDataService) { }
 
   ngOnInit() {
     this.getUsers();
   }
 
   public getUsers() : void {
-    this.uas.getUseracounts().subscribe(
-      (response : UserBeta[]) => {
+    this.uds.getUsers().subscribe(
+      (response : User[]) => {
         this.users = response;
       },
       (error: HttpErrorResponse) => {
@@ -54,12 +55,10 @@ export class UseraccountsComponent implements OnInit {
     button.click();
   }
 
-
-
   public onAddUser(addForm: NgForm): void {
     document.getElementById('add-user-form')?.click();
-    this.uas.addUser(addForm.value).subscribe(
-      (response: UserBeta) => {
+    this.uds.addUser(addForm.value).subscribe(
+      (response: User) => {
         console.log(response);
         this.getUsers();
         addForm.reset();
@@ -70,8 +69,8 @@ export class UseraccountsComponent implements OnInit {
     )
   }
 
-  public onDeleteUser(userID: number): void {
-    this.uas.deleteUser(userID).subscribe(
+  public onDeleteUser(id : number): void {
+    this.uds.deleteUser(id).subscribe(
       (response: void) => {
         console.log(response);
         this.getUsers();
@@ -81,11 +80,10 @@ export class UseraccountsComponent implements OnInit {
       }
     )
   }
- 
 
-  public onUpdateUser(user: UserBeta): void {
-    this.uas.updateUser(user).subscribe(
-      (response: UserBeta) => {
+  public onUpdateUser(user: User): void {
+    this.uds.updateUser(user).subscribe(
+      (response: User) => {
         console.log(response);
         console.log(user);
         this.getUsers();
@@ -97,7 +95,7 @@ export class UseraccountsComponent implements OnInit {
   }
 
   public searchUser(key: string): void{
-    const results: UserBeta[] = [];
+    const results: User[] = [];
     for (const user of this.users!) {
       if (user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 
       ||  user.function.toLowerCase().indexOf(key.toLowerCase()) !== -1 
@@ -113,6 +111,12 @@ export class UseraccountsComponent implements OnInit {
       this.getUsers();
     }
   }
+
+public openURLWindow(url : string): void {
+  window.open(url);
+  
+}
+
 
 }
 

@@ -13,7 +13,7 @@
             <div class="card m-b-30">
                 <div class="card-body row">
                     <div class="col-6">
-                        <a href=""><img src="{{user?.imageUrl}}" alt="" class="img-fluid rounded-circle w-60"></a>
+						<a href='./profielpagina/'><img src="{{user?.photo}}" alt="" class="img-fluid rounded-circle w-60"></a>
                     </div>
                     <div class="col-6 card-naam align-self-center mb-0">
                         <h5>{{user.name}}</h5>
@@ -22,10 +22,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{user.email}} <a href="#"></a></li>
-                    <li class="list-group-item"><i class="fa fa-phone float-right"></i>Nummer: {{user.phoneNumber}}</li>
+                    <li *ngIf="user.phoneNumber" class="list-group-item"><i class="fa fa-phone float-right"></i>Nummer: {{user.phoneNumber}}</li>
 					<li *ngIf="user.admin"  class="list-group-item"><i ></i>Admin</li>
-
-
                 </ul>
                 <div class="card-body">
                     <div class="float-right btn-group btn-group-sm">
@@ -37,9 +35,7 @@
 							#toHover{
 								cursor: pointer;}
 						</style>
-						<!-- <li id="toHover" onclick=" window.open('https://www.linkedin.com/in/jvanderkooi/?originalSubdomain=nl','_blank')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li> -->
-						<li id="toHover" onclick="window.open('user.linkedinURL', 'new_window')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
-						<!-- <li id="toHover" onclick="window.open('user.linkedinURL', 'new_window')" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li> -->
+						<li *ngIf="user.linkedinURL" id="toHover" (click)=" openURLWindow(user.linkedinURL)" class="list-inline-item"><a naam="" data-placement="top" data-toggle="tooltip" class="tooltips" data-original-naam="LinkedIn"><i class="fa fa-linkedin"></i></a></li>
 					</ul>
                 </div>
             </div>
@@ -67,6 +63,10 @@
 				 <label for="name">Naam</label>
 				 <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Naam" required>
 			  </div>
+			  <!-- <div class="form-group">
+				<label for="username">User naam</label>
+				<input type="text" ngModel name="username" class="form-control" id="username" placeholder="User naam" required>
+			 </div> -->
 			  <div class="form-group">
 				 <label for="password">Passwoord</label>
 				 <input type="password" ngModel name="password" class="form-control" id="password" placeholder="Passwoord" required>
@@ -88,8 +88,8 @@
 				<input type="text" ngModel name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Telefoon nummer"required>
 			 </div>
 			  <div class="form-group">
-				 <label for="imageUrl">Profiel foto </label>
-				 <input type="text" ngModel name="imageUrl" class="form-control" id="imageUrl" placeholder="Voer URL in" >
+				 <label for="photo">Profiel foto </label>
+				 <input type="text" ngModel name="photo" class="form-control" id="photo" placeholder="Voer URL in" >
 			  </div>
 			  <div class="form-group">
 				<label for="linkedinURL">LinkedIn pagina </label>
@@ -121,9 +121,14 @@
 				 <label for="name">Naam</label>
 				 <input type="text" ngModel="{{updateUser?.name}}" name="name" class="form-control" id="name" placeholder="Naam"required>
 			  </div>
+			  <!-- <div class="form-group">
+				<label for="username">User naam</label>
+				<input type="text" ngModel="{{updateUser?.username}}" name="username" class="form-control" id="username" placeholder="User naam"required>
+			 </div> -->
 
 			  <input type="hidden" ngModel="{{updateUser?.id}}" name="id" class="form-control" id="id" placeholder="ISBN">
-              <input type="hidden" ngModel="{{updateUser?.userID}}" name="userID" class="form-control" id="userID" >
+              <!-- <input type="hidden" ngModel="{{updateUser?.userID}}" name="userID" class="form-control" id="userID" > -->
+			  <input type="hidden" ngModel="{{updateUser?.user_id}}" name="user_id" class="form-control" id="user_id" >
 
 			  <div class="form-group">
 				 <label for="function">Functie</label>
@@ -146,8 +151,9 @@
 				<input type="boolean" ngModel="{{updateUser?.admin}}" name="admin" class="form-control" id="admin" placeholder="true/false" required>
 			 </div>
 			  <div class="form-group">
-				 <label for="imageUrl">Profiel foto</label>
-				 <input type="text" ngModel="{{updateUser?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Voer URL in" >
+				 <label for="photo">Profiel foto</label>
+				 <input type="text" ngModel="{{updateUser?.photo}}" name="photo" class="form-control" id="photo" placeholder="Voer URL in" >
+				 <!-- <input type="text" ngModel="{{updateUser?.imageUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Voer URL in" > -->
 			  </div>
 			  <div class="form-group">
 				<label for="linkedinURL">LinkedIn pagina</label>
@@ -184,8 +190,7 @@
 	 </div>
    </div>
 
-
-<!-- Notification for no books -->
+<!-- Notification for no users -->
 <div *ngIf="users?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
 	<div class="alert alert-info" role="alert">
 	  <h4 class="alert-heading">Geen users!</h4>

@@ -10,15 +10,16 @@ const routes: Routes = [
   { path: '', component: BoekenlijstComponent },
   { path: 'login', component: LoginComponent },
   { path: 'boekenlijst', component: BoekenlijstComponent},
-  { path: 'logout', component: LogoutComponent},
   { path: 'useraccounts', component: UseraccountsComponent},
-  { path: 'boekenlijst', component: BoekenlijstComponent },
   { path: 'profielpagina', component: ProfielpaginaComponent },
   { path: 'logout', component: LogoutComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
+
+
 export class AppRoutingModule {}
