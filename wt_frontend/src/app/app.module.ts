@@ -10,11 +10,11 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
-
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { UseraccountsComponent } from './useraccounts/useraccounts.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 @NgModule({
   declarations: [
@@ -26,15 +26,17 @@ import { FormsModule } from '@angular/forms';
     BoekenlijstComponent,
     BoekenpaginaComponent,
 
+    UseraccountsComponent,
+    ProfielpaginaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

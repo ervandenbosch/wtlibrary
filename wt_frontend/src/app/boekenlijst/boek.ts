@@ -1,19 +1,16 @@
 export interface Boek {
-
-    id: number;
-    title: string;
-    isbn: string;
-    thumbnailUrl: string;
-    authors: string;
-    categories: string;
-    status: string;
-    pageCount: number;
-    copies: number;
-    available: number;
-    bookCode: string;
+  id: number;
+  title: string;
+  isbn: string;
+  thumbnailUrl: string;
+  authors: string;
+  categories: string;
+  status: string;
+  pageCount: number;
+  copies: number;
+  available: number;
+  bookCode: string;
 }
-
-
 
 // export class Boek {
 
