@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Boek } from '../boekenlijst/boek';
-import { boekService } from '../boekenlijst/boekenlijst.service';
+import { boekService } from './boekenpagina.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 // COMPONENT EIGENSCHAPPEN
@@ -17,6 +17,19 @@ export class BoekenpaginaComponent implements OnInit {
 
   public boeken: Boek[] | undefined;
   public editBoek: Boek | undefined;
+
+  public getBoek(): void {
+
+    this.boekService.getBoek(this.route.snapshot.params['title']).subscribe(
+
+    (response: Boek) => {
+      this.editBoek = response;
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    } 
+    )
+  }
 
   // LIJST MET BOEK-OBJECTEN
   // boekenlijst: Boek[] = [
@@ -67,13 +80,22 @@ export class BoekenpaginaComponent implements OnInit {
 
   // URL METHOD
   // Initialiseerd var "id", neemt ingevoerde waarde in URL en slaat deze op in var "id"
-    id = 0
+
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['title'];
+    this.getBoek()
+    console.log(this.editBoek?.available);
+
     
-    //Als n_available van Boek-object > 0, zet var is_beschikbaar op true
-    if (this.editBoek?.available) {
+    
+
+    // this.editBoek = getBoek(this.id)
+
+
+
+    // Als n_available van Boek-object > 0, zet var is_beschikbaar op true
+    if (this.editBoek?.available! > 0) {
       this.is_beschikbaar = true;
+      console.log(this.is_beschikbaar)
     }
   }
 }

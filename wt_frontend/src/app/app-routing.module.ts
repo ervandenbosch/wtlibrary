@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'boekenlijst', component: BoekenlijstComponent},
   { path: 'logout', component: LogoutComponent},
-  { path: 'boek/:id', component: BoekenpaginaComponent}
+  { path: 'boek/:title', component: BoekenpaginaComponent},
   { path: 'useraccounts', component: UseraccountsComponent},
   { path: 'profielpagina', component: ProfielpaginaComponent },
   { path: 'logout', component: LogoutComponent },
