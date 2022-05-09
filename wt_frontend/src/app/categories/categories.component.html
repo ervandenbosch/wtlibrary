@@ -10,20 +10,15 @@
             <th>Categorie titel</th>
             <th>Informatie</th>
           </tr>
-          <tr id="1">
-            <td><textarea [(ngModel)]="catName1" (keydown.enter)="myFunction()" style="width: 100%; resize: none; border: none;"></textarea></td>
-            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="myFunction()">Informatie 1</textarea></td>
-            <td><button class="btn btn-light" style="display: block; margin: auto;"  (click)="delCat(1)">Verwijder</button></td>
-          </tr>
-          <tr id="2">
-            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="myFunction()">Communicatie</textarea></td>
-            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="myFunction()">Info over communicatie</textarea></td>
-            <td><button class="btn btn-light btn-centered" style="display: block; margin: auto;" (click)="delCat(2)">Verwijder</button></td>
+          <tr *ngFor="let category of categories" id={{category.id}}>
+            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()">{{category.cat_name}}</textarea></td>
+            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()">{{category.cat_desc}}</textarea></td>
+            <td><button class="btn btn-light btn-centered" style="display: block; margin: auto;" (click)="deleteCategory(category.id)">Verwijder</button></td>
           </tr>
     </table>
-    <button class="btn btn-light" (click)="addCat()">Toevoegen</button>
+    <button class="btn btn-light" (click)="addCategory()">Toevoegen</button>
 
-    <div class="popup" (click)="myFunction()">
+    <div class="popup" (click)="popUp()">
         <span class="popuptext" id="myPopup" style="display: none; position:absolute;">A Simple Popup!</span>
-      </div>
+    </div>    
 </div>
