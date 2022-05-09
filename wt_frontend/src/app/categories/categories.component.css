@@ -1,0 +1,23 @@
+#mainCom{
+    margin-top: 5%;
+}
+
+h1{
+    margin-bottom: 5%;
+}
+
+#myPopup{
+    border-color: rgb(240, 240, 240);
+    border-style: solid;
+    border-width: 1px;
+    top: 10%;
+    left: 5%;
+    z-index: 99;
+    text-align: center;
+    padding: 2%;
+    background-color: white;
+    margin: auto;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+}
