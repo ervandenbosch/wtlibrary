@@ -4,6 +4,7 @@ import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
+import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
 
 const routes: Routes = [
@@ -12,11 +13,15 @@ const routes: Routes = [
   { path: 'boekenlijst', component: BoekenlijstComponent},
   { path: 'logout', component: LogoutComponent},
   { path: 'reserveringen', component: ReserveringenComponent},
+  { path: 'useraccounts', component: UseraccountsComponent},
   { path: 'profielpagina', component: ProfielpaginaComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
+
+
 export class AppRoutingModule {}

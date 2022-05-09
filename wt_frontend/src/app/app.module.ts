@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
+import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,8 @@ import { ProfielpaginaComponent } from './profielpagina/profielpagina.component'
     LogoutComponent,
     BoekenlijstComponent,
     ReserveringenComponent,
-    ProfielpaginaComponent
+    ProfielpaginaComponent,
+    UseraccountsComponent,
   ],
   imports: [
     BrowserModule,
