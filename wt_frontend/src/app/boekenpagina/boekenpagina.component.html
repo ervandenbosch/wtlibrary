@@ -2,12 +2,13 @@
 <body>
   <div class="container" id="main-container">
     <div class="tekstEnFoto">
-        <img src={{boekenlijst[id].path}} class="img1">
+        <img src={{editBoek?.thumbnailUrl}} class="img1">
         <div class="tekst">
-            <h1>{{boekenlijst[id].title}}</h1>
+            <h1>{{editBoek?.title}}</h1>
             <h4>Beschrijving</h4>
-            <p>
-                {{boekenlijst[id].description}}
+            <p> 
+              <!-- Dit moet nog verandert worden naar description -->
+                {{editBoek?.title}}
             </p>
         </div>
     </div>
@@ -16,10 +17,10 @@
         <h4 class="over">Over dit boek</h4>
 
         <h6>Categorie(ën):</h6>
-        <p class="categorie">{{boekenlijst[id].categories}}</p>
+        <p class="categorie">{{editBoek?.categories}}</p>
 
         <h6>Aantal exemplaren beschikbaar:</h6>
-        <p> {{boekenlijst[id].n_available}}</p>
+        <p> {{editBoek?.available}}</p>
     </div>
 
 
@@ -42,7 +43,7 @@
            </div>
            <div class="modal-body">
             <p>Weet je zeker dat je het boek<p>
-            <p><b>{{boekenlijst[id].title}}</b>
+            <p><b>{{editBoek?.title}}</b>
             <p>wilt reserveren?</p>
             <div class="modal-footer">
              <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
