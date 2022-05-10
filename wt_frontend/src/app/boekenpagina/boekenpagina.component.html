@@ -1,101 +1,77 @@
 <!-- BOEK  -->
+
 <body>
   <div class="container" id="main-container">
     <div class="tekstEnFoto">
-        <img src={{editBoek?.thumbnailUrl}} class="img1">
-        <div class="tekst">
-            <h1>{{editBoek?.title}}</h1>
-            <h4>Beschrijving</h4>
-            <p> 
-              <!-- Dit moet nog verandert worden naar description -->
-                {{editBoek?.title}}
-            </p>
-        </div>
+      <img src={{editBoek?.thumbnailUrl}} class="img1">
+      <div class="tekst">
+        <h1 class="titel">{{editBoek?.title}}</h1>
+        <h4 class="beschrijving_header">Beschrijving</h4>
+        <p class="beschrijving">
+          <!-- Dit moet nog verandert worden naar description -->
+          {{editBoek?.title}}
+        </p>
+      </div>
     </div>
     <div class="metaInformatie">
-        <br><br>
-        <h4 class="over">Over dit boek</h4>
-
-        <h6>Categorie(ën):</h6>
-        <p class="categorie">{{editBoek?.categories}}</p>
-
-        <h6>Aantal exemplaren beschikbaar:</h6>
-        <p> {{editBoek?.available}}</p>
+      <br><br>
+      <h4 class="over">Over dit boek</h4>
+      <h6 style="color:#00e600;">Auteur(s):</h6>
+      <p style = "width: 20%;">{{editBoek?.authors}}</p>
+      <h6 style="color:#00e600;">Pagina's:</h6>
+      <p>{{editBoek?.pageCount}}</p>
+      <h6 style="color:#00e600;">Categorie(ën):</h6>
+      <p class="categorie">{{editBoek?.categories}}</p>
+      <h6 style="color:#00e600;">ISBN:</h6>
+      <p class="categorie">{{editBoek?.isbn}}</p>
+      <br><br>
+      <h6 style="color:#00e600;">Exemplaren beschikbaar:</h6>
+      <p> {{editBoek?.available}}</p>
     </div>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
+    <br><br>
 
 
     <!-- KNOP -->
     <div class="knop">
-        <a *ngIf="is_beschikbaar" (click)="onOpenModal()"><button class="btn btn-success" style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
-        <a *ngIf="!is_beschikbaar"><button class="btn btn-failure" style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet Beschikbaar</button></a>
+      <a *ngIf="boekAvailable" (click)="onOpenModal()"><button class="btn btn-success"
+          style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
+      <a *ngIf="!boekAvailable"><button class="btn btn-failure"
+          style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet
+          Beschikbaar</button></a>
     </div>
     <br><br>
-    
-<div>
-    <div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-           </div>
-           <div class="modal-body">
-            <p>Weet je zeker dat je het boek<p>
-            <p><b>{{editBoek?.title}}</b>
-            <p>wilt reserveren?</p>
-            <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
-             <button class="btn btn-success" data-dismiss="modal">Ja</button>
+
+
+    <!-- POP UP -->
+    <div>
+      <div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-           </div>
+            <div class="modal-body">
+              <p>Weet je zeker dat je het boek
+              <p>
+              <p><b>{{editBoek?.title}}</b>
+              <p>wilt reserveren?</p>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+                <button (click)="onUpdate(this.editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
+              </div>
+            </div>
+          </div>
         </div>
-       </div>
-       </div>
+      </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- POP UP 1
-    <ng-template #mymodal let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Boek Reserveren</h4>
-          <button type="button" class="btn" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">x</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <table id="boekenlijst" class="table table-hover">
-
-             <thead class="thead-dark">
-                <p>Weet je zeker dat je dit boek wilt reserveren?</p>
-                  <tr>
-                      <th>Titel</th>
-                      <th>ISBN</th>
-                  </tr>
-              </thead>
-      
-              <tbody>
-                  <tr >
-                    <td>{{boekenlijst[id].title}}</td>
-                    <td>{{boekenlijst[id].isbn}}</td>
-                  </tr>
-              </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Reservering bevestigen</button>
-        </div>
-      </ng-template> -->
-    </div>
-  </body>
+  </div>
+</body>
