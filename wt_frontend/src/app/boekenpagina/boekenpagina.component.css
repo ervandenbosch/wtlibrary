@@ -1,0 +1,63 @@
+.img1 {
+    width: 150px;
+    margin-left: 2%;
+    margin-right: 5%;
+    margin-top: 3%;
+}
+
+.tekstEnFoto {
+    display: flex;
+    left: 0;
+    color: black;
+    
+}
+
+body {
+    background-color: black;
+    border-style: solid;
+    border-color: green;
+    border-width: 12px;
+    border-radius: 80px;
+}
+
+.over {
+    margin-bottom: 25px;
+    color: white;
+}
+
+.categorie {
+    margin-bottom: 20px;
+}
+
+.metaInformatie {
+    margin-left: 2%;
+    color: white;
+    width: 75%;
+}
+
+.knop {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.tekst {
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.btn btn-success {
+    width: 100px;
+}
+
+.beschrijving_header {
+    color: white;
+}
+
+.beschrijving {
+    color: white;
+}
+
+.titel {
+    color: #00e600;
+}
