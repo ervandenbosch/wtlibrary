@@ -146,14 +146,14 @@
 				<input type="text" ngModel name="username" class="form-control" id="username" placeholder="User naam" required>
 			 </div> -->
           <div class="form-group">
-            <label for="password">Passwoord</label>
+            <label for="password">Password</label>
             <input
               type="password"
               ngModel
               name="password"
               class="form-control"
               id="password"
-              placeholder="Passwoord"
+              placeholder="Password"
               required
             />
           </div>
@@ -171,15 +171,19 @@
           </div>
           <div class="form-group">
             <label for="admin">Admin</label>
-            <input
-              type="boolean"
+            <select
               ngModel
               name="admin"
               class="form-control"
               id="admin"
-              placeholder="true/false"
               required
-            />
+            >
+              <optgroup label="admin">
+                <option value="">Click to choose..</option>
+                <option value="false" selected>False</option>
+                <option value="true">True</option>
+              </optgroup>
+            </select>
           </div>
           <div class="form-group">
             <label for="email">E-mail adres</label>
@@ -323,14 +327,14 @@
             />
           </div>
           <div class="form-group">
-            <label for="password">Passwoord</label>
+            <label for="password">Password</label>
             <input
               type="password"
               ngModel="{{ updateUser?.password }}"
               name="password"
               class="form-control"
               id="password"
-              placeholder="Passwoord"
+              placeholder="Password"
               required
             />
           </div>
