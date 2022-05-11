@@ -16,13 +16,11 @@ const routes: Routes = [
   { path: 'useraccounts', component: UseraccountsComponent},
   { path: 'profielpagina', component: ProfielpaginaComponent },
   { path: 'logout', component: LogoutComponent },
+  { path: 'profielpagina/:id', component: ProfielpaginaComponent },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-
-
 export class AppRoutingModule {}

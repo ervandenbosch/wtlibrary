@@ -72,7 +72,7 @@
         <div class="mb-3 form-group">
           <label for="password" class="form-label"><b>Password</b></label>
           <input
-            type="text"
+            type="password"
             ngModel="{{ editUser?.password }}"
             class="form-control"
             id="password"
@@ -81,7 +81,31 @@
           />
         </div>
         <div class="mb-3 form-group">
-          <label for="password" class="form-label"><b>Photo URL</b></label>
+          <label for="function" class="form-label"><b>Functie</b></label>
+          <input
+            type="text"
+            ngModel="{{ editUser?.function }}"
+            class="form-control"
+            id="function"
+            placeholder="..."
+            name="function"
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="phoneNumber" class="form-label"
+            ><b>Phone number</b></label
+          >
+          <input
+            type="text"
+            ngModel="{{ editUser?.phoneNumber }}"
+            class="form-control"
+            id="phoneNumber"
+            placeholder="..."
+            name="phoneNumber"
+          />
+        </div>
+        <div class="mb-3 form-group">
+          <label for="photo" class="form-label"><b>Photo URL</b></label>
           <input
             type="text"
             ngModel="{{ editUser?.photo }}"
@@ -91,7 +115,19 @@
             name="photo"
           />
         </div>
-
+        <div class="mb-3 form-group">
+          <label for="linkedinURL" class="form-label"
+            ><b>LinkedIn URL</b></label
+          >
+          <input
+            type="text"
+            ngModel="{{ editUser?.linkedinURL }}"
+            class="form-control"
+            id="linkedinURL"
+            placeholder="..."
+            name="linkedinURL"
+          />
+        </div>
         <div class="modal-footer">
           <button
             type="button"
@@ -208,7 +244,7 @@
             name="name"
             class="form-control"
             id="name"
-            placeholder="Name"
+            placeholder="..."
             required
           />
         </div>
@@ -220,55 +256,80 @@
             name="email"
             class="form-control"
             id="email"
-            placeholder="Email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.username }}"
-            name="username"
-            class="form-control"
-            id="username"
-            placeholder="Job title"
+            placeholder="@"
             required
           />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
           <input
-            type="text"
+            type="password"
             ngModel="{{ addUser?.password }}"
             name="password"
             class="form-control"
             id="password"
-            placeholder="Phone"
+            placeholder="..."
             required
           />
         </div>
         <div class="form-group">
-          <label for="photo">Photo URL</label>
+          <label for="phoneNumber">Telefoonnummer</label>
           <input
             type="text"
-            ngModel="{{ addUser?.photo }}"
-            name="imageUrl"
+            ngModel="{{ addUser?.phoneNumber }}"
+            name="phoneNumber"
             class="form-control"
-            id="imageUrl"
-            placeholder="Image URL"
+            id="phoneNumber"
+            placeholder="..."
+          />
+        </div>
+        <div class="form-group">
+          <label for="function">Functie</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.function }}"
+            name="function"
+            class="form-control"
+            id="function"
+            placeholder="..."
           />
         </div>
         <div class="form-group">
           <label for="admin">admin</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.admin }}"
+          <select
             name="admin"
+            ngModel="{{ addUser?.admin }}"
             class="form-control"
             id="admin"
-            placeholder="true/false"
             required
+          >
+            <optgroup label="admin">
+              <option value="false" selected>False</option>
+              <option value="true">True</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="admin">LinkedIn URL:</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.linkedinURL }}"
+            name="linkedinURL"
+            class="form-control"
+            id="linkedinURL"
+            placeholder="https://linkedin.nl/"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="photo">Profile photo URL</label>
+          <input
+            type="text"
+            ngModel="{{ addUser?.photo }}"
+            name="photo"
+            class="form-control"
+            id="photo"
+            placeholder="Image URL"
           />
         </div>
         <div class="modal-footer">
@@ -579,15 +640,27 @@
               </td>
             </tr>
             <tr>
-              <td>Username:</td>
-              <td>
-                <b>{{ currentUser?.username }}</b>
-              </td>
-            </tr>
-            <tr>
               <td>Admin Role:</td>
               <td>
                 <b>{{ currentUser?.admin }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Telefoonnummer:</td>
+              <td>
+                <b>{{ currentUser?.phoneNumber }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>Functie</td>
+              <td>
+                <b>{{ currentUser?.function }}</b>
+              </td>
+            </tr>
+            <tr>
+              <td>LinkedIn:</td>
+              <td>
+                <b>{{ currentUser?.linkedinURL }}</b>
               </td>
             </tr>
           </tbody>
