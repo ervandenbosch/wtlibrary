@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reservering } from './reservering';
 import { API_URL } from '../app.constants';
@@ -12,8 +12,12 @@ export class reserveringService {
     return this.http.get<Reservering[]>(`${API_URL}/statushistorie/find/status/gereserveerd/1`);
   }
 
-  public goedkeurReservering(reservering: Reservering, user_id: number, exemplaar_id: number): Observable<Reservering> {
-    return this.http.post<Reservering>(`${API_URL}/statushistorie/add/user/${user_id}/exemplaar/${exemplaar_id}`, reservering);
+  public goedkeurReservering(reserveringJson: any, user_id: number, exemplaar_id: number): Observable<Reservering> {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type' : 'application/json',
+      // 'Cache-Control': 'no-cache'
+    });
+    return this.http.post<Reservering>(`${API_URL}/statushistorie/add/user/${user_id}/exemplaar/${exemplaar_id}`, reserveringJson, { headers : httpHeaders});
   }
 
   // public addBoek(Boek: Boek): Observable<Boek> {

@@ -52,9 +52,9 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Titel: goedReservering?.title</li>
-                    <li class="list-group-item">User: goedReservering?.name</li>
-                    <li class="list-group-item">Datum: goedReservering?.dateReserved</li>
+                    <li class="list-group-item">Titel: {{ goedReservering?.exemplaar?.id }}</li>
+                    <li class="list-group-item">User: {{ goedReservering?.user?.name }}</li>
+                    <li class="list-group-item">Datum: {{ goedReservering?.timestamp }}</li>
                 </ul>
             </div>
             <div class="modal-footer">

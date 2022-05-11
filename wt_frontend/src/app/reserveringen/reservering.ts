@@ -7,7 +7,7 @@ export interface Reservering {
     active: boolean;
     sh_code: string;
     status: string;
-    timestamp: Date;
+    timestamp: string;
     exemplaar: Exemplaar;
     user: User;
     // available: number; 
