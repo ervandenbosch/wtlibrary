@@ -7,6 +7,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
+import { LogboekComponent } from './logboek/logboek.component';
 
 const routes: Routes = [
   { path: '', component: BoekenlijstComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'profielpagina', component: ProfielpaginaComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'profielpagina/:id', component: ProfielpaginaComponent },
+  { path: 'logboek', component: LogboekComponent },
 ];
 
 @NgModule({

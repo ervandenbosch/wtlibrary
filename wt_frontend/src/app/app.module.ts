@@ -16,6 +16,8 @@ import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
+import { LogboekComponent } from './logboek/logboek.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { ProfielpaginaComponent } from './profielpagina/profielpagina.component'
     BoekenpaginaComponent,
     UseraccountsComponent,
     ProfielpaginaComponent,
-    UseraccountsComponent,
+    LogboekComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { ProfielpaginaComponent } from './profielpagina/profielpagina.component'
     NgbModule,
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
