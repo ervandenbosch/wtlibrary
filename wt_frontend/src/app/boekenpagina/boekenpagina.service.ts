@@ -15,7 +15,7 @@ export class boekService {
   }
 
   public getBoek(BoekId : number): Observable<any> {
-    return this.http.get<Boek>(`${this.apiServerUrl}/boek/${BoekId}`);
+    return this.http.get<Boek>(`${this.apiServerUrl}/boek/find/${BoekId}`);
   }
 
   public addBoek(Boek: Boek): Observable<Boek> {
