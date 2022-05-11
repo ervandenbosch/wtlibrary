@@ -6,7 +6,7 @@ import { User } from '../service/user';
 import { UserDataService } from '../service/user-data.service';
 import { Boek } from '../boekenlijst/boek';
 import { boekService } from '../boekenlijst/boekenlijst.service';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-profielpagina',
   templateUrl: './profielpagina.component.html',
@@ -21,11 +21,13 @@ export class ProfielpaginaComponent implements OnInit {
   public boeken: Boek[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
+  public currentUserId: number | undefined;
 
   constructor(
     private modalService: NgbModal,
     private UserDataService: UserDataService,
-    private boekService: boekService
+    private boekService: boekService,
+    private route: ActivatedRoute
   ) {}
 
   open(content: any) {
@@ -33,6 +35,10 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      console.log('the id of this route is: ', params['id']);
+      this.currentUserId = params['id'] - 1;
+    });
     this.getUsers();
     this.getBooks();
   }
@@ -42,7 +48,11 @@ export class ProfielpaginaComponent implements OnInit {
       (response: User[]) => {
         this.users = response;
         console.log(this.users);
-        this.currentUser = this.users[0];
+        if (this.currentUserId) {
+          this.currentUser = this.users[this.currentUserId];
+        } else {
+          this.currentUser = this.users[0];
+        }
         this.editUser = this.currentUser;
         console.log(this.currentUser);
       },
