@@ -295,7 +295,7 @@
           />
         </div>
         <div class="form-group">
-          <label for="admin">admin</label>
+          <label for="admin">Admin</label>
           <select
             name="admin"
             ngModel="{{ addUser?.admin }}"
@@ -304,6 +304,7 @@
             required
           >
             <optgroup label="admin">
+              <option value="">Click to choose..</option>
               <option value="false" selected>False</option>
               <option value="true">True</option>
             </optgroup>
@@ -318,7 +319,6 @@
             class="form-control"
             id="linkedinURL"
             placeholder="https://linkedin.nl/"
-            required
           />
         </div>
         <div class="form-group">
@@ -658,7 +658,7 @@
               </td>
             </tr>
             <tr>
-              <td>LinkedIn:</td>
+              <td *ngIf="currentUser?.linkedinURL">LinkedIn:</td>
               <td>
                 <b>{{ currentUser?.linkedinURL }}</b>
               </td>
