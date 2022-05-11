@@ -38,23 +38,31 @@
 
     <!-- KNOP -->
     <div class="knop">
-      <a *ngIf="boekAvailable" (click)="onOpenModal()"><button class="btn btn-success"
-          style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;">Reserveer</button></a>
-      <a *ngIf="!boekAvailable"><button class="btn btn-failure"
+      <a *ngIf="isAvailable && !boekGereserveerd" (click)="onOpenModal()"><button class="btn btn-success"
+          style="width:400px; color: black; background-color: #00e600; font-size: 20px; font-weight: bold;"
+          >Reserveer <span class="fa-stack">
+            <i class="fa fa-book fa-stack-1x"></i>
+          </span></button></a>
+      <a *ngIf="!isAvailable && !boekGereserveerd"><button class="btn btn-failure"
           style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet
           Beschikbaar</button></a>
+
+      <button *ngIf="boekGereserveerd" class="btn btn-success"
+          style="width:400px; color: black; background-color: green; font-size: 20px; font-weight: bold;"
+          > Gereserveerd ☑️</button>
+
     </div>
     <br><br>
 
 
-    <!-- POP UP -->
+    <!-- POP UP 1: WEET JE HET ZEKER-->
     <div>
       <div class="modal fade" id="deleteBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
+              <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -66,7 +74,7 @@
               <p>wilt reserveren?</p>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
-                <button (click)="onUpdate(this.editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
+                <button (click)="onOpenModal2()" (click)="onUpdate(this.editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
               </div>
             </div>
           </div>
@@ -74,4 +82,30 @@
       </div>
     </div>
   </div>
+
+   <!-- POP UP 2: BEVESTIGING -->
+  <div>
+    <div class="modal fade" id="okBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Uw reservering is succesvol!</p>
+            <div class="modal-footer">
+              <button class="btn btn-success" data-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </body>
+

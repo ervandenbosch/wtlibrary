@@ -13,21 +13,24 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./boekenpagina.component.css']
 })
 
+// CLASS BoekenpaginaComponent
 export class BoekenpaginaComponent implements OnInit {
 
+  //Attributen
   public boeken: Boek[] | undefined;
   public editBoek: Boek | undefined;
-  public boekAvailable: boolean | undefined;
+  public isAvailable: boolean | undefined;
+  public boekGereserveerd: boolean | undefined = false;
 
 
-
+  //Functie die het juiste boek ophaalt op basis van de id (title) in de URL
   public getBoek(): void {
 
     this.boekService.getBoek(this.route.snapshot.params['title']).subscribe(
-
+      //Checkt of "aantal beschikbaar" van Boek object groter is dan 0 en sets de isAvailable overeenkomstig
     (response: Boek) => {
       this.editBoek = response;
-      if (this.editBoek.available > 0) {this.boekAvailable = true} else {this.boekAvailable = false}
+      if (this.editBoek.available > 0) {this.isAvailable = true} else {this.isAvailable = false}
     },
     (error: HttpErrorResponse) => {
       alert(error.message);
@@ -37,20 +40,21 @@ export class BoekenpaginaComponent implements OnInit {
     
   }
 
+  //Functie het aantal beschikbare exemplaren met 1 verminderd na een reservering
   public onUpdate(boek : Boek) {
     boek.available = boek.available - 1
     this.boekService.updateBoek(boek).subscribe(
       (response: Boek) => {
         console.log(response);
         this.getBoek();
+        this.boekGereserveerd = true;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
   }
-
-  is_beschikbaar = false;
+  
 
   constructor(
     private router: Router,
@@ -81,6 +85,16 @@ export class BoekenpaginaComponent implements OnInit {
     button.click();
   }
 
+  public onOpenModal2(): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#okBoekModal');
+    container?.appendChild(button);
+    button.click();
+  }
 
 
 
