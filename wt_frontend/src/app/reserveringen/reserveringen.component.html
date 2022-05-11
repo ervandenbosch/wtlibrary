@@ -5,25 +5,26 @@
 		<div class="col-lg-12">
 			<div class="main-box clearfix">
 				<div class="table-responsive">    
-                    <table class = "table user-list" id = "reserveringlijst">
+                    <table class = "table user-list" id = "reserveringen">
                         <thead> 
                             <tr>
                                 <th><span>Boek</span></th>
                                 <th><span>User</span></th>
                                 <th><span>Datum gereserveerd</span></th>
-                                <th><span>Nog beschikbaar</span> </th>                
+                                <!-- <th><span>Nog beschikbaar</span> </th>                 -->
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
                     
                         <tbody>
-                            <tr *ngFor="let tempReservering of reserveringlijst">
-                                <td class="align-middle">{{ tempReservering.title }}</td>
-                                <td class="align-middle">{{ tempReservering.name }}</td>
-                                <td class="align-middle">{{ tempReservering.dateReserved }}</td>
-                                <td class="align-middle">{{ tempReservering.available }}</td>
+                            <tr *ngFor="let tempReservering of reserveringen">
+                                <td class="align-middle">{{ tempReservering.exemplaar.id }}</td>
+                                <td class="align-middle">{{ tempReservering.user.name }}</td>
+                                <td class="align-middle">{{ tempReservering.timestamp }}</td>
+                                <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
                                 <td class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
-                                    <button class="btn btn-danger btn-sm" (click)="openBevestigingModal(tempReservering, 'afkeuren')"><span><i class="fa fa-thumbs-down"></i></span></button> </td>
+                                    <!-- <button class="btn btn-danger btn-sm" (click)="openBevestigingModal(tempReservering, 'afkeuren')"><span><i class="fa fa-thumbs-down"></i></span></button> -->
+                                </td> 
                             </tr>
                         </tbody>
                     </table>
@@ -34,7 +35,7 @@
 </div>
 
 <!-- Notificatie voor geen reserveringen -->
-<div *ngIf="reserveringlijst?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+<div *ngIf="reserveringen?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
 	<div class="alert alert-info" role="alert">
 	  <h4 class="alert-heading">Geen reserveringen!</h4>
 	  <p>Er zijn geen openstaande reserveringen gevonden.</p>
@@ -66,8 +67,8 @@
 </div> 
 
 
-<!-- Afkeuren Modal-->
-<div class="modal fade" id="afkeurModal" tabindex="-1" role="dialog" aria-labelledby="afkeurModalLabel" aria-hidden="true">
+<!-- Afkeuren Modal -->
+<!-- <div class="modal fade" id="afkeurModal" tabindex="-1" role="dialog" aria-labelledby="afkeurModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -88,7 +89,7 @@
 
         </div>
     </div>
-</div> 
+</div>  -->
 
 <!-- Bevestiging goedkeuring Modal -->
 <div class="modal fade" id="goedgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="goedgekeurdModalLabel" aria-hidden="true">
@@ -111,7 +112,7 @@
 </div>
 
 <!-- Bevestiging afkeuring Modal -->
-<div class="modal fade" id="afgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="afgekeurdModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="afgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="afgekeurdModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,4 +129,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

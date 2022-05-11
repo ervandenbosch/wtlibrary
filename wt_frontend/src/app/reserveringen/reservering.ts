@@ -1,23 +1,28 @@
-// export interface Reservering {
-//     id: number;
-//     title: string;
-//     name: string;
-//     dateReserved: string;
-//     available: number;
-//     user_id: number;
-//     book_id: number;
-// }
+import { Exemplaar } from "src/app/reserveringen/exemplaar"
+import { User } from "src/app/service/user"
 
-export class Reservering {
-
-    constructor(
-                public id: number,
-                public title: string,
-                public name: string,
-                public dateReserved: string, 
-                public available: number,
-                public user_id: number,
-                public book_id: number
-                ){
-                }
+export interface Reservering {
+    id: number;
+    admin_modif: boolean;
+    active: boolean;
+    sh_code: string;
+    status: string;
+    timestamp: Date;
+    exemplaar: Exemplaar;
+    user: User;
+    // available: number; 
 }
+
+// export class Reservering {
+
+//     constructor(
+//                 public id: number,
+//                 public title: string,
+//                 public name: string,
+//                 public dateReserved: string, 
+//                 public available: number,
+//                 public user_id: number,
+//                 public book_id: number
+//                 ){
+//                 }
+// }
