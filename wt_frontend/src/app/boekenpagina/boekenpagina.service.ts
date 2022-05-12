@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Boek } from '../boekenlijst/boek';
 import { environment } from 'src/environments/environment';
+import { Exemplaar } from '../exemplaar/exemplaar';
 
 @Injectable({providedIn: 'root'})
 export class boekService {
@@ -28,5 +29,17 @@ export class boekService {
 
   public deleteBoek(BoekId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/boek/delete/${BoekId}`);
+  }
+
+  public getExemplaren(): Observable<Exemplaar[]> {
+    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/all`);
+  }
+
+  public updateExemplaar(exemplaar: Exemplaar): Observable<Exemplaar> {
+    return this.http.put<Exemplaar>(`${this.apiServerUrl}/exemplaar/update`, exemplaar);
+  }
+
+  public getExemplarenBybookCode(bookCode: string): Observable<Exemplaar[]> {
+    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/${bookCode}`);
   }
 }
