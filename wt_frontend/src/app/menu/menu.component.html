@@ -1,37 +1,64 @@
-<header>
+<div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-light border">
     <div>
       <a routerLink="/" class="navbar-brand m-2">
         <img src="../assets/images/wtlogo.svg" />
       </a>
     </div>
-    <ul class="navbar-nav">
-      <li>
-        <a class="nav-link">Home</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link text-dark" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a href="/admin" class="nav-link text-dark" routerLink="admin"
+          >Admin-panel</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="showModeratorBoard">
+        <a href="/mod" class="nav-link text-dark" routerLink="mod"
+          >Moderator Board</a
+        >
       </li>
     </ul>
 
-    <ul class="navbar-nav navbar-collapse justify-content-end">
-      <li>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <!-- <li class="nav-item">
+        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+      </li> -->
+      <li class="nav-item">
+        <a href="/login" class="nav-link text-dark" routerLink="login">Login</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item" *ngIf="showAdminBoard">
         <a routerLink="/useraccounts" class="nav-link text-dark"
           >User Accounts</a
+        >
+      </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a routerLink="/reserveringen" class="nav-link text-dark">
+          Reserveringen</a
         >
       </li>
       <li>
         <a routerLink="/boekenlijst" class="nav-link text-dark">Bibliotheek</a>
       </li>
-      <li>
+      <li class="nav-item" *ngIf="showAdminBoard">
         <a routerLink="/logboek" class="nav-link text-dark">Logboek</a>
       </li>
       <li>
-        <a routerLink="/profielpagina" class="nav-link text-dark">Profiel</a>
+        <a routerLink="/profielpagina/" class="nav-link text-dark">{{
+          username
+        }}</a>
       </li>
-      <li>
-        <a routerLink="/login" class="nav-link text-dark">Login</a>
-      </li>
-      <li>
-        <a routerLink="/logout" class="nav-link text-dark">Logout</a>
+      <li class="nav-item">
+        <a href class="nav-link text-dark" (click)="logout()">Uitloggen</a>
       </li>
     </ul>
   </nav>
-</header>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

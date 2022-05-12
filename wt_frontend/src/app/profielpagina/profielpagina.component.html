@@ -22,20 +22,6 @@
           class="form-control"
           id="id"
         />
-        <input
-          type="hidden"
-          ngModel="{{ editUser?.user_id }}"
-          name="user_id"
-          class="form-control"
-          id="user_id"
-        />
-        <input
-          type="hidden"
-          ngModel="{{ editUser?.admin }}"
-          name="admin"
-          class="form-control"
-          id="admin"
-        />
         <div class="mb-3 form-group">
           <label for="name" class="form-label"><b>Name</b></label>
           <input
@@ -81,14 +67,14 @@
           />
         </div>
         <div class="mb-3 form-group">
-          <label for="function" class="form-label"><b>Functie</b></label>
+          <label for="functie" class="form-label"><b>Functie</b></label>
           <input
             type="text"
-            ngModel="{{ editUser?.function }}"
+            ngModel="{{ editUser?.functie }}"
             class="form-control"
-            id="function"
+            id="functie"
             placeholder="..."
-            name="function"
+            name="functie"
           />
         </div>
         <div class="mb-3 form-group">
@@ -229,13 +215,6 @@
           class="form-control"
           id="id"
         />
-        <input
-          type="hidden"
-          ngModel="{{ addUser?.user_id }}"
-          name="id"
-          class="form-control"
-          id="id"
-        />
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -284,34 +263,18 @@
           />
         </div>
         <div class="form-group">
-          <label for="function">Functie</label>
+          <label for="functie">Functie</label>
           <input
             type="text"
-            ngModel="{{ addUser?.function }}"
-            name="function"
+            ngModel="{{ addUser?.functie }}"
+            name="functie"
             class="form-control"
-            id="function"
+            id="functie"
             placeholder="..."
           />
         </div>
         <div class="form-group">
-          <label for="admin">Admin</label>
-          <select
-            name="admin"
-            ngModel="{{ addUser?.admin }}"
-            class="form-control"
-            id="admin"
-            required
-          >
-            <optgroup label="admin">
-              <option value="">Click to choose..</option>
-              <option value="false" selected>False</option>
-              <option value="true">True</option>
-            </optgroup>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="admin">LinkedIn URL:</label>
+          <label>LinkedIn URL:</label>
           <input
             type="text"
             ngModel="{{ addUser?.linkedinURL }}"
@@ -582,14 +545,13 @@
 </ng-template>
 
 <div class="container-fluid" style="min-height: 100vh">
-  <div class="d-flex flex-wrap">
+  <!-- <div class="d-flex flex-wrap">
     <div class="d-flex flex-row">
       <div class="col-sm">
         <button
           class="btn btn-secondary my-2"
           style="width: 100px; margin-left: 8px"
           type="button"
-          *ngIf="currentUser?.admin"
           (click)="open(mymodal3)"
         >
           Add User
@@ -600,14 +562,13 @@
           class="btn btn-secondary my-2"
           style="width: 100px; margin-left: 8px"
           type="button"
-          *ngIf="currentUser?.admin"
           (click)="open(mymodal5)"
         >
           Add Boek
         </button>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="p-2 row">
     <div class="col-sm border rounded m-2">
@@ -634,15 +595,15 @@
               </td>
             </tr>
             <tr>
+              <td>Username:</td>
+              <td>
+                <b>{{ currentUser?.username }}</b>
+              </td>
+            </tr>
+            <tr>
               <td>Email:</td>
               <td>
                 <b>{{ currentUser?.email }}</b>
-              </td>
-            </tr>
-            <!-- <tr>
-              <td>Admin Role:</td>
-              <td>
-                <b>{{ currentUser?.admin }}</b>
               </td>
             </tr> -->
 
@@ -657,7 +618,7 @@
             <tr>
               <td>Functie</td>
               <td>
-                <b>{{ currentUser?.function }}</b>
+                <b>{{ currentUser?.functie }}</b>
               </td>
             </tr>
             <tr *ngIf="currentUser?.admin">

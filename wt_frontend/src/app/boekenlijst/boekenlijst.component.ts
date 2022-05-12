@@ -13,6 +13,7 @@ export class BoekenlijstComponent implements OnInit {
   public boeken: Boek[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
+  public boekBeschikbaar: boolean = true;
 
   constructor(private boekService: boekService) {}
 
@@ -45,13 +46,22 @@ export class BoekenlijstComponent implements OnInit {
     );
   }
 
-  public setReserved(): void {
-    const row = document.getElementById('main-row');
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.style.backgroundColor = 'green';
-    row?.appendChild(button);
-    button.click();
+  public setReserved(boek: Boek): void {
+    if (boek.available > 0) {
+      boek.available--;
+    } else (boek.available = 0);
+    
+    this.boekService.updateBoek(boek).subscribe(
+      (response: Boek) => {
+        console.log(response);
+        this.getBoeken();
+        if (boek.available == 0) {this.boekBeschikbaar = false};
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
 
   public onUpdateBoek(boek: Boek): void {

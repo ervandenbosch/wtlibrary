@@ -7,7 +7,7 @@
   <h2>Userlijst &nbsp;&nbsp;&nbsp; <button
     id="topbttn"
     class="btn btn-primary"
-    (click)="onOpenModal(null, 'add')"
+    routerLink="/register"
   >
     <i class="fa fa book"></i> User Toevoegen
   </button>
@@ -38,10 +38,10 @@
             />
           </div>
           <div class="col-6 card-naam align-self-center mb-0">
-            <a style= "text-decoration: none;"  routerLink="/profielpagina/{{ user.id }}"
-              ><h5 style="color: black">{{ user.name }}</h5></a
+            <a routerLink="/profielpagina/{{ user.id - 1 }}"
+              ><h5>{{ user.username }}</h5>{{ user.name }}</a
             >
-            <p class="m-0">{{ user.function }}</p>
+            <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush">
@@ -52,8 +52,6 @@
           <li *ngIf="user.phoneNumber" class="list-group-item">
             <i class="fa fa-phone float-right"></i>Nummer:
             {{ user.phoneNumber }}
-          </li>
-          <li *ngIf="user.admin" class="list-group-item"><i></i>Admin</li>
         </ul>
         <div class="card-body">
           <div class="float-right btn-group btn-group-sm">
@@ -102,155 +100,6 @@
   </div>
 </div>
 
-<!-- Add User Modal -->
-<div
-  class="modal fade"
-  id="addUserModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="addUserModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
-          <div class="form-group">
-            <label for="name">Naam</label>
-            <input
-              type="text"
-              ngModel
-              name="name"
-              class="form-control"
-              id="name"
-              placeholder="Naam"
-              required
-            />
-          </div>
-          <!-- <div class="form-group">
-				<label for="username">User naam</label>
-				<input type="text" ngModel name="username" class="form-control" id="username" placeholder="User naam" required>
-			 </div> -->
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              ngModel
-              name="password"
-              class="form-control"
-              id="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="function">Functie</label>
-            <input
-              type="text"
-              ngModel
-              name="function"
-              class="form-control"
-              id="function"
-              placeholder="Functie"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="admin">Admin</label>
-            <select
-              ngModel
-              name="admin"
-              class="form-control"
-              id="admin"
-              required
-            >
-              <optgroup label="admin">
-                <option value="">Click to choose..</option>
-                <option value="false" selected>False</option>
-                <option value="true">True</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="email">E-mail adres</label>
-            <input
-              type="text"
-              ngModel
-              name="email"
-              class="form-control"
-              id="email"
-              placeholder="E-mail adres"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="phoneNumber">Telefoon nummer</label>
-            <input
-              type="text"
-              ngModel
-              name="phoneNumber"
-              class="form-control"
-              id="phoneNumber"
-              placeholder="Telefoon nummer"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="photo">Profiel foto </label>
-            <input
-              type="text"
-              ngModel
-              name="photo"
-              class="form-control"
-              id="photo"
-              placeholder="Voer URL in"
-            />
-          </div>
-          <div class="form-group">
-            <label for="linkedinURL">LinkedIn pagina </label>
-            <input
-              type="text"
-              ngModel
-              name="linkedinURL"
-              class="form-control"
-              id="linkedinURL"
-              placeholder="Voer URL in"
-            />
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              id="add-user-form"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Sluiten
-            </button>
-            <button
-              [disabled]="addForm.invalid"
-              type="submit"
-              class="btn btn-primary"
-            >
-              User Toevoegen
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Edit User Modal -->
 <div
   class="modal fade"
@@ -281,7 +130,7 @@
             <label for="name">Naam</label>
             <input
               type="text"
-              ngModel="{{ updateUser?.name }}"
+              ngModel="{{ name }}"
               name="name"
               class="form-control"
               id="name"
@@ -289,10 +138,10 @@
               required
             />
           </div>
-          <!-- <div class="form-group">
-				<label for="username">User naam</label>
+          <div class="form-group">
+				<label for="username">Username</label>
 				<input type="text" ngModel="{{updateUser?.username}}" name="username" class="form-control" id="username" placeholder="User naam"required>
-			 </div> -->
+			 </div>
 
           <input
             type="hidden"
@@ -303,22 +152,15 @@
             placeholder="ISBN"
           />
           <!-- <input type="hidden" ngModel="{{updateUser?.userID}}" name="userID" class="form-control" id="userID" > -->
-          <input
-            type="hidden"
-            ngModel="{{ updateUser?.user_id }}"
-            name="user_id"
-            class="form-control"
-            id="user_id"
-          />
 
           <div class="form-group">
-            <label for="function">Functie</label>
+            <label for="functie">Functie</label>
             <input
               type="text"
-              ngModel="{{ updateUser?.function }}"
-              name="function"
+              ngModel="{{ updateUser?.functie }}"
+              name="functie"
               class="form-control"
-              id="function"
+              id="functie"
               placeholder="Functie"
               required
             />
@@ -356,18 +198,6 @@
               class="form-control"
               id="phoneNumber"
               placeholder="Telefoon nummer"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="admin">Admin</label>
-            <input
-              type="boolean"
-              ngModel="{{ updateUser?.admin }}"
-              name="admin"
-              class="form-control"
-              id="admin"
-              placeholder="true/false"
               required
             />
           </div>
