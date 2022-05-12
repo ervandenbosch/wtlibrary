@@ -45,4 +45,8 @@ export class ExemplaarService {
   public getExemplarenBybookCode(bookCode: string): Observable<Exemplaar[]> {
     return this.http.get<Exemplaar[]>(`${API_URL}/exemplaar/${bookCode}`);
   }
+
+  public getExemplarenBybookId(bookId: number): Observable<Exemplaar[]> {
+    return this.http.get<Exemplaar[]>(`${API_URL}/exemplaar/boekexemplaren/${bookId}`);
+  }
 }

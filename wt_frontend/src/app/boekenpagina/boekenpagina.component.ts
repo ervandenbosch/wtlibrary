@@ -5,6 +5,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Boek } from '../boekenlijst/boek';
 import { boekService } from './boekenpagina.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Exemplaar } from '../exemplaar/exemplaar';
+import { ExemplaarService } from '../exemplaar/exemplaar.service';
+import { reserveringService } from '../reserveringen/reserveringen.service';
+import { Reservering} from '../reserveringen/reservering';
 
 // COMPONENT EIGENSCHAPPEN
 @Component({
@@ -17,10 +21,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class BoekenpaginaComponent implements OnInit {
 
   //Attributen
-  public boeken: Boek[] | undefined;
+  public exemplaren: Exemplaar[] | undefined 
   public editBoek: Boek | undefined;
   public isAvailable: boolean | undefined;
-  public boekGereserveerd: boolean | undefined = false;
+  public boekGereserveerd: boolean | undefined = false
+  public aantal: number | undefined 
 
 
   //Functie die het juiste boek ophaalt op basis van de id (title) in de URL
@@ -40,12 +45,13 @@ export class BoekenpaginaComponent implements OnInit {
     
   }
 
+
+
   //Functie het aantal beschikbare exemplaren met 1 verminderd na een reservering
   public onUpdate(boek : Boek) {
     boek.available = boek.available - 1
     this.boekService.updateBoek(boek).subscribe(
       (response: Boek) => {
-        console.log(response);
         this.getBoek();
         this.boekGereserveerd = true;
       },
@@ -53,6 +59,39 @@ export class BoekenpaginaComponent implements OnInit {
         alert(error.message);
       }
     );
+    this.exemplaarService.getExemplarenBybookId(boek.id).subscribe(
+      (response: Exemplaar[]) => {
+        console.log(response)
+        for (var exemplaar of response) {
+          if (exemplaar.staat === "beschikbaar") {
+            console.log(exemplaar)
+            let resObj = {
+
+              admin_modif: false,
+              active: true,
+              status: "gereserveerd"}
+      
+            var reserveringJson = JSON.stringify(resObj);
+            this.reserveringService.goedkeurReservering(reserveringJson, 40, exemplaar.id).subscribe(
+              (response: Reservering) => {
+ 
+              },
+              (error: HttpErrorResponse) => {
+                alert(error.message);
+              }
+            );
+            break
+          }
+        }
+      }
+        
+
+      ,
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+
   }
   
 
@@ -60,7 +99,9 @@ export class BoekenpaginaComponent implements OnInit {
     private router: Router,
     private route:ActivatedRoute,
     private modalService: NgbModal,
-    private boekService: boekService
+    private boekService: boekService,
+    private exemplaarService: ExemplaarService,
+    private reserveringService: reserveringService
   ) { }
 
 
@@ -70,7 +111,6 @@ export class BoekenpaginaComponent implements OnInit {
 
   
   closeResult: string = '';
-
 
 
   // POP UP METHODS
@@ -97,13 +137,9 @@ export class BoekenpaginaComponent implements OnInit {
   }
 
 
-
   
 
   ngOnInit(): void {
     this.getBoek()
-   
-
-    
   }
 }

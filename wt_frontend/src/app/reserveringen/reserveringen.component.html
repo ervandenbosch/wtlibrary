@@ -18,7 +18,7 @@
                     
                         <tbody>
                             <tr *ngFor="let tempReservering of reserveringen">
-                                <td class="align-middle">{{ tempReservering.exemplaar.id }}</td>
+                                <td class="align-middle">{{ tempReservering.exemplaar.boek.title }}</td>
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
                                 <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
@@ -52,7 +52,7 @@
             </div>
             <div class="modal-body">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Titel: {{ goedReservering?.exemplaar?.id }}</li>
+                    <li class="list-group-item">Titel: {{ goedReservering?.exemplaar?.boek?.title }}</li>
                     <li class="list-group-item">User: {{ goedReservering?.user?.name }}</li>
                     <li class="list-group-item">Datum: {{ goedReservering?.timestamp }}</li>
                 </ul>
