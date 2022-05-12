@@ -1,14 +1,12 @@
 export interface User {
   id: number;
-  user_id: String;
-  admin: boolean;
   username: string;
   password: string;
   name: string;
   email: string;
+  roles: string[];
   photo: string;
-
-  function: string;
+  functie: string;
   phoneNumber: string;
   linkedinURL: string;
 }
