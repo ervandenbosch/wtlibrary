@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
+import { ReserveringenComponent } from './reserveringen/reserveringen.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
@@ -26,8 +27,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     LogoutComponent,
     BoekenlijstComponent,
+    ReserveringenComponent,
     BoekenpaginaComponent,
-
     UseraccountsComponent,
     ProfielpaginaComponent,
     LogboekComponent,
