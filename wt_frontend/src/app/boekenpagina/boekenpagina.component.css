@@ -13,16 +13,16 @@
 }
 
 body {
-    background-color: black;
+    background-color: white;
     border-style: solid;
-    border-color: green;
-    border-width: 12px;
+    border-color:white;
+    border-width: 5px;
     border-radius: 80px
 }
 
 .over {
     margin-bottom: 25px;
-    color: white;
+    color: black;
 }
 
 .categorie {
@@ -31,7 +31,7 @@ body {
 
 .metaInformatie {
     margin-left: 2%;
-    color: white;
+    color: black;
     width: 75%;
 }
 
@@ -51,13 +51,13 @@ body {
 }
 
 .beschrijving_header {
-    color: white;
+    color: black;
 }
 
 .beschrijving {
-    color: white;
+    color: black;
 }
 
 .titel {
-    color: #00e600;
+    color: black;
 }
