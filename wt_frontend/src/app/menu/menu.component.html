@@ -30,14 +30,17 @@
       <li class="nav-item" *ngIf="showAdminBoard">
         <a routerLink="/useraccounts" class="nav-link text-dark">User Accounts</a>
       </li>
+      <li class="nav-item" *ngIf="showAdminBoard">
+        <a routerLink="/reserveringen" class="nav-link text-dark"> Reserveringen</a>
+      </li>
       <li>
         <a routerLink="/boekenlijst" class="nav-link text-dark">Bibliotheek</a>
       </li>
-      <li>
+      <li class="nav-item" *ngIf="showAdminBoard">
         <a routerLink="/logboek" class="nav-link text-dark">Logboek</a>
       </li>
       <li>
-        <a routerLink="/profielpagina" class="nav-link text-dark">{{ username }}</a>
+        <a routerLink="/profielpagina/{{ id! - 1}}" class="nav-link text-dark">{{ username }}</a>
       </li>
       <li class="nav-item">
         <a href class="nav-link text-dark" (click)="logout()">Uitloggen</a>
