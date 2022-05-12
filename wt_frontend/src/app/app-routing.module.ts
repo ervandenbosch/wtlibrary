@@ -2,21 +2,28 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
 import { ProfielpaginaComponent } from './profielpagina/profielpagina.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
+import { BoardUserComponent } from './board-user/board-user.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  { path: '', component: BoekenlijstComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'boekenlijst', component: BoekenlijstComponent},
-  { path: 'logout', component: LogoutComponent},
   { path: 'boek/:title', component: BoekenpaginaComponent},
   { path: 'useraccounts', component: UseraccountsComponent},
   { path: 'profielpagina', component: ProfielpaginaComponent },
-  { path: 'logout', component: LogoutComponent },
   { path: 'profielpagina/:id', component: ProfielpaginaComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'user', component: BoardUserComponent },
+  { path: 'mod', component: BoardModeratorComponent },
+  { path: 'admin', component: BoardAdminComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
