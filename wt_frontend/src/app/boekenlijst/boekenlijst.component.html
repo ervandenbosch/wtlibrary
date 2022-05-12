@@ -17,10 +17,11 @@
     class="form-control mr-sm-2"
     placeholder="Boek zoeken..."
     required
+    autocomplete="off"
   />
 
   <div class="row" id="main-row">
-    <div class="col-lg-12">
+    <div class="col-lg-12" >
       <div class="main-box clearfix">
         <div class="table-responsive">
           <table class="table user-list">
@@ -33,8 +34,8 @@
                 <th>&nbsp;</th>
               </tr>
             </thead>
-            <tbody *ngFor="let boek of boeken">
-              <tr>
+            <tbody *ngFor="let boek of boeken" >
+              <tr >
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
                   <a href="/boek/{{ boek?.id }}" class="user-link">{{
@@ -56,15 +57,24 @@
                   <a href="#">{{ boek?.categories }}</a>
                 </td>
                 <td style="width: 25%">
+                  <a *ngIf="boek.available > 0" (click)="setReserved(boek)">
                   <button
                     class="btn btn-outline-primary"
-                    (click)="setReserved()"
-                  >
-                    Reserveer
+                    >Reserveer
                     <span class="fa-stack">
                       <i class="fa fa-book fa-stack-1x"></i>
                     </span>
                   </button>
+                  </a>
+                  <a *ngIf="boek.available == 0" (click)="setReserved(boek)">
+                    <button
+                      class="btn btn-outline-secondary" disabled
+                      >Reserveer
+                      <span class="fa-stack">
+                        <i class="fa fa-book fa -stack-1x"></i>
+                      </span>
+                    </button>
+                    </a>
                   <a class="table-link" (click)="onOpenModal(boek, 'edit')">
                     <span class="fa-stack">
                       <i class="fa fa-square fa-stack-2x"></i>
@@ -299,6 +309,7 @@
                 <label for="authors">Beschikbaar</label>
                 <input
                   type="number"
+                  max = {{editBoek?.copies}}
                   ngModel="{{ editBoek?.available }}"
                   name="available"
                   class="form-control"
