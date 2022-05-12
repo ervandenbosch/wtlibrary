@@ -639,12 +639,15 @@
                 <b>{{ currentUser?.email }}</b>
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Admin Role:</td>
               <td>
                 <b>{{ currentUser?.admin }}</b>
               </td>
-            </tr>
+            </tr> -->
+
+            
+
             <tr>
               <td>Telefoonnummer:</td>
               <td>
@@ -657,11 +660,25 @@
                 <b>{{ currentUser?.function }}</b>
               </td>
             </tr>
+            <tr *ngIf="currentUser?.admin">
+              <td>Admin</td>
+            </tr>
             <tr>
-              <td *ngIf="currentUser?.linkedinURL">LinkedIn:</td>
-              <td>
-                <b>{{ currentUser?.linkedinURL }}</b>
-              </td>
+            <style>
+              #toHover {
+                cursor: pointer;}
+            </style>
+              <td *ngIf="currentUser?.linkedinURL"
+              id="toHover"
+              (click)="openURLWindow(currentUser?.linkedinURL)">
+              <a
+                naam=""
+                data-placement="top"
+                data-toggle="tooltip"
+                class="tooltips"
+                data-original-naam="LinkedIn"
+                ><i class="fa fa-linkedin"></i
+              ></a></td>
             </tr>
           </tbody>
         </table>

@@ -132,4 +132,8 @@ export class ProfielpaginaComponent implements OnInit {
     document.getElementById('close-modal5')?.click();
     document.getElementById('close-modal6')?.click();
   }
+
+  public openURLWindow(url : string | undefined): void {
+    window.open(url);
+  }
 }
