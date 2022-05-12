@@ -7,17 +7,20 @@ h1{
 }
 
 #myPopup{
-    border-color: rgb(240, 240, 240);
+    border-color: rgba(0, 0, 0, 0.626);
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
+    border-radius: 1%;
     top: 10%;
     left: 5%;
     z-index: 99;
     text-align: center;
     padding: 2%;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     margin: auto;
     position: absolute;
     top: 40%;
     left: 40%;
+    box-shadow: 5px 5px 5px rgba(170, 158, 158, 0.462);
+    font-weight: 600;
 }

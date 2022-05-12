@@ -34,6 +34,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.addCategories(null).subscribe({
       next: (response: Category) => {
         this.category = response;
+        this.getCategories()
       },
       error: (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -45,6 +46,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.updateCategories(id).subscribe({
       next: (response: Category) => {
         this.category = response;
+        this.getCategories()
       },
       error: (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -56,6 +58,7 @@ export class CategoriesComponent implements OnInit {
     this.categoriesService.deleteCategories(id).subscribe({
       next: (response: Category) => {
         this.category = response;
+        this.getCategories()
       },
       error: (error: HttpErrorResponse) => {
         console.log(error.message);
@@ -113,7 +116,7 @@ export class CategoriesComponent implements OnInit {
     var popup: HTMLElement = <HTMLElement> document.getElementById("myPopup");
 
     if(!this.buttonOn){
-      popup.innerHTML = `<p>Weet je het zeker? <button (click)="changeCat()">Bevestig</button></p>`
+      popup.innerHTML = `<p>Weet je het zeker?  <button (click)="changeCat()" class="btn btn-light btn-centered">Bevestig</button></p>`
       popup.style.display = 'initial';
       this.buttonOn = true;
     }

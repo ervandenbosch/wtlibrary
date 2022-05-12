@@ -1,32 +1,32 @@
 [  
     {  
       "id": 1,  
-      "titel": "Programmeren",  
-      "info": "Info over programmeren.",
-      "maincategry": true
+      "cat_name": "Programmeren",  
+      "cat_desc": "cat_desc over programmeren.",
+      "maincategory": true
     },  
     {  
       "id": 2,  
-      "titel": "Design",  
-      "info": "Info over designen.",
-      "maincategry": true 
+      "cat_name": "Design",  
+      "cat_desc": "cat_desc over designen.",
+      "maincategory": true 
     },  
     {  
       "id": 3,  
-      "titel": "Java",  
-      "info": "Info over Java.",
-      "maincategry": false
+      "cat_name": "Java",  
+      "cat_desc": "cat_desc over Java.",
+      "maincategory": false
     },  
     {  
       "id": 4,  
-      "titel": "Javascript",  
-      "info": "Info over Javascript.",
-      "maincategry": false
+      "cat_name": "Javascript",  
+      "cat_desc": "cat_desc over Javascript.",
+      "maincategory": false
     },  
     {  
       "id": 5,  
-      "titel": "User Testing",  
-      "info": "Info over user testen.",
-      "maincategry": false 
+      "cat_name": "User Testing",  
+      "cat_desc": "cat_desc over user testen.",
+      "maincategory": false 
     }  
   ]  
