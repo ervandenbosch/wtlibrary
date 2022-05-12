@@ -10,6 +10,7 @@ import { User } from './user';
 export class UserDataService {
   constructor(private http: HttpClient) {}
 
+    
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${API_URL}/user/all`);
   }
