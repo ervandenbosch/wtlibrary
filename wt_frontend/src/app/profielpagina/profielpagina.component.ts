@@ -77,8 +77,6 @@ export class ProfielpaginaComponent implements OnInit {
       this.phoneNumber = this.currentUser.phoneNumber;
       this.linkedinURL = this.currentUser.linkedinURL;  
     }
-  
-
   }
 
   public getUsers() {

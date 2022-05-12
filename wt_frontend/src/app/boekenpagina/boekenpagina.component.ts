@@ -9,6 +9,7 @@ import { Exemplaar } from '../exemplaar/exemplaar';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { reserveringService } from '../reserveringen/reserveringen.service';
 import { Reservering} from '../reserveringen/reservering';
+import { CurrentUserService } from '../service/current-user.service';
 
 // COMPONENT EIGENSCHAPPEN
 @Component({
@@ -26,6 +27,7 @@ export class BoekenpaginaComponent implements OnInit {
   public isAvailable: boolean | undefined;
   public boekGereserveerd: boolean | undefined = false
   public aantal: number | undefined 
+  public currentUser: any;
 
 
   //Functie die het juiste boek ophaalt op basis van de id (title) in de URL
@@ -70,9 +72,9 @@ export class BoekenpaginaComponent implements OnInit {
               admin_modif: false,
               active: true,
               status: "gereserveerd"}
-      
+
             var reserveringJson = JSON.stringify(resObj);
-            this.reserveringService.goedkeurReservering(reserveringJson, 40, exemplaar.id).subscribe(
+            this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
               (response: Reservering) => {
  
               },
@@ -101,7 +103,8 @@ export class BoekenpaginaComponent implements OnInit {
     private modalService: NgbModal,
     private boekService: boekService,
     private exemplaarService: ExemplaarService,
-    private reserveringService: reserveringService
+    private reserveringService: reserveringService,
+    private CurrentUserService: CurrentUserService
   ) { }
 
 
@@ -140,6 +143,9 @@ export class BoekenpaginaComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.getBoek()
+    this.getBoek();
+    this.CurrentUserService.getCurrentUser();
+    this.currentUser = this.CurrentUserService.currentUser;
+    console.log(this.currentUser.id);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../service/token-storage.service';
+import { CurrentUserService } from '../service/current-user.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +9,7 @@ import { TokenStorageService } from '../service/token-storage.service';
 })
 export class MenuComponent implements OnInit {
   roles: string[] = [];
+  
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
@@ -19,6 +21,9 @@ export class MenuComponent implements OnInit {
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+
+    
+
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {

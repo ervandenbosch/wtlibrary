@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from '../service/current-user.service';
 import { Reservering } from './reservering';
 import { reserveringService } from './reserveringen.service';
 
