@@ -282,7 +282,6 @@
             class="form-control"
             id="linkedinURL"
             placeholder="https://linkedin.nl/"
-            required
           />
         </div>
         <div class="form-group">
@@ -620,7 +619,7 @@
               </td>
             </tr>
             <tr>
-              <td>LinkedIn:</td>
+              <td *ngIf="currentUser?.linkedinURL">LinkedIn:</td>
               <td>
                 <b>{{ currentUser?.linkedinURL }}</b>
               </td>

@@ -10,9 +10,12 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { RegisterComponent } from './register/register.component';
+import { ReserveringenComponent } from './reserveringen/reserveringen.component';
+import { LogboekComponent } from './logboek/logboek.component';
 
 const routes: Routes = [
   { path: 'boekenlijst', component: BoekenlijstComponent},
+  { path: 'reserveringen', component: ReserveringenComponent},
   { path: 'boek/:title', component: BoekenpaginaComponent},
   { path: 'useraccounts', component: UseraccountsComponent},
   { path: 'profielpagina', component: ProfielpaginaComponent },
@@ -24,6 +27,7 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'logboek', component: LogboekComponent },
 ];
 
 @NgModule({

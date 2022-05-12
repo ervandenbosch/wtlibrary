@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { BoekenlijstComponent } from './boekenlijst/boekenlijst.component';
+import { ReserveringenComponent } from './reserveringen/reserveringen.component';
 import { BoekenpaginaComponent } from './boekenpagina/boekenpagina.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { UseraccountsComponent } from './useraccounts/useraccounts.component';
@@ -18,6 +19,8 @@ import { RegisterComponent } from './register/register.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
+import { LogboekComponent } from './logboek/logboek.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
     MenuComponent,
     FooterComponent,
     BoekenlijstComponent,
+    ReserveringenComponent,
     BoekenpaginaComponent,
     UseraccountsComponent,
     ProfielpaginaComponent,
@@ -33,7 +37,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
     HomeComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    LogboekComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +46,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
