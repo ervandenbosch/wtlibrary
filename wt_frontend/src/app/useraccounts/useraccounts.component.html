@@ -4,17 +4,14 @@
 />
 
 <div class="User link">
-  <h2>Userlijst &nbsp;&nbsp;&nbsp;</h2>
-  <button
+  <h2>Userlijst &nbsp;&nbsp;&nbsp; <button
     id="topbttn"
     class="btn btn-primary"
     (click)="onOpenModal(null, 'add')"
   >
     <i class="fa fa book"></i> User Toevoegen
   </button>
-  <button id="topbttn" class="btn btn-primary">
-    <i class="fa fa book"></i> Oude Users
-  </button>
+</h2>
   <input
     type="search"
     (ngModelChange)="searchUser(key.value)"

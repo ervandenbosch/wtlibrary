@@ -37,7 +37,7 @@ export class ProfielpaginaComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       console.log('the id of this route is: ', params['id']);
-      this.currentUserId = params['id'] - 1;
+      this.currentUserId = params['id'];
     });
     this.getUsers();
     this.getBooks();
@@ -49,7 +49,7 @@ export class ProfielpaginaComponent implements OnInit {
         this.users = response;
         console.log(this.users);
         if (this.currentUserId) {
-          this.currentUser = this.users[this.currentUserId];
+          this.currentUser =  this.users.find(user => user.id == this.currentUserId);
         } else {
           this.currentUser = this.users[0];
         }
