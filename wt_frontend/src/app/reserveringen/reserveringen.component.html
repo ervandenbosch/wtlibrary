@@ -1,0 +1,132 @@
+<div class = "container" id = "main-container">
+    <h2 class="item">Reserveringen ter goedkeuring</h2>
+
+	<div class="row" id="main-row">
+		<div class="col-lg-12">
+			<div class="main-box clearfix">
+				<div class="table-responsive">    
+                    <table class = "table user-list" id = "reserveringen">
+                        <thead> 
+                            <tr>
+                                <th><span>Boek</span></th>
+                                <th><span>User</span></th>
+                                <th><span>Datum gereserveerd</span></th>
+                                <!-- <th><span>Nog beschikbaar</span> </th>                 -->
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                    
+                        <tbody>
+                            <tr *ngFor="let tempReservering of reserveringen">
+                                <td class="align-middle">{{ tempReservering.exemplaar.id }}</td>
+                                <td class="align-middle">{{ tempReservering.user.name }}</td>
+                                <td class="align-middle">{{ tempReservering.timestamp }}</td>
+                                <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
+                                <td class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
+                                    <!-- <button class="btn btn-danger btn-sm" (click)="openBevestigingModal(tempReservering, 'afkeuren')"><span><i class="fa fa-thumbs-down"></i></span></button> -->
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div>
+
+<!-- Notificatie voor geen reserveringen -->
+<div *ngIf="reserveringen?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+	<div class="alert alert-info" role="alert">
+	  <h4 class="alert-heading">Geen reserveringen!</h4>
+	  <p>Er zijn geen openstaande reserveringen gevonden.</p>
+	</div>
+</div>
+
+<!-- Goedkeuren Modal-->
+<div class="modal fade" id="goedkeurModal" tabindex="-1" role="dialog" aria-labelledby="goedkeurModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"id="modal-basic-title">Reservering goedkeuren?</h5>
+                <button type="button" class="close" aria-label="Close" data-dissmiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Titel: {{ goedReservering?.exemplaar?.id }}</li>
+                    <li class="list-group-item">User: {{ goedReservering?.user?.name }}</li>
+                    <li class="list-group-item">Datum: {{ goedReservering?.timestamp }}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
+                <button  type="button" class="btn btn-danger" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
+            </div>
+
+        </div>
+    </div>
+</div> 
+
+
+<!-- Afkeuren Modal -->
+<!-- <div class="modal fade" id="afkeurModal" tabindex="-1" role="dialog" aria-labelledby="afkeurModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"id="modal-basic-title">Reservering afkeuren?</h5>
+                <button type="button" class="close" aria-label="Close" data-dissmiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Titel: afReservering?.title</li>
+                    <li class="list-group-item">User: afReservering?.name</li>
+                    <li class="list-group-item">Datum: afReservering?.dateReserved</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
+                <button  type="button" class="btn btn-danger" (click)="onAfgekeurd(afReservering)" onclick="$('#afgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
+            </div>
+
+        </div>
+    </div>
+</div>  -->
+
+<!-- Bevestiging goedkeuring Modal -->
+<div class="modal fade" id="goedgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="goedgekeurdModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bevestigdLabel">Reservering bevestigd</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>De reservering is goedgekeurd.</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bevestiging afkeuring Modal -->
+<!-- <div class="modal fade" id="afgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="afgekeurdModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bevestigdLabel">Reservering afgekeurd</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>De reservering is afgekeurd.</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
