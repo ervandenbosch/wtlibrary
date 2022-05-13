@@ -6,8 +6,8 @@ import { NgForm } from '@angular/forms';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { Exemplaar } from '../exemplaar/exemplaar';
 import { reserveringService } from '../reserveringen/reserveringen.service';
+import { StatusHistory } from '../reserveringen/statushistory';
 import { CurrentUserService } from '../service/current-user.service';
-import { Reservering} from '../reserveringen/reservering';
 
 @Component({
   selector: 'app-boekenlijst',
@@ -69,15 +69,12 @@ export class BoekenlijstComponent implements OnInit {
             if (exemplaar.staat === "beschikbaar") {
               console.log(exemplaar)
               let resObj = {
-  
                 admin_modif: false,
                 active: true,
                 status: "gereserveerd"}
-  
               var reserveringJson = JSON.stringify(resObj);
               this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
-                (response: Reservering) => {
-   
+                (response: StatusHistory) => {
                 },
                 (error: HttpErrorResponse) => {
                   alert(error.message);
@@ -92,9 +89,6 @@ export class BoekenlijstComponent implements OnInit {
           alert(error.message);
         }
       );
-
-
-
     } else (boek.available = 0);
     
     this.boekService.updateBoek(boek).subscribe(
@@ -107,7 +101,6 @@ export class BoekenlijstComponent implements OnInit {
         alert(error.message);
       }
     );
-
   }
 
   public onUpdateBoek(boek: Boek): void {

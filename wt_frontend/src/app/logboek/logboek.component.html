@@ -144,27 +144,27 @@
                           <td>
                             <div class="d-flex flex-col py-2">
                               <img
-                                src="{{ log?.thumbnailUrl }}"
+                                src="{{ log?.exemplaar?.boek?.thumbnailUrl }}"
                                 style="max-width: 50px; border-radius: 0%"
                               />
                               <div class=".d-inline-flex flex-column">
                                 <div class="pl-1" style="font-size: 16px">
-                                  <a href="/boekenlijst/{{ log?.id }}"
-                                    >{{ log?.title }}
+                                  <a href="/boekenlijst/{{ log?.exemplaar?.boek?.id }}"
+                                    >{{ log?.exemplaar?.boek?.title }}
                                   </a>
                                 </div>
                                 <div class="pl-1" style="font-size: 12px">
-                                  {{ log?.authors }}
+                                  {{ log?.exemplaar?.boek?.authors }}
                                 </div>
                                 <div class="pt-2 pl-1" style="font-size: 10px">
-                                  ISBN: {{ log?.isbn }}
+                                  ISBN: {{ log?.exemplaar?.boek?.isbn }}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td>
                             <div class="p-1 text-center">
-                              {{ log?.exemplaar }}
+                              {{ log?.exemplaar?.id }}
                             </div>
                           </td>
                           <td>
@@ -183,13 +183,13 @@
                           <td>
                             <div class="">
                               <p class="type m-0 text-center">
-                                {{ log?.date }}
+                                {{ log?.timestamp }}
                               </p>
                             </div>
                           </td>
                           <td>
                             <div class="widget-26-job-emp-img text-center">
-                              {{ log?.namelender }}
+                              {{ log?.user?.name }}
                             </div>
                           </td>
                         </tr>

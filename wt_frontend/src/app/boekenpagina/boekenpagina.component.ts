@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Exemplaar } from '../exemplaar/exemplaar';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { reserveringService } from '../reserveringen/reserveringen.service';
-import { Reservering} from '../reserveringen/reservering';
+import { StatusHistory } from '../reserveringen/statushistory';
 import { CurrentUserService } from '../service/current-user.service';
 
 // COMPONENT EIGENSCHAPPEN
@@ -75,7 +75,7 @@ export class BoekenpaginaComponent implements OnInit {
 
             var reserveringJson = JSON.stringify(resObj);
             this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
-              (response: Reservering) => {
+              (response: StatusHistory) => {
  
               },
               (error: HttpErrorResponse) => {
@@ -85,10 +85,7 @@ export class BoekenpaginaComponent implements OnInit {
             break
           }
         }
-      }
-        
-
-      ,
+      },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
@@ -146,6 +143,5 @@ export class BoekenpaginaComponent implements OnInit {
     this.getBoek();
     this.CurrentUserService.getCurrentUser();
     this.currentUser = this.CurrentUserService.currentUser;
-    console.log(this.currentUser.id);
   }
 }
