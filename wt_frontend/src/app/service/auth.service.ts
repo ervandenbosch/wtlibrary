@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { CanActivate } from '@angular/router';
+import { TokenStorageService } from './token-storage.service';
+
+const AUTH_API = 'http://localhost:8080/api/auth/';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {
@@ -9,6 +13,41 @@ const httpOptions = {
 
 @Injectable({
   providedIn: 'root',
+})
+
+export class LoggedIn implements CanActivate {
+  constructor(private token: TokenStorageService) {}
+
+  canActivate() {
+    
+    if (!!this.token.getToken()) {
+      return true;
+    } else {
+      window.alert("Je hebt geen toestemming om deze pagina te bekijken");
+      return false;
+    }
+  }
+}
+  
+@Injectable({
+  providedIn: 'root'
+})
+export class isAdmin implements CanActivate {
+  constructor(private token: TokenStorageService) {}
+
+  canActivate() {
+    if (this.token.getUser().roles.includes('ROLE_ADMIN')) {
+      return true;
+    } else {
+      window.alert("Je hebt geen toestemming om deze pagina te bekijken");
+      return false;
+    }
+  }
+}
+
+
+@Injectable({
+  providedIn: 'root'
 })
 export class AuthService {
   private AUTH_API = environment.authURL;
