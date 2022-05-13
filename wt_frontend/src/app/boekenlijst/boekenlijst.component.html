@@ -57,7 +57,7 @@
                   <a href="#">{{ boek?.categories }}</a>
                 </td>
                 <td style="width: 25%">
-                  <a *ngIf="boek.available > 0" (click)="setReserved(boek)">
+                  <a *ngIf="boek.available > 0" (click)="onOpenModal1(boek)">
                   <button
                     class="btn btn-outline-primary"
                     >Reserveer
@@ -460,3 +460,61 @@
     <p>Er zijn geen boeken gevonden.</p>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+    <!-- POP UP 1: WEET JE HET ZEKER-->
+    <div>
+      <div class="modal fade" id="deleteeBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Weet je zeker dat je het boek
+              <p>
+              <p><b>{{editBoek?.title}}</b>
+              <p>wilt reserveren?</p>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+                <button (click)="onOpenModal2()" (click)="setReserved(editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- POP UP 2: BEVESTIGING -->
+  <div>
+    <div class="modal fade" id="okkBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Uw reservering is succesvol!</p>
+            <div class="modal-footer">
+              <button class="btn btn-success" data-dismiss="modal">Ok</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

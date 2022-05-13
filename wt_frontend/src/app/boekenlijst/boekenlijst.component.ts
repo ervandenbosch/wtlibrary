@@ -179,4 +179,29 @@ export class BoekenlijstComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
+
+
+  public onOpenModal2(): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#okkBoekModal');
+    container?.appendChild(button);
+    button.click();
+  }
+
+  public onOpenModal1(boek : Boek): void {
+    this.editBoek = boek;
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#deleteeBoekModal');
+    container?.appendChild(button);
+    button.click();
+  }
 }
+
