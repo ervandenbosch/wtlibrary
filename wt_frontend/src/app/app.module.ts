@@ -21,6 +21,7 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { LogboekComponent } from './logboek/logboek.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { isAdmin, LoggedIn } from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     FontAwesomeModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, LoggedIn, isAdmin],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
