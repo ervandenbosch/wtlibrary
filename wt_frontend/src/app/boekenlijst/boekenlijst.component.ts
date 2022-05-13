@@ -69,15 +69,12 @@ export class BoekenlijstComponent implements OnInit {
             if (exemplaar.staat === "beschikbaar") {
               console.log(exemplaar)
               let resObj = {
-  
                 admin_modif: false,
                 active: true,
                 status: "gereserveerd"}
-  
               var reserveringJson = JSON.stringify(resObj);
               this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
                 (response: StatusHistory) => {
-   
                 },
                 (error: HttpErrorResponse) => {
                   alert(error.message);
@@ -104,35 +101,6 @@ export class BoekenlijstComponent implements OnInit {
         alert(error.message);
       }
     );
-    this.exemplaarService.getExemplarenBybookId(boek.id).subscribe(
-      (response: Exemplaar[]) => {
-        console.log(response)
-        for (var exemplaar of response) {
-          if (exemplaar.staat === "beschikbaar") {
-            let resObj = {
-
-              admin_modif: false,
-              active: true,
-              status: "gereserveerd"}
-
-            var reserveringJson = JSON.stringify(resObj);
-            this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
-              (response: StatusHistory) => {
- 
-              },
-              (error: HttpErrorResponse) => {
-                alert(error.message);
-              }
-            );
-            break
-          }
-        }
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-
   }
 
   public onUpdateBoek(boek: Boek): void {
