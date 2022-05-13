@@ -9,8 +9,10 @@ import { environment } from 'src/environments/environment';
 })
 export class UserDataService {
   private apiServerUrl = environment.apiBaseurl;
+
   constructor(private http: HttpClient) {}
 
+    
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiServerUrl}/user/all`);
   }

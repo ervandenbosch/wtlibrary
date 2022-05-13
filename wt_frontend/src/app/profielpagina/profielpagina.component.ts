@@ -8,6 +8,8 @@ import { Boek } from '../boekenlijst/boek';
 import { boekService } from '../boekenlijst/boekenlijst.service';
 import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from '../service/token-storage.service';
+import { CurrentUserService } from '../service/current-user.service';
+import { Token } from '@angular/compiler/src/ml_parser/tokens';
 
 @Component({
   selector: 'app-profielpagina',
@@ -26,21 +28,22 @@ export class ProfielpaginaComponent implements OnInit {
   public currentUserId: number | undefined;
   isLoggedIn = false;
   username?: string;
-  name?: string
-  email?: string
-  roles?: string[]
+  name?: string;
+  email?: string;
+  roles?: string[];
   photo?: string;
   functie?: string;
   phoneNumber?: string;
   linkedinURL?: string;
-
 
   constructor(
     private modalService: NgbModal,
     private UserDataService: UserDataService,
     private boekService: boekService,
     private route: ActivatedRoute,
-    private token: TokenStorageService
+    private token: TokenStorageService,
+    private CurrentUserService: CurrentUserService,
+    private TokenStorageService: TokenStorageService
   ) {}
 
   open(content: any) {
@@ -48,7 +51,7 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.token.getUser();
+    this.currentUser = this.TokenStorageService.getUser();
     this.route.params.subscribe((params) => {
       //console.log('the id of this route is: ', params['id']);
       this.currentUserId = params['id'];
@@ -63,10 +66,9 @@ export class ProfielpaginaComponent implements OnInit {
       this.currentUser = this.token.getUser();
       this.roles = this.currentUser.roles;
 
-      if (this.roles?.includes('ROLE_ADMIN')){
-
-
-      } else {}
+      if (this.roles?.includes('ROLE_ADMIN')) {
+      } else {
+      }
 
       this.username = this.currentUser.username;
       this.name = this.currentUser.name;
@@ -75,10 +77,8 @@ export class ProfielpaginaComponent implements OnInit {
       this.photo = this.currentUser.photo;
       this.functie = this.currentUser.functie;
       this.phoneNumber = this.currentUser.phoneNumber;
-      this.linkedinURL = this.currentUser.linkedinURL;  
+      this.linkedinURL = this.currentUser.linkedinURL;
     }
-  
-
   }
 
   public getUsers() {
