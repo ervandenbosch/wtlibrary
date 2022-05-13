@@ -1,7 +1,7 @@
 import { Exemplaar } from "src/app/reserveringen/exemplaar"
 import { User } from "src/app/service/user"
 
-export interface Reservering {
+export interface StatusHistory {
     id: number;
     admin_modif: boolean;
     active: boolean;

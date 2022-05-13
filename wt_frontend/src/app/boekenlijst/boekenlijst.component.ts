@@ -3,6 +3,11 @@ import { Boek } from './boek';
 import { boekService } from './boekenlijst.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { ExemplaarService } from '../exemplaar/exemplaar.service';
+import { Exemplaar } from '../exemplaar/exemplaar';
+import { reserveringService } from '../reserveringen/reserveringen.service';
+import { StatusHistory} from '../reserveringen/statushistory';
+import { CurrentUserService } from '../service/current-user.service';
 
 @Component({
   selector: 'app-boekenlijst',
@@ -14,8 +19,12 @@ export class BoekenlijstComponent implements OnInit {
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
   public boekBeschikbaar: boolean = true;
+  public currentUser: any;
 
-  constructor(private boekService: boekService) {}
+  constructor(private boekService: boekService,
+              private exemplaarService: ExemplaarService,
+              private reserveringService: reserveringService,
+              private CurrentUserService: CurrentUserService) {}
 
   public getBoeken(): void {
     this.boekService.getBoeken().subscribe(
@@ -30,6 +39,8 @@ export class BoekenlijstComponent implements OnInit {
 
   ngOnInit() {
     this.getBoeken();
+    this.CurrentUserService.getCurrentUser();
+    this.currentUser = this.CurrentUserService.currentUser;
   }
 
   public onAddBoek(addForm: NgForm): void {
@@ -56,6 +67,34 @@ export class BoekenlijstComponent implements OnInit {
         console.log(response);
         this.getBoeken();
         if (boek.available == 0) {this.boekBeschikbaar = false};
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+    this.exemplaarService.getExemplarenBybookId(boek.id).subscribe(
+      (response: Exemplaar[]) => {
+        console.log(response)
+        for (var exemplaar of response) {
+          if (exemplaar.staat === "beschikbaar") {
+            let resObj = {
+
+              admin_modif: false,
+              active: true,
+              status: "gereserveerd"}
+
+            var reserveringJson = JSON.stringify(resObj);
+            this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
+              (response: StatusHistory) => {
+ 
+              },
+              (error: HttpErrorResponse) => {
+                alert(error.message);
+              }
+            );
+            break
+          }
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
