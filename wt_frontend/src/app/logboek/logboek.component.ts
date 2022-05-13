@@ -7,7 +7,6 @@ import { logboekService } from './logboek.service';
 import { StatusHistory } from '../reserveringen/statushistory';
 import { HttpErrorResponse } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-logboek',
   templateUrl: './logboek.component.html',
@@ -133,12 +132,12 @@ export class LogboekComponent implements OnInit {
           this.currentLogs[i].timestamp = this.convertTimestamp(this.currentLogs[i].timestamp);
         }
         console.log(this.currentLogs);
+        this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )    
-    this.logs = this.currentLogs;
   }
 
   first100() {
@@ -211,7 +210,6 @@ export class LogboekComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLogs();
-    // this.sortDatumDown();
 
     // console.log(this.currentSort);
     // console.log(this.currentPage);
