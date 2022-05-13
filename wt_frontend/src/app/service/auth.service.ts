@@ -19,7 +19,7 @@ export class LoggedIn implements CanActivate {
   constructor(private token: TokenStorageService) {}
 
   canActivate() {
-    
+
     if (!!this.token.getToken()) {
       return true;
     } else {

@@ -52,13 +52,8 @@ export class ProfielpaginaComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.TokenStorageService.getUser();
-    this.route.params.subscribe((params) => {
-      //console.log('the id of this route is: ', params['id']);
-      this.currentUserId = params['id'];
-    });
-
     this.getBooks();
-    this.getUsers();
+    this.getUser();
 
     this.isLoggedIn = !!this.token.getToken();
 
@@ -86,17 +81,35 @@ export class ProfielpaginaComponent implements OnInit {
       (response: User[]) => {
         this.users = response;
         console.log(this.users);
+<<<<<<< HEAD
         if (this.currentUserId) {
           this.currentUser =  this.users.find(user => user.id == this.currentUserId);
         } else {
           this.currentUser = this.users[0];
         }
         this.editUser = this.currentUser;
+=======
+>>>>>>> master
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     );
+  }
+
+  public getUser(): void {
+
+    this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
+    (response: User) => {
+      this.editUser = response;
+      console.log(this.editUser);
+    },
+    (error: HttpErrorResponse) => {
+      alert(error.message);
+    }
+    
+    )
+    
   }
 
   public getBooks() {
@@ -115,7 +128,7 @@ export class ProfielpaginaComponent implements OnInit {
     this.UserDataService.updateUser(user).subscribe(
       (response: User) => {
         console.log(response);
-        this.getUsers();
+        this.getUser();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
