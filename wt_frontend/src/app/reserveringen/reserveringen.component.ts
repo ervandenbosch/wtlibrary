@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from '../service/current-user.service';
-import { Reservering } from './reservering';
+import { StatusHistory } from './statushistory';
 import { reserveringService } from './reserveringen.service';
 
 @Component({
@@ -10,17 +10,10 @@ import { reserveringService } from './reserveringen.service';
   styleUrls: ['./reserveringen.component.css']
 })
 export class ReserveringenComponent implements OnInit {
-  //Array van reserveringen maken
-  // public reserveringlijst: Reservering[] = [
-  //   new Reservering(1, "Boek nummer 1", "Sofieke Niekolaas", "02/05/2022", 2, 1, 20),
-  //   new Reservering(5, "Boek nummer 2", "Tako Forsten", "31/04/2022", 5, 3, 12),
-  //   new Reservering(8, "Boek nummer 3", "Winnie Hoogakker", "25/04/2022", 0, 5, 10),
-  //   new Reservering(10, "Boek nummer 4", "Gijs van Riel", "01/05/2022", 1, 2, 50)
-  // ];
   
-  public reserveringen!: Reservering[];
-  public goedReservering!: Reservering; // | undefined;
-  public afReservering!: Reservering;// | undefined;
+  public reserveringen!: StatusHistory[];
+  public goedReservering!: StatusHistory; // | undefined;
+  public afReservering!: StatusHistory;// | undefined;
 
   constructor(private reserveringService: reserveringService) {}
 
@@ -40,11 +33,10 @@ export class ReserveringenComponent implements OnInit {
 
   public getReserveringen(): void {
     this.reserveringService.getReserveringen().subscribe(
-      (response: Reservering[]) => {
+      (response: StatusHistory[]) => {
         this.reserveringen = response;
         for (var i = 0; i < this.reserveringen.length; i++) {
           this.reserveringen[i].timestamp = this.convertTimestamp(this.reserveringen[i].timestamp);
-          console.log(this.convertTimestamp(this.reserveringen[i].timestamp)); 
         }
       },
       (error: HttpErrorResponse) => {
@@ -58,7 +50,7 @@ export class ReserveringenComponent implements OnInit {
   }
 
 
-  public openBevestigingModal(reservering: Reservering, actie: string) {
+  public openBevestigingModal(reservering: StatusHistory, actie: string) {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.type = 'button';
@@ -76,7 +68,7 @@ export class ReserveringenComponent implements OnInit {
     button.click();
   }
  
-  public onGoedgekeurd(reservering: Reservering): void {
+  public onGoedgekeurd(reservering: StatusHistory): void {
     console.log("goedgekeurd is geklikt");
     // var hi: Object = {
     //   admin_modif = true,
@@ -91,7 +83,7 @@ export class ReserveringenComponent implements OnInit {
     var reserveringJson = JSON.stringify(resObj);
     console.log(reserveringJson);
     this.reserveringService.goedkeurReservering(reserveringJson, reservering.user.id, reservering.exemplaar.id).subscribe(
-      (response: Reservering) => {
+      (response: StatusHistory) => {
         console.log(response);
         this.getReserveringen();
       },
