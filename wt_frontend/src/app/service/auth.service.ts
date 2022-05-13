@@ -5,13 +5,14 @@ import { CanActivate } from '@angular/router';
 import { TokenStorageService } from './token-storage.service';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 export class LoggedIn implements CanActivate {
@@ -49,25 +50,44 @@ export class isAdmin implements CanActivate {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  private AUTH_API = environment.authURL;
+
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signin', {
-      username,
-      password
-    }, httpOptions);
+    return this.http.post(
+      `${this.AUTH_API}/signin`,
+      {
+        username,
+        password,
+      },
+      httpOptions
+    );
   }
 
-  register(name: string, username: string, email: string, password: string, phoneNumber: string, functie: string, photo: string, linkedinURL: string): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
-      name,
-      username,
-      email,
-      password,
-      phoneNumber,
-      functie,
-      photo,
-      linkedinURL
-    }, httpOptions);
+  register(
+    name: string,
+    username: string,
+    email: string,
+    password: string,
+    phoneNumber: string,
+    functie: string,
+    photo: string,
+    linkedinURL: string
+  ): Observable<any> {
+    return this.http.post(
+      `${this.AUTH_API}/signup`,
+      {
+        name,
+        username,
+        email,
+        password,
+        phoneNumber,
+        functie,
+        photo,
+        linkedinURL,
+      },
+      httpOptions
+    );
   }
 }

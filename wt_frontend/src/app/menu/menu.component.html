@@ -4,16 +4,20 @@
       <a routerLink="/" class="navbar-brand m-2">
         <img src="../assets/images/wtlogo.svg" />
       </a>
-      </div>
+    </div>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
         <a href="/home" class="nav-link text-dark" routerLink="home">Home </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link text-dark" routerLink="admin">Admin-panel</a>
+        <a href="/admin" class="nav-link text-dark" routerLink="admin"
+          >Admin-panel</a
+        >
       </li>
       <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link text-dark" routerLink="mod">Moderator Board</a>
+        <a href="/mod" class="nav-link text-dark" routerLink="mod"
+          >Moderator Board</a
+        >
       </li>
     </ul>
 
@@ -28,10 +32,14 @@
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a routerLink="/useraccounts" class="nav-link text-dark">User Accounts</a>
+        <a routerLink="/useraccounts" class="nav-link text-dark"
+          >User Accounts</a
+        >
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a routerLink="/reserveringen" class="nav-link text-dark"> Reserveringen</a>
+        <a routerLink="/reserveringen" class="nav-link text-dark">
+          Reserveringen</a
+        >
       </li>
       <li>
         <a routerLink="/boekenlijst" class="nav-link text-dark">Bibliotheek</a>
@@ -40,7 +48,9 @@
         <a routerLink="/logboek" class="nav-link text-dark">Logboek</a>
       </li>
       <li>
-        <a routerLink="/profielpagina" class="nav-link text-dark">{{ username }}</a>
+        <a routerLink="/profielpagina/" class="nav-link text-dark">{{
+          username
+        }}</a>
       </li>
       <li class="nav-item">
         <a href class="nav-link text-dark" (click)="logout()">Uitloggen</a>
