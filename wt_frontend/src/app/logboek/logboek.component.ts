@@ -128,6 +128,7 @@ export class LogboekComponent implements OnInit {
     this.logboekService.getLogboek().subscribe(
       (response: StatusHistory[]) => {
         this.currentLogs = response;
+        this.logs = response;
         for (var i = 0; i < this.currentLogs.length; i++) {
           this.currentLogs[i].timestamp = this.convertTimestamp(this.currentLogs[i].timestamp);
         }
@@ -210,10 +211,9 @@ export class LogboekComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLogs();
-    console.log(this.currentLogs);
-    this.sortDatumDown();
+    // this.sortDatumDown();
 
-    console.log(this.currentSort);
-    console.log(this.currentPage);
+    // console.log(this.currentSort);
+    // console.log(this.currentPage);
   }
 }
