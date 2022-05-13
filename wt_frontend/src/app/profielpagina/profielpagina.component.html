@@ -42,6 +42,7 @@
             id="last_name"
             placeholder="..."
             name="username"
+            readonly
           />
         </div>
         <div class="mb-3 form-group">
@@ -64,6 +65,7 @@
             id="password"
             placeholder="..."
             name="password"
+            readonly
           />
         </div>
         <div class="mb-3 form-group">
@@ -576,7 +578,7 @@
         <h3 class="py-3 text-center">Personalia</h3>
         <div class="pt-2 pb-4">
           <img
-            src="{{ currentUser?.photo }}"
+            src="{{ editUser?.photo }}"
             alt="profilepic"
             style="
               display: block;
@@ -591,37 +593,37 @@
             <tr>
               <td>Naam:</td>
               <td>
-                <b>{{ currentUser?.name }}</b>
+                <b>{{ editUser?.name }}</b>
               </td>
             </tr>
             <tr>
               <td>Username:</td>
               <td>
-                <b>{{ currentUser?.username }}</b>
+                <b>{{ editUser?.username }}</b>
               </td>
             </tr>
             <tr>
               <td>Email:</td>
               <td>
-                <b>{{ currentUser?.email }}</b>
+                <b>{{ editUser?.email }}</b>
               </td>
             </tr>
             <tr>
               <td>Telefoonnummer:</td>
               <td>
-                <b>{{ currentUser?.phoneNumber }}</b>
+                <b>{{ editUser?.phoneNumber }}</b>
               </td>
             </tr>
             <tr>
               <td>Functie</td>
               <td>
-                <b>{{ currentUser?.functie }}</b>
+                <b>{{ editUser?.functie }}</b>
               </td>
             </tr>
             <tr>
-              <td *ngIf="currentUser?.linkedinURL">LinkedIn:</td>
+              <td *ngIf="editUser?.linkedinURL">LinkedIn:</td>
               <td>
-                <b>{{ currentUser?.linkedinURL }}</b>
+                <b>{{ editUser?.linkedinURL }}</b>
               </td>
             </tr>
           </tbody>

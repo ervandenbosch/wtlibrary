@@ -41,7 +41,7 @@
             />
           </div>
           <div class="col-6 card-naam align-self-center mb-0">
-            <a routerLink="/profielpagina/{{ user.id - 1 }}"
+            <a routerLink="/profielpagina/{{ user.id }}"
               ><h5>{{ user.username }}</h5>{{ user.name }}</a
             >
             <p class="m-0">{{ user.functie }}</p>
@@ -143,7 +143,7 @@
           </div>
           <div class="form-group">
 				<label for="username">Username</label>
-				<input type="text" ngModel="{{updateUser?.username}}" name="username" class="form-control" id="username" placeholder="User naam"required>
+				<input type="text" ngModel="{{updateUser?.username}}" name="username" class="form-control" id="username" placeholder="User naam"required readonly>
 			 </div>
 
           <input
@@ -153,6 +153,7 @@
             class="form-control"
             id="id"
             placeholder="ISBN"
+            readonly
           />
           <!-- <input type="hidden" ngModel="{{updateUser?.userID}}" name="userID" class="form-control" id="userID" > -->
 
@@ -178,6 +179,7 @@
               id="password"
               placeholder="Password"
               required
+              readonly
             />
           </div>
           <div class="form-group">
