@@ -197,7 +197,8 @@ export class LogboekComponent implements OnInit {
         log.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
         log.exemplaar.boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
         log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(log);
       }
