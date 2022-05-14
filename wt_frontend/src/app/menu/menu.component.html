@@ -1,7 +1,10 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-light border">
     <div>
-      <a routerLink="/" class="navbar-brand m-2">
+      <a *ngIf="isLoggedIn" routerLink="/profielpagina/{{ id }}" class="navbar-brand m-2">
+        <img src="../assets/images/wtlogo.svg" />
+      </a>
+      <a *ngIf="!isLoggedIn" class="navbar-brand m-2">
         <img src="../assets/images/wtlogo.svg" />
       </a>
     </div>
