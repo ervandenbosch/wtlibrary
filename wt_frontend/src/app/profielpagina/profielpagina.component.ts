@@ -1,12 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm } from '@angular/forms';
 import { User } from '../service/user';
 import { UserDataService } from '../service/user-data.service';
 import { Boek } from '../boekenlijst/boek';
 import { boekService } from '../boekenlijst/boekenlijst.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from '../service/token-storage.service';
 import { CurrentUserService } from '../service/current-user.service';
 import { Token } from '@angular/compiler/src/ml_parser/tokens';
@@ -28,6 +28,7 @@ export class ProfielpaginaComponent implements OnInit {
   public currentUserId: number | undefined;
   isLoggedIn = false;
   username?: string;
+  id?: number;
   name?: string;
   email?: string;
   roles?: string[];
@@ -40,6 +41,7 @@ export class ProfielpaginaComponent implements OnInit {
     private modalService: NgbModal,
     private UserDataService: UserDataService,
     private boekService: boekService,
+    private router: Router,
     private route: ActivatedRoute,
     private token: TokenStorageService,
     private CurrentUserService: CurrentUserService,
@@ -51,6 +53,7 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.currentUser = this.TokenStorageService.getUser();
     this.getBooks();
     this.getUser();
@@ -76,6 +79,8 @@ export class ProfielpaginaComponent implements OnInit {
     }
   }
 
+  
+
   public getUsers() {
     this.UserDataService.getUsers().subscribe(
       (response: User[]) => {
@@ -89,19 +94,25 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public getUser(): void {
+    console.log(this.route.snapshot.params['id'])
+    console.log(this.currentUser)
+    if (this.route.snapshot.params['id'] == this.currentUser.id || this.currentUser.roles.includes('ROLE_ADMIN')){
+      console.log (true);
+      this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
+        (response: User) => {
+          this.editUser = response;
 
-    this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
-    (response: User) => {
-      this.editUser = response;
-      console.log(this.editUser);
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    }
-    
-    )
-    
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      )
+    } else {
+      window.alert("Je hebt geen toestemming om deze gebruiker te bekijken")
+      this.router.navigate(['/profielpagina/' + this.currentUser.id])
+      }
   }
+
 
   public getBooks() {
     this.boekService.getBoeken().subscribe(
