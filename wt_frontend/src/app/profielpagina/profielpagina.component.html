@@ -114,22 +114,23 @@
           />
         </div>
         <div class="modal-footer">
+            <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="open(mymodal2)"
+          >
+            Opslaan
+          </button>
           <button
             type="button"
             class="btn btn-secondary"
             data-dismiss="modal"
             (click)="modal.close()"
           >
-            Close
+            Sluiten
           </button>
-          <button
-            type="button"
-            class="btn btn-success"
-            data-dismiss="modal"
-            (click)="open(mymodal2)"
-          >
-            Save changes
-          </button>
+
           <button
             type="button"
             data-dismiss="modal"
