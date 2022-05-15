@@ -94,14 +94,10 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public getUser(): void {
-    console.log(this.route.snapshot.params['id'])
-    console.log(this.currentUser)
     if (this.route.snapshot.params['id'] == this.currentUser.id || this.currentUser.roles.includes('ROLE_ADMIN')){
-      console.log (true);
       this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
         (response: User) => {
           this.editUser = response;
-
         },
         (error: HttpErrorResponse) => {
           alert(error.message);
@@ -118,7 +114,6 @@ export class ProfielpaginaComponent implements OnInit {
     this.boekService.getBoeken().subscribe(
       (response: Boek[]) => {
         this.boeken = response;
-        console.log(this.boeken);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -129,7 +124,6 @@ export class ProfielpaginaComponent implements OnInit {
   public onEditUser(user: User) {
     this.UserDataService.updateUser(user).subscribe(
       (response: User) => {
-        console.log(response);
         this.getUser();
       },
       (error: HttpErrorResponse) => {

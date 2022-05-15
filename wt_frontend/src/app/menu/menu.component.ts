@@ -32,9 +32,14 @@ export class MenuComponent implements OnInit {
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
       this.username = user.username;
+      
       this.name = user.name;
+      console.log(this.tokenStorageService.getUser().name);
       this.email = user.email;
       this.id = user.id;
+      console.log(this.email);
+      console.log(this.id);
+      
     }
   }
 
