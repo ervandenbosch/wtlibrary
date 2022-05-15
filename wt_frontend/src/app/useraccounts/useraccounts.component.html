@@ -31,25 +31,28 @@
 <div class="container" id="main-container">
   <div class="row">
     <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-      <div class="card m-b-30">
-        <div class="card-body row">
+      <div class="card m-b-30 mt-3 border-secondary">
+        <div class="card-body row"  style='height:120px;'>
           <div class="col-6">
             <img
               src="{{ user?.photo }}"
+              style='height:100px;
+              width:auto;/*maintain aspect ratio*/;
+              max-width:200px;'
               alt=""
               class="img-fluid rounded-circle w-60"
             />
           </div>
-          <div class="col-6 card-naam align-self-center mb-0">
+          <div class="col-6 card-naam align-self-center mb-0 ">
             <a routerLink="/profielpagina/{{ user.id }}"
               ><h5>{{ user.name }}</h5></a
             >
             <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group list-group-flush border-0" style='height:80px;'>
           <li class="list-group-item">
-            <i class="fa fa-envelope float-right"></i>{{ user.email }}
+            <i class="fa fa-envelope float-right"></i>{{ user.username }}
             <a href="#"></a>
           </li>
           <li *ngIf="user.phoneNumber" class="list-group-item">
