@@ -42,7 +42,7 @@
           </div>
           <div class="col-6 card-naam align-self-center mb-0">
             <a routerLink="/profielpagina/{{ user.id }}"
-              ><h5>{{ user.username }}</h5>{{ user.name }}</a
+              ><h5>{{ user.name }}</h5></a
             >
             <p class="m-0">{{ user.functie }}</p>
           </div>
@@ -133,7 +133,7 @@
             <label for="name">Naam</label>
             <input
               type="text"
-              ngModel="{{ name }}"
+              ngModel="{{updateUser?.name}}"
               name="name"
               class="form-control"
               id="name"
@@ -231,20 +231,20 @@
           </div>
           <div class="modal-footer">
             <button
-              type="button"
-              id=""
-              data-dismiss="modal"
-              class="btn btn-secondary"
-            >
-              Sluiten
-            </button>
-            <button
               (click)="onUpdateUser(editForm.value)"
               data-dismiss="modal"
               class="btn btn-primary"
             >
               Opslaan
             </button>
+            <button
+            type="button"
+            id=""
+            data-dismiss="modal"
+            class="btn btn-secondary"
+          >
+            Sluiten
+          </button>
           </div>
         </form>
       </div>
@@ -279,9 +279,9 @@
       <div class="modal-body">
         <p>Weet je zeker dat je deze user wilt verwijderen?</p>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Nee
-          </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Nee
+            </button>
           <button
             (click)="onDeleteUser(deleteUser?.id!)"
             class="btn btn-danger"
