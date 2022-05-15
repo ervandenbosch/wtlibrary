@@ -34,7 +34,7 @@
           />
         </div>
         <div class="mb-3 form-group">
-          <label for="username" class="form-label"><b>Username</b></label>
+          <label for="username" class="form-label"><b>Email</b></label>
           <input
             type="text"
             ngModel="{{ editUser?.username }}"
@@ -45,17 +45,14 @@
             readonly
           />
         </div>
-        <div class="mb-3 form-group">
-          <label for="email" class="form-label"><b>Email</b></label>
           <input
-            type="email"
+            type="hidden"
             ngModel="{{ editUser?.email }}"
             class="form-control"
             id="email"
             placeholder="..."
             name="email"
           />
-        </div>
         <div class="mb-3 form-group">
           <label for="password" class="form-label"><b>Password</b></label>
           <input
@@ -117,22 +114,23 @@
           />
         </div>
         <div class="modal-footer">
+            <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="open(mymodal2)"
+          >
+            Opslaan
+          </button>
           <button
             type="button"
             class="btn btn-secondary"
             data-dismiss="modal"
             (click)="modal.close()"
           >
-            Close
+            Sluiten
           </button>
-          <button
-            type="button"
-            class="btn btn-success"
-            data-dismiss="modal"
-            (click)="open(mymodal2)"
-          >
-            Save changes
-          </button>
+
           <button
             type="button"
             data-dismiss="modal"
@@ -164,193 +162,6 @@
         class="font-weight-bold btn"
         data-dismiss="modal"
         (click)="editUser2()"
-        style="
-          border: 1px solid;
-          border-radius: 5px;
-          color: white;
-          background-color: #11740c;
-        "
-      >
-        Ja
-      </button>
-      <button
-        type="button"
-        class="font-weight-bold btn"
-        data-dismiss="modal"
-        (click)="modal.close()"
-        id="close-modal2"
-        style="
-          border: 1px solid;
-          border-radius: 5px;
-          background-color: red;
-          color: white;
-        "
-      >
-        Nee
-      </button>
-    </div>
-  </div>
-</ng-template>
-
-<!-- Add user -->
-<ng-template #mymodal3 let-modal>
-  <div id="mymodal3">
-    <div class="modal-header">
-      <h4 class="modal-title" id="exampleModalLabel">Add User</h4>
-      <button
-        type="button"
-        class="close"
-        data-dismiss="modal"
-        aria-label="Close"
-        id="close-modal3"
-        (click)="modal.dismiss('Cross click')"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form #addForm="ngForm" (ngSubmit)="onAddUser(addForm)">
-        <input
-          type="hidden"
-          ngModel="{{ addUser?.id }}"
-          name="id"
-          class="form-control"
-          id="id"
-        />
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.name }}"
-            name="name"
-            class="form-control"
-            id="name"
-            placeholder="..."
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address</label>
-          <input
-            type="email"
-            ngModel="{{ addUser?.email }}"
-            name="email"
-            class="form-control"
-            id="email"
-            placeholder="@"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            ngModel="{{ addUser?.password }}"
-            name="password"
-            class="form-control"
-            id="password"
-            placeholder="..."
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="phoneNumber">Telefoonnummer</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.phoneNumber }}"
-            name="phoneNumber"
-            class="form-control"
-            id="phoneNumber"
-            placeholder="..."
-          />
-        </div>
-        <div class="form-group">
-          <label for="functie">Functie</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.functie }}"
-            name="functie"
-            class="form-control"
-            id="functie"
-            placeholder="..."
-          />
-        </div>
-        <div class="form-group">
-          <label>LinkedIn URL:</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.linkedinURL }}"
-            name="linkedinURL"
-            class="form-control"
-            id="linkedinURL"
-            placeholder="https://linkedin.nl/"
-          />
-        </div>
-        <div class="form-group">
-          <label for="photo">Profile photo URL</label>
-          <input
-            type="text"
-            ngModel="{{ addUser?.photo }}"
-            name="photo"
-            class="form-control"
-            id="photo"
-            placeholder="Image URL"
-          />
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            id="add-user-form"
-            class="btn btn-secondary"
-            data-dismiss="modal"
-            (click)="modal.close()"
-          >
-            Sluiten
-          </button>
-          <button
-            type="button"
-            class="btn btn-success"
-            data-dismiss="modal"
-            (click)="open(mymodal4)"
-            [disabled]="addForm.invalid"
-          >
-            Save changes
-          </button>
-          <button
-            data-dismiss="modal"
-            style="display: none"
-            id="hidden-button2"
-            type="submit"
-          ></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</ng-template>
-
-<!-- Add user confirmation -->
-<ng-template #mymodal4 let-modal>
-  <div id="mymodal4">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">
-        Weet je het zeker, {{ currentUser?.name }}?
-      </h4>
-      <button
-        type="button"
-        class="btn"
-        (click)="modal.dismiss('Cross click')"
-        id="close-modal4"
-      >
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="font-weight-bold btn"
-        data-dismiss="modal"
-        (click)="addUser2()"
         style="
           border: 1px solid;
           border-radius: 5px;
@@ -576,10 +387,10 @@
     <div class="col-sm border rounded m-2">
       <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
-        <div class="pt-2 pb-4">
-          <img
+        <div  class="pt-2 pb-4">
+          <img 
             src="{{ editUser?.photo }}"
-            alt="profilepic"
+            alt=""
             style="
               display: block;
               max-width: 150px;
@@ -597,58 +408,34 @@
               </td>
             </tr>
             <tr>
-              <td>Username:</td>
+              <td>Email:</td>
               <td>
                 <b>{{ editUser?.username }}</b>
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Email:</td>
               <td>
                 <b>{{ editUser?.email }}</b>
               </td>
             </tr> -->
-
-            
-
-            <tr>
+            <tr *ngIf="editUser?.phoneNumber">
               <td>Telefoonnummer:</td>
               <td>
                 <b>{{ editUser?.phoneNumber }}</b>
               </td>
             </tr>
-            <tr>
-              <td>Functie</td>
+            <tr *ngIf="editUser?.functie">
+              <td>Functie:</td>
               <td>
                 <b>{{ editUser?.functie }}</b>
               </td>
             </tr>
-            <tr *ngIf="currentUser?.admin">
-              <td>Admin</td>
-            </tr>
-            <tr>
-<<<<<<< HEAD
-            <style>
-              #toHover {
-                cursor: pointer;}
-            </style>
-              <td *ngIf="currentUser?.linkedinURL"
-              id="toHover"
-              (click)="openURLWindow(currentUser?.linkedinURL)">
-              <a
-                naam=""
-                data-placement="top"
-                data-toggle="tooltip"
-                class="tooltips"
-                data-original-naam="LinkedIn"
-                ><i class="fa fa-linkedin"></i
-              ></a></td>
-=======
-              <td *ngIf="editUser?.linkedinURL">LinkedIn:</td>
+            <tr *ngIf="editUser?.linkedinURL">
+              <td>LinkedIn:</td>
               <td>
                 <b>{{ editUser?.linkedinURL }}</b>
               </td>
->>>>>>> master
             </tr>
           </tbody>
         </table>

@@ -22,9 +22,14 @@
         name="name"
         [(ngModel)]="form.name"
         #name="ngModel"
+        required
       />
-    </div>  
-    <div class="form-group">
+      <div class="alert-danger" *ngIf="name.errors && f.submitted">
+        <div *ngIf="name.errors.required">Naam is verplicht!</div>
+      </div>
+    </div>
+    
+    <!-- <div class="form-group">
         <label for="username">Username</label>
         <input
           type="text"
@@ -45,7 +50,7 @@
             Username must be at most 20 characters
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="form-group">
         <label for="email">Email</label>
         <input
@@ -58,14 +63,14 @@
           #email="ngModel"
         />
         <div class="alert-danger" *ngIf="email.errors && f.submitted">
-          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.required">Email is verplicht!</div>
           <div *ngIf="email.errors.email">
-            Email must be a valid email address
+            Ongeldig e-mail adres!
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">Wachtwoord</label>
         <input
           type="password"
           class="form-control"
@@ -76,9 +81,9 @@
           #password="ngModel"
         />
         <div class="alert-danger" *ngIf="password.errors && f.submitted">
-          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.required">Wachtwoord is veprlicht!</div>
           <div *ngIf="password.errors.minlength">
-            Password must be at least 6 characters
+            Wachtwoord moet minimaal 6 karakters zijn.
           </div>
         </div>
         <div class="form-group">
@@ -124,16 +129,16 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block">Sign Up</button>
+        <button class="btn btn-primary btn-block">Registreren</button>
       </div>
 
       <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-        Signup failed!<br />{{ errorMessage }}
+        Signup mislukt<br />{{ errorMessage }}
       </div>
     </form>
 
     <div class="alert alert-success" *ngIf="isSuccessful">
-      Your registration is successful!
+      Jouw registratie is succesvol!
     </div>
   </div>
 </div>

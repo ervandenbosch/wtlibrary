@@ -22,8 +22,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -34,7 +32,6 @@ export class MenuComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
       this.username = user.username;
       this.name = user.name;
       this.email = user.email;

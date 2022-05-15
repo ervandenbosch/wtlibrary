@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { TokenStorageService } from './token-storage.service';
 
 const AUTH_API = 'http://localhost:8080/api/auth/';
@@ -16,14 +16,15 @@ const httpOptions = {
 })
 
 export class LoggedIn implements CanActivate {
-  constructor(private token: TokenStorageService) {}
+  constructor(private token: TokenStorageService, private router: Router) {}
 
   canActivate() {
 
     if (!!this.token.getToken()) {
       return true;
     } else {
-      window.alert("Je hebt geen toestemming om deze pagina te bekijken");
+      this.router.navigateByUrl('/login');
+      window.alert("Log in om de site te kunnen bezoeken");
       return false;
     }
   }
@@ -33,13 +34,14 @@ export class LoggedIn implements CanActivate {
   providedIn: 'root'
 })
 export class isAdmin implements CanActivate {
-  constructor(private token: TokenStorageService) {}
+  constructor(private token: TokenStorageService, private router: Router) {}
 
   canActivate() {
     if (this.token.getUser().roles.includes('ROLE_ADMIN')) {
       return true;
     } else {
-      window.alert("Je hebt geen toestemming om deze pagina te bekijken");
+      this.router.navigateByUrl('/profielpagina/' + this.token.getUser().id);
+      window.alert("Je hebt geen toestemming om deze pagina te bezoeken");
       return false;
     }
   }
