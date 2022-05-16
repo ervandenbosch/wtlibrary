@@ -1,20 +1,20 @@
+<body>
 <link
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
   rel="stylesheet"
 />
 
-<div class="User link">
-  <h2>Userlijst &nbsp;&nbsp;&nbsp;</h2>
+<div class="User link" id="topbar">
+  <h2>Userlijst &nbsp;&nbsp;&nbsp;
   <button
     id="topbttn"
     class="btn btn-primary"
-    routerLink="/register"
-  >
+    routerLink="/register">
     <i class="fa fa book"></i> User Toevoegen
-  </button>
-  <button id="topbttn" class="btn btn-primary">
+  </button></h2>
+  <!-- <button id="topbttn" class="btn btn-primary">
     <i class="fa fa book"></i> Oude Users
-  </button>
+  </button> -->
   <input
     type="search"
     (ngModelChange)="searchUser(key.value)"
@@ -26,12 +26,13 @@
     placeholder="User zoeken..."
     required
   />
+
 </div>
 
 <div class="container" id="main-container">
   <div class="row">
     <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-      <div class="card m-b-30 mt-3 border-secondary">
+      <div class="card m-b-30 mt-3 border-secondary" style="background-color: rgb(16,211,16)">
         <div class="card-body row"  style='height:120px;'>
           <div class="col-6">
             <img
@@ -44,22 +45,22 @@
             />
           </div>
           <div class="col-6 card-naam align-self-center mb-0 ">
-            <a routerLink="/profielpagina/{{ user.id }}"
-              ><h5>{{ user.name }}</h5></a
+            <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
+              ><h5 style="color: black;">{{ user.name }}</h5></a
             >
             <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush border-0" style='height:80px;'>
-          <li class="list-group-item">
+          <li class="list-group-item"  style="background-color: rgb(16,180,16)">
             <i class="fa fa-envelope float-right"></i>{{ user.username }}
             <a href="#"></a>
           </li>
-          <li *ngIf="user.phoneNumber" class="list-group-item">
+          <li *ngIf="user.phoneNumber" class="list-group-item"  style="background-color: rgb(16,140,16)">
             <i class="fa fa-phone float-right"></i>Nummer:
             {{ user.phoneNumber }}
         </ul>
-        <div class="card-body">
+        <div class="card-body" style="background-color:rgb(16,100,16)">
           <div class="float-right btn-group btn-group-sm">
             <a
               (click)="onOpenModal(user, 'edit')"
@@ -105,6 +106,8 @@
     </div>
   </div>
 </div>
+
+</body>
 
 <!-- Edit User Modal -->
 <div
