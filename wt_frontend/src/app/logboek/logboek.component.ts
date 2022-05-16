@@ -18,50 +18,6 @@ export class LogboekComponent implements OnInit {
 
   public currentPage: number = 1;
   public currentSort: string | undefined;
-  // public currentLogs: Log[] = [
-  //   {
-  //     id: 1,
-  //     title: 'Harry Potter',
-  //     thumbnailUrl:
-  //       'https://secure.img2-fg.wfcdn.com/im/96449558/resize-h800-w800%5Ecompr-r85/4049/40493777/Harry+Potter+%2527Book+Cover+-+Deathly+Hallows%2527+Graphic+Art+Print.jpg',
-  //     authors: 'J.K. Rowling',
-  //     categories: 'fiction',
-  //     date: '25-03-2021',
-  //     namelender: 'Ezra',
-  //     exemplaar: 3,
-  //     isbn: 'ee32r23r23r',
-  //     status: 'Toevoeging',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Barry Pooter',
-  //     thumbnailUrl:
-  //       'https://secure.img2-fg.wfcdn.com/im/96449558/resize-h800-w800%5Ecompr-r85/4049/40493777/Harry+Potter+%2527Book+Cover+-+Deathly+Hallows%2527+Graphic+Art+Print.jpg',
-  //     authors: 'J.K. Rowling',
-  //     categories: 'fiction',
-  //     date: '24-03-2021',
-  //     namelender: 'Tako',
-  //     exemplaar: 3,
-  //     isbn: 'e3e23e23',
-  //     status: 'Reservering',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Larry Boter',
-  //     thumbnailUrl:
-  //       'https://secure.img2-fg.wfcdn.com/im/96449558/resize-h800-w800%5Ecompr-r85/4049/40493777/Harry+Potter+%2527Book+Cover+-+Deathly+Hallows%2527+Graphic+Art+Print.jpg',
-  //     authors: 'J.K. Howling',
-  //     categories: 'Non-fictie',
-  //     date: '24-04-2021',
-  //     namelender: 'Martijn',
-  //     exemplaar: 2,
-  //     isbn: 'e3e23e23',
-  //     status: 'Reservering',
-  //   },
-  // ];
-
-  // public currentLogs: Log[] | undefined;
-  // public logs: Log[] | undefined;
 
   public currentLogs!: StatusHistory[]; // | undefined;
   public logs: StatusHistory[] | undefined;

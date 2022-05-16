@@ -4,7 +4,7 @@ import { boekService } from './boekenlijst.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
-import { Exemplaar } from '../exemplaar/exemplaar';
+import { Exemplaar } from '../reserveringen/exemplaar';
 import { reserveringService } from '../reserveringen/reserveringen.service';
 import { StatusHistory } from '../reserveringen/statushistory';
 import { CurrentUserService } from '../service/current-user.service';

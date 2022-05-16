@@ -11,6 +11,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { RegisterComponent } from './register/register.component';
 import { ReserveringenComponent } from './reserveringen/reserveringen.component';
 import { LogboekComponent } from './logboek/logboek.component';
+import { UitgeleendComponent } from './uitgeleend/uitgeleend.component'
+import { ExemplarenComponent } from './exemplaren/exemplaren.component';
 import { LoggedIn, isAdmin} from './service/auth.service';
 
 const routes: Routes = [
@@ -27,6 +29,9 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent, canActivate: [LoggedIn, isAdmin]},
   { path: 'admin', component: BoardAdminComponent, canActivate: [LoggedIn, isAdmin]},
   { path: 'logboek', component: LogboekComponent, canActivate: [LoggedIn, isAdmin]},
+  { path: 'uitgeleend', component: UitgeleendComponent, canActivate: [LoggedIn, isAdmin]},
+  { path: 'exemplaren', component: ExemplarenComponent, canActivate: [LoggedIn, isAdmin]},
+
 ];
 
 @NgModule({

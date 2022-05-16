@@ -5,7 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Boek } from '../boekenlijst/boek';
 import { boekService } from './boekenpagina.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Exemplaar } from '../exemplaar/exemplaar';
+import { Exemplaar } from '../reserveringen/exemplaar';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { reserveringService } from '../reserveringen/reserveringen.service';
 import { StatusHistory } from '../reserveringen/statushistory';
