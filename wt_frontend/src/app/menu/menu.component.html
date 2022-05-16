@@ -1,14 +1,14 @@
 <div id="app">
   <nav class="navbar navbar-expand navbar-dark bg-light border">
     <div>
-      <a routerLink="/" class="navbar-brand m-2">
+      <a *ngIf="isLoggedIn" routerLink="/profielpagina/{{ id }}" class="navbar-brand m-2">
+        <img src="../assets/images/wtlogo.svg" />
+      </a>
+      <a *ngIf="!isLoggedIn" class="navbar-brand m-2">
         <img src="../assets/images/wtlogo.svg" />
       </a>
     </div>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link text-dark" routerLink="home">Home </a>
-      </li>
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link text-dark" routerLink="admin"
           >Admin-panel</a
@@ -48,9 +48,7 @@
         <a routerLink="/logboek" class="nav-link text-dark">Logboek</a>
       </li>
       <li>
-        <a routerLink="/profielpagina/{{ id }}" class="nav-link text-dark">{{
-          username
-        }}</a>
+        <a routerLink="/profielpagina/{{ id }}" class="nav-link text-dark">Mijn account</a>
       </li>
       <li class="nav-item">
         <a href class="nav-link text-dark" (click)="logout()">Uitloggen</a>

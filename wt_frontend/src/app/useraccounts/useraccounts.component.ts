@@ -100,8 +100,6 @@ export class UseraccountsComponent implements OnInit {
   public onUpdateUser(user: User): void {
     this.uds.updateUser(user).subscribe(
       (response: User) => {
-        console.log(response);
-        console.log(user);
         this.getUsers();
       },
       (error: HttpErrorResponse) => {
