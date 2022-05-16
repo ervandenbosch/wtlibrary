@@ -9,12 +9,14 @@
         <tr>
             <th>Categorie titel</th>
             <th>Informatie</th>
-          </tr>
-          <tr *ngFor="let category of categories" id={{category.id}}>
-            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()">{{category.cat_name}}</textarea></td>
-            <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()">{{category.cat_desc}}</textarea></td>
-            <td><button class="btn btn-light btn-centered" style="display: block; margin: auto;" (click)="deleteCategory(category.id)">Verwijder</button></td>
-          </tr>
+        </tr>
+        <tr *ngFor="let category of categories" id={{category.id}}>
+            <!-- <form #editForm="ngForm" (ngSubmit)="updateCategory(category)"> -->
+                <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()" id="nameList">{{category.cat_name}}</textarea></td> <!--(keydown.enter)="updateCategory(editForm.value)" ngModel="{{editForm}}" -->
+                <td><textarea style="width: 100%; resize: none; border: none;" (keydown.enter)="popUp()">{{category.cat_desc}}</textarea></td>
+                <td><button class="btn btn-light btn-centered" style="display: block; margin: auto;" (click)="deleteCategory(category.id)">Verwijder</button></td>
+            <!-- </form> -->
+        </tr>
     </table>
     <button class="btn btn-light" (click)="addCategory()">Toevoegen</button>
 

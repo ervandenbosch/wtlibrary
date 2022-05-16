@@ -2,31 +2,31 @@
     {  
       "id": 1,  
       "cat_name": "Programmeren",  
-      "cat_desc": "cat_desc over programmeren.",
-      "maincategory": true
+      "cat_desc": "uitleg over programmeren.",
+      "main_category": true
     },  
     {  
       "id": 2,  
       "cat_name": "Design",  
-      "cat_desc": "cat_desc over designen.",
-      "maincategory": true 
+      "cat_desc": "uitleg over designen.",
+      "main_category": true 
     },  
     {  
       "id": 3,  
       "cat_name": "Java",  
-      "cat_desc": "cat_desc over Java.",
-      "maincategory": false
+      "cat_desc": "uitleg over Java.",
+      "main_category": false
     },  
     {  
       "id": 4,  
       "cat_name": "Javascript",  
-      "cat_desc": "cat_desc over Javascript.",
-      "maincategory": false
+      "cat_desc": "uitleg over Javascript.",
+      "main_category": false
     },  
     {  
       "id": 5,  
       "cat_name": "User Testing",  
-      "cat_desc": "cat_desc over user testen.",
-      "maincategory": false 
+      "cat_desc": "uitleg over user testen.",
+      "main_category": false 
     }  
   ]  

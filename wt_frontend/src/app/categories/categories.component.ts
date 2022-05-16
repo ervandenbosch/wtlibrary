@@ -15,6 +15,7 @@ export class CategoriesComponent implements OnInit {
   buttonOn = false //voor popup
   public categories: Category[];
   public category: Category;
+  public editCategory: Category;
   //constructor() { }
   
   constructor(private categoriesService: CategoriesService) { }
@@ -42,8 +43,8 @@ export class CategoriesComponent implements OnInit {
   });
   }
 
-  public updateCategory(id: number): void {
-    this.categoriesService.updateCategories(id).subscribe({
+  public updateCategory(category: Category): void {
+    this.categoriesService.updateCategories(category).subscribe({
       next: (response: Category) => {
         this.category = response;
         this.getCategories()
@@ -124,6 +125,13 @@ export class CategoriesComponent implements OnInit {
       popup.style.display = 'none';
       this.buttonOn = false;
     }
+  }
+
+  public onOpenModal(category: Category){
+    const textConfirm = document.getElementById('nameList');
+    this.editCategory = category;
+    textConfirm.setAttribute('data-target', '#updateCategoryModal')
+
   }
 
 }
