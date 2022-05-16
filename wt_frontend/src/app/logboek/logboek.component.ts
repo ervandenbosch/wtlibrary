@@ -131,7 +131,6 @@ export class LogboekComponent implements OnInit {
         for (var i = 0; i < this.currentLogs.length; i++) {
           this.currentLogs[i].timestamp = this.convertTimestamp(this.currentLogs[i].timestamp);
         }
-        console.log(this.currentLogs);
         this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
@@ -197,7 +196,8 @@ export class LogboekComponent implements OnInit {
         log.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
         log.exemplaar.boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
         log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(log);
       }

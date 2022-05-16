@@ -23,7 +23,6 @@ export class reserveringService {
   ): Observable<StatusHistory> {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Cache-Control': 'no-cache'
     });
     return this.http.post<StatusHistory>(
       `${this.apiServerUrl}/statushistorie/add/user/${user_id}/exemplaar/${exemplaar_id}`,

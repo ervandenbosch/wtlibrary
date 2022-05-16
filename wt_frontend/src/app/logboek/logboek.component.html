@@ -1,6 +1,8 @@
+<body>
 <div class="container">
   <div class="row">
     <div class="col-lg-12 card-margin">
+      <h2>Logboek &nbsp;&nbsp;&nbsp;</h2>
       <div class="card search-form">
         <div class="card-body p-0">
           <form id="search-form">
@@ -15,7 +17,7 @@
                       ngModel
                       name="key"
                       id="searchLog"
-                      class="width-full outline-transparant"
+                      class="form-control mr-sm-2"
                       placeholder="Zoeken.."
                       required
                     />
@@ -149,7 +151,7 @@
                               />
                               <div class=".d-inline-flex flex-column">
                                 <div class="pl-1" style="font-size: 16px">
-                                  <a href="/boekenlijst/{{ log?.exemplaar?.boek?.id }}"
+                                  <a href="/boek/{{ log?.exemplaar?.boek?.id }}"
                                     >{{ log?.exemplaar?.boek?.title }}
                                   </a>
                                 </div>
@@ -235,3 +237,4 @@
     </div>
   </div>
 </div>
+</body>
