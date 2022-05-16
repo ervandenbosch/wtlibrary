@@ -15,4 +15,10 @@ export class logboekService {
       `${this.apiServerUrl}/statushistorie/all`
     );
   }
+
+  public getBoekenUser(user_id: number): Observable<StatusHistory[]> {
+    return this.http.get<StatusHistory[]>(
+      `${this.apiServerUrl}/statushistorie/find/user/${user_id}`
+    )
+  }
 }

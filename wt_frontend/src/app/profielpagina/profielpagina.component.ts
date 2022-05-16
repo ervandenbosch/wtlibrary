@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from '../service/token-storage.service';
 import { CurrentUserService } from '../service/current-user.service';
 import { Token } from '@angular/compiler/src/ml_parser/tokens';
+import { logboekService } from '../logboek/logboek.service';
+import { StatusHistory } from '../reserveringen/statushistory';
 
 @Component({
   selector: 'app-profielpagina',
@@ -23,6 +25,8 @@ export class ProfielpaginaComponent implements OnInit {
   public addUser: User | undefined;
   public deleteUser: User | undefined;
   public boeken: Boek[] | undefined;
+  public boekenActief: StatusHistory[] | undefined;
+  public boekenVroeger: StatusHistory[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
   public currentUserId: number | undefined;
@@ -43,7 +47,8 @@ export class ProfielpaginaComponent implements OnInit {
     private route: ActivatedRoute,
     private token: TokenStorageService,
     private CurrentUserService: CurrentUserService,
-    private TokenStorageService: TokenStorageService
+    private TokenStorageService: TokenStorageService,
+    private logboekService: logboekService
   ) {}
 
   open(content: any) {
@@ -53,6 +58,7 @@ export class ProfielpaginaComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.TokenStorageService.getUser();
     this.getBooks();
+    this.getBoekenUser();
     this.getUser();
 
     this.isLoggedIn = !!this.token.getToken();
@@ -89,25 +95,34 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public getUser(): void {
-
     this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
-    (response: User) => {
-      this.editUser = response;
-      console.log(this.editUser);
-    },
-    (error: HttpErrorResponse) => {
-      alert(error.message);
-    }
-    
-    )
-    
+      (response: User) => {
+        this.editUser = response;
+        console.log(this.editUser);
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public getBoekenUser() {
+    this.logboekService.getBoekenUser(this.route.snapshot.params['id']).subscribe(
+      (response: StatusHistory[]) => {
+        this.boekenActief = response.filter(item => (item.active && (item.status == 'uitgeleend' || item.status == 'gereserveerd')))
+        this.boekenVroeger = response.filter(item => (!item.active && item.status == 'uitgeleend'))
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public getBooks() {
     this.boekService.getBoeken().subscribe(
       (response: Boek[]) => {
         this.boeken = response;
-        console.log(this.boeken);
+        // console.log(this.boeken);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

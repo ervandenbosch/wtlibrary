@@ -131,7 +131,6 @@ export class LogboekComponent implements OnInit {
         for (var i = 0; i < this.currentLogs.length; i++) {
           this.currentLogs[i].timestamp = this.convertTimestamp(this.currentLogs[i].timestamp);
         }
-        console.log(this.currentLogs);
         this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
