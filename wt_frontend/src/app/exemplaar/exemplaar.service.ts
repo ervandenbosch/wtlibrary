@@ -16,7 +16,7 @@ export class ExemplaarService {
   constructor(private http: HttpClient) {}
 
   public getExemplaren(): Observable<Exemplaar[]> {
-    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/all`);
+    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/exemplaren/all`);
   }
 
   public addExemplaar(exemplaar: Exemplaar): Observable<Exemplaar> {

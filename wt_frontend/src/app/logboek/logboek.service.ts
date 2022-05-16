@@ -21,4 +21,19 @@ export class logboekService {
       `${this.apiServerUrl}/statushistorie/find/user/${user_id}`
     )
   }
+
+  public updateStatus(
+    newStatusJson: any,
+    user_id: number,
+    exemplaar_id: number
+  ): Observable<StatusHistory> {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http.post<StatusHistory>(
+      `${this.apiServerUrl}/statushistorie/add/user/${user_id}/exemplaar/${exemplaar_id}`,
+      newStatusJson,
+      { headers: httpHeaders }
+    );
+  }
 }
