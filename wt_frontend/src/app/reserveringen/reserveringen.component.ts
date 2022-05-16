@@ -69,12 +69,6 @@ export class ReserveringenComponent implements OnInit {
   }
  
   public onGoedgekeurd(reservering: StatusHistory): void {
-    console.log("goedgekeurd is geklikt");
-    // var hi: Object = {
-    //   admin_modif = true,
-    //   active = true,
-    //   status = "uitgeleend"};
-    // };
     let resObj = {
       admin_modif: true,
       active: true,
