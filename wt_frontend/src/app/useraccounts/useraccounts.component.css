@@ -34,3 +34,12 @@ a {
 #topbttn{
     margin: 0px 5px 5px 0px;
 }
+
+.wt {   
+    opacity: 0.4;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+  
+}

@@ -1,3 +1,7 @@
+<div class="wt">
+  <img src="./assets/images/wtachtergrond.svg">
+</div>
+
 <!-- Edit user -->
 <ng-template #mymodal1 let-modal>
   <div id="mymodal1">
@@ -383,8 +387,8 @@
     </div>
   </div> -->
 
-  <div class="p-2 row">
-    <div class="col-sm border rounded m-2">
+  <div class="p-2 row ">
+    <div class="col-sm border border-dark rounded m-2" style="background-color: white;">
       <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
         <div  class="pt-2 pb-4">
@@ -442,7 +446,7 @@
 
         <div class="mt-3 text-center">
           <button
-            class="btn btn-secondary my-3"
+            class="btn btn-primary"
             style="width: 120px"
             type="button"
             (click)="open(mymodal1)"
@@ -453,7 +457,11 @@
       </div>
     </div>
 
+<<<<<<< Updated upstream
     <!-- <div class="m-2 col-sm border rounded position-relative">
+=======
+    <div class="m-2 col-sm border border-dark rounded position-relative" style="background-color: white;">
+>>>>>>> Stashed changes
       <h3 class="py-3 text-center">Mijn boeken</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of boeken">
@@ -462,7 +470,7 @@
             class="link text-dark"
             style="cursor: pointer"
           >
-            <div class="container p-2 my-3 border rounded">
+            <div class="container p-2 my-3 border border-dark rounded">
               <div class="d-flex flex-row pt-2">
                 <div class="px-1">
                   <img
@@ -533,7 +541,11 @@
       </a>
     </div>
 
+<<<<<<< Updated upstream
     <!-- <div class="m-2 col-sm border rounded position-relative">
+=======
+    <div class="m-2 col-sm border border-dark rounded position-relative" style="background-color: white;">
+>>>>>>> Stashed changes
       <h3 class="py-3 text-center">Mijn geschiedenis</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of boeken">
@@ -542,7 +554,7 @@
             class="link text-dark"
             style="cursor: pointer"
           >
-            <div class="container p-2 my-3 border rounded">
+            <div class="container p-2 my-3 border border-dark rounded">
               <div class="d-flex flex-row pt-2">
                 <div class="px-1">
                   <img
@@ -605,6 +617,7 @@
           style="bottom: 5px; right: 5px"
           *ngIf="boeken?.length != 0"
         >
+       
           More..
         </button>
       </a>

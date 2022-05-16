@@ -268,3 +268,13 @@ body {
   border: 1px solid #e6e4e9;
   border-radius: 8px;
 }
+
+.wt {   
+  opacity: 0.4;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+
+}
