@@ -58,7 +58,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      `${this.AUTH_API}/signin`,
+      this.AUTH_API + 'signin',
       {
         username,
         password,
@@ -78,7 +78,7 @@ export class AuthService {
     linkedinURL: string
   ): Observable<any> {
     return this.http.post(
-      `${this.AUTH_API}/signup`,
+      this.AUTH_API + 'signup',
       {
         name,
         username,

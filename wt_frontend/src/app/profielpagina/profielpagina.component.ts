@@ -85,8 +85,6 @@ export class ProfielpaginaComponent implements OnInit {
     }
   }
 
-  
-
   public getUsers() {
     this.UserDataService.getUsers().subscribe(
       (response: User[]) => {
@@ -100,7 +98,10 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public getUser(): void {
-    if (this.route.snapshot.params['id'] == this.currentUser.id || this.currentUser.roles.includes('ROLE_ADMIN')){
+    if (
+      this.route.snapshot.params['id'] == this.currentUser.id ||
+      this.currentUser.roles.includes('ROLE_ADMIN')
+    ) {
       this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
         (response: User) => {
           this.editUser = response;
@@ -108,25 +109,33 @@ export class ProfielpaginaComponent implements OnInit {
         (error: HttpErrorResponse) => {
           alert(error.message);
         }
-      )
+      );
     } else {
-      window.alert("Je hebt geen toestemming om deze gebruiker te bekijken")
-      this.router.navigate(['/profielpagina/' + this.currentUser.id])
-      }
+      window.alert('Je hebt geen toestemming om deze gebruiker te bekijken');
+      this.router.navigate(['/profielpagina/' + this.currentUser.id]);
+    }
   }
 
   public getBoekenUser() {
-    this.logboekService.getBoekenUser(this.route.snapshot.params['id']).subscribe(
-      (response: StatusHistory[]) => {
-        this.boekenActief = response.filter(item => (item.active && (item.status == 'uitgeleend' || item.status == 'gereserveerd')))
-        this.boekenVroeger = response.filter(item => (!item.active && item.status == 'uitgeleend'))
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+    this.logboekService
+      .getBoekenUser(this.route.snapshot.params['id'])
+      .subscribe(
+        (response: StatusHistory[]) => {
+          this.boekenActief = response.filter(
+            (item) =>
+              item.active &&
+              (item.status == 'uitgeleend' || item.status == 'gereserveerd')
+          );
+          this.boekenVroeger = response.filter(
+            (item) => !item.active && item.status == 'uitgeleend'
+          );
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
   }
-  
+
   public getBooks() {
     this.boekService.getBoeken().subscribe(
       (response: Boek[]) => {
