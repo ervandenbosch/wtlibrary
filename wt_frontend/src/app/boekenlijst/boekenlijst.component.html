@@ -1,13 +1,14 @@
 <br><br>
 <div class="container" id="main-container">
-  <h2>
-    Boekenlijst &nbsp;&nbsp;&nbsp;<button
+  <h2 style="text-align: center">
+    Boekenlijst
+  </h2>
+  <button
       class="btn btn-primary"
       (click)="createBoek()"
     >
       <i class="fa fa book"></i> Boek Toevoegen
-    </button>
-  </h2>
+  </button>
   <input
     type="search"
     (ngModelChange)="searchBoek(key.value)"
@@ -32,11 +33,11 @@
                 <th><span>ISBN</span></th>
                 <th class="text-center"><span>Beschikbaarheid</span></th>
                 <th><span>Categorie</span></th>
-                <th>&nbsp;</th>
+                <th><span>Acties</span></th>
               </tr>
             </thead>
             <tbody *ngFor="let boek of boeken" >
-              <tr >
+              <tr>
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
                   <a href="/boek/{{ boek?.id }}" class="user-link">{{

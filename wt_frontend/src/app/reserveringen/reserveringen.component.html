@@ -1,6 +1,6 @@
 <br><br>
 <div class = "container" id = "main-container">
-    <h2 class="item">Reserveringen ter goedkeuring</h2>
+    <h2 style="text-align: center" class="item">Reserveringen ter goedkeuring</h2>
 	<div class="row" id="main-row">
 		<div class="col-lg-12">
 			<div class="main-box clearfix">
@@ -18,7 +18,7 @@
                     
                         <tbody>
                             <tr *ngFor="let tempReservering of reserveringen">
-                                <td class="align-middle">{{ tempReservering.exemplaar.boek.title }}</td>
+                                <td class="align-middle"><a routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
                                 <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
