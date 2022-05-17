@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Log } from './log';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { logboekService } from './logboek.service';
@@ -25,13 +24,17 @@ export class LogboekComponent implements OnInit {
   constructor(private logboekService: logboekService) {}
 
   sortAz() {
-    this.logs = this.currentLogs.sort((a, b) => a.exemplaar.boek.title.localeCompare(b.exemplaar.boek.title));
+    this.logs = this.currentLogs.sort((a, b) =>
+      a.exemplaar.boek.title.localeCompare(b.exemplaar.boek.title)
+    );
 
     this.currentSort = 'Titel (A-Z)';
     return this.logs;
   }
   sortZa() {
-    this.logs = this.currentLogs.sort((a, b) => b.exemplaar.boek.title.localeCompare(a.exemplaar.boek.title));
+    this.logs = this.currentLogs.sort((a, b) =>
+      b.exemplaar.boek.title.localeCompare(a.exemplaar.boek.title)
+    );
 
     this.currentSort = 'Titel (Z-A)';
     return this.logs;
@@ -54,29 +57,35 @@ export class LogboekComponent implements OnInit {
   }
 
   sortDatumDown() {
-    this.logs = this.currentLogs.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+    this.logs = this.currentLogs.sort((a, b) =>
+      b.timestamp.localeCompare(a.timestamp)
+    );
     this.currentSort = 'Datum ∀';
     return this.logs;
   }
 
   sortDatumUp() {
-    this.logs = this.currentLogs.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
+    this.logs = this.currentLogs.sort((a, b) =>
+      a.timestamp.localeCompare(b.timestamp)
+    );
     this.currentSort = 'Datum ^';
     return this.logs;
   }
 
   public convertTimestamp(timestamp: string) {
     var date = new Date(timestamp);
-    var newTimestamp = [([
-        ("0" + date.getDate()).slice(-2),
-        ("0" + (date.getMonth()+1)).slice(-2),
-        date.getFullYear()
-      ].join('/')), ([
-        ("0" + date.getHours()).slice(-2),
-        ("0" + date.getMinutes()).slice(-2)
-      ].join(':'))
-      ].join(" ");
-    return newTimestamp
+    var newTimestamp = [
+      [
+        ('0' + date.getDate()).slice(-2),
+        ('0' + (date.getMonth() + 1)).slice(-2),
+        date.getFullYear(),
+      ].join('/'),
+      [
+        ('0' + date.getHours()).slice(-2),
+        ('0' + date.getMinutes()).slice(-2),
+      ].join(':'),
+    ].join(' ');
+    return newTimestamp;
   }
 
   getLogs(): void {
@@ -85,14 +94,16 @@ export class LogboekComponent implements OnInit {
         this.currentLogs = response;
         this.logs = response;
         for (var i = 0; i < this.currentLogs.length; i++) {
-          this.currentLogs[i].timestamp = this.convertTimestamp(this.currentLogs[i].timestamp);
+          this.currentLogs[i].timestamp = this.convertTimestamp(
+            this.currentLogs[i].timestamp
+          );
         }
         this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    )    
+    );
   }
 
   first100() {
@@ -147,15 +158,37 @@ export class LogboekComponent implements OnInit {
   public searchLogs(key: string): void {
     const results: StatusHistory[] = [];
     for (const log of this.logs!) {
-      if (
-        log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.exemplaar.boek.categories.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ) {
-        results.push(log);
+      if (log.user.name) {
+        if (
+          log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          log.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(log);
+        }
+      } else {
+        if (
+          log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          log.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(log);
+        }
       }
     }
     this.logs = results;
