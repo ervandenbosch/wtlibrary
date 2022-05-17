@@ -128,7 +128,6 @@ export class UseraccountsComponent implements OnInit {
 
 public openURLWindow(url : string): void {
   window.open(url);
-  
 }
 
 

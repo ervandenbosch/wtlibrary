@@ -1,16 +1,20 @@
+<div class="wt">
+  <img src="./assets/images/wtachtergrond.svg">
+</div>
+<body>
 <link
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
   rel="stylesheet"
 />
 <br /><br />
-<div class="User link">
+<div class="User link" id="topbar">
   <h2 style="text-align: center">Userlijst</h2>
-  <button id="topbttn" class="btn btn-primary" routerLink="/register">
+  <button id="topbttn" class="btn btn-success" routerLink="/register">
     <i class="fa fa book"></i> User Toevoegen
-  </button>
-  <button id="topbttn" class="btn btn-primary">
+  </button></h2>
+  <!-- <button id="topbttn" class="btn btn-success">
     <i class="fa fa book"></i> Oude Users
-  </button>
+  </button> -->
   <input
     type="search"
     (ngModelChange)="searchUser(key.value)"
@@ -22,12 +26,13 @@
     placeholder="User zoeken..."
     required
   />
+
 </div>
 
 <div class="container" id="main-container">
   <div class="row">
     <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-      <div class="card m-b-30 mt-3 border-secondary">
+      <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
         <div class="card-body row" style="height: 120px">
           <div class="col-6">
             <img
@@ -36,34 +41,32 @@
                 height: 100px;
                 width: auto; /*maintain aspect ratio*/
                 max-width: 120px;
-              "
+                border-style: solid; border-width: 3px; border-color: gray;"
               alt=""
               class="img-fluid rounded-circle w-60"
             />
           </div>
-          <div class="col-6 card-naam align-self-center mb-0">
-            <a routerLink="/profielpagina/{{ user.id }}"
-              ><h5>{{ user.name }}</h5></a
-            >
+          <div class="col-6 card-naam align-self-center mb-0 ">
+            <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
+              ><h5 style="color: black;">{{ user.name }}</h5></a>
             <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush border-0" style="height: 80px">
-          <li class="list-group-item">
+          <li id="emailbox" class="list-group-item">
             <i class="fa fa-envelope float-right"></i>{{ user.username }}
             <a href="#"></a>
           </li>
-          <li *ngIf="user.phoneNumber" class="list-group-item">
+          <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
             <i class="fa fa-phone float-right"></i>Nummer:
             {{ user.phoneNumber }}
           </li>
         </ul>
-
-        <div class="card-body">
+        <div class="card-body" style="background-color: rgb(130,130,130)">
           <div class="float-right btn-group btn-group-sm">
             <a
               (click)="onOpenModal(user, 'edit')"
-              class="btn btn-primary tooltips"
+              class="btn btn-success tooltips"
               data-placement="top"
               data-toggle="tooltip"
               data-original-naam="Edit"
@@ -71,7 +74,7 @@
             </a>
             <a
               (click)="onOpenModal(user, 'delete')"
-              class="btn btn-secondary tooltips"
+              class="btn btn-danger tooltips"
               data-placement="top"
               data-toggle="tooltip"
               data-original-naam="Delete"
@@ -105,6 +108,8 @@
     </div>
   </div>
 </div>
+
+</body>
 
 <!-- Edit User Modal -->
 <div
@@ -245,7 +250,7 @@
             <button
               (click)="onUpdateUser(editForm.value)"
               data-dismiss="modal"
-              class="btn btn-primary"
+              class="btn btn-success"
             >
               Opslaan
             </button>
