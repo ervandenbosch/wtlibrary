@@ -169,6 +169,7 @@
                           </td>
                           <td>
                             <div
+                              *ngIf="log?.status == 'beschikbaar'"
                               class="widget-26-job-category bg-soft-base mt-2 p-1 m-auto"
                               style="
                                 width: 120px;
@@ -177,6 +178,16 @@
                               "
                             >
                               <span>{{ log?.status }} </span>
+                            </div>
+                            <div 
+                            *ngIf="log?.status !== 'beschikbaar'"
+                            class="widget-26-job-category bg-soft-danger mt-2 p-1 m-auto"
+                            style="
+                            width: 120px;
+                            border-radius: 15px;
+                            text-align: center;
+                            "
+                            >{{ log?.status }}
                             </div>
                           </td>
 

@@ -51,7 +51,7 @@ export class BoekenpaginaComponent implements OnInit {
 
   //Functie het aantal beschikbare exemplaren met 1 verminderd na een reservering
   public onUpdate(boek : Boek) {
-    boek.available = boek.available - 1
+    boek.available = boek.available - 1;
     this.boekService.updateBoek(boek).subscribe(
       (response: Boek) => {
         this.getBoek();
