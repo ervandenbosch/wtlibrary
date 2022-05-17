@@ -1,4 +1,3 @@
-
 <div class="wt">
   <img src="./assets/images/wtachtergrond.svg">
 </div>
@@ -7,13 +6,10 @@
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
   rel="stylesheet"
 />
-
+<br /><br />
 <div class="User link" id="topbar">
-  <h2>Userlijst &nbsp;&nbsp;&nbsp;
-  <button style="color: black"
-    id="topbttn"
-    class="btn btn-success"
-    routerLink="/register">
+  <h2 style="text-align: center">Userlijst</h2>
+  <button id="topbttn" class="btn btn-success" routerLink="/register">
     <i class="fa fa book"></i> User Toevoegen
   </button></h2>
   <!-- <button id="topbttn" class="btn btn-success">
@@ -37,32 +33,34 @@
   <div class="row">
     <div *ngFor="let user of users" class="col-md-6 col-xl-3">
       <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
-        <div class="card-body row"  style='height:120px;'>
+        <div class="card-body row" style="height: 120px">
           <div class="col-6">
             <img
               src="{{ user?.photo }}"
-              style='height:100px;
-              width:auto;/*maintain aspect ratio*/;
-              max-width:200px; border-style: solid; border-width: 3px; border-color: gray;'
+              style="
+                height: 100px;
+                width: auto; /*maintain aspect ratio*/
+                max-width: 120px;
+                border-style: solid; border-width: 3px; border-color: gray;"
               alt=""
               class="img-fluid rounded-circle w-60"
             />
           </div>
           <div class="col-6 card-naam align-self-center mb-0 ">
             <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
-              ><h5 style="color: black;">{{ user.name }}</h5></a
-            >
+              ><h5 style="color: black;">{{ user.name }}</h5></a>
             <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
-        <ul class="list-group list-group-flush border-0" style='height:80px;'>
-          <li id="emailbox" class="list-group-item" >
+        <ul class="list-group list-group-flush border-0" style="height: 80px">
+          <li id="emailbox" class="list-group-item">
             <i class="fa fa-envelope float-right"></i>{{ user.username }}
             <a href="#"></a>
           </li>
           <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
             <i class="fa fa-phone float-right"></i>Nummer:
             {{ user.phoneNumber }}
+          </li>
         </ul>
         <div class="card-body" style="background-color: rgb(130,130,130)">
           <div class="float-right btn-group btn-group-sm">
@@ -143,7 +141,7 @@
             <label for="name">Naam</label>
             <input
               type="text"
-              ngModel="{{updateUser?.name}}"
+              ngModel="{{ updateUser?.name }}"
               name="name"
               class="form-control"
               id="name"
@@ -152,9 +150,18 @@
             />
           </div>
           <div class="form-group">
-				<label for="username">Username</label>
-				<input type="text" ngModel="{{updateUser?.username}}" name="username" class="form-control" id="username" placeholder="User naam"required readonly>
-			 </div>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              ngModel="{{ updateUser?.username }}"
+              name="username"
+              class="form-control"
+              id="username"
+              placeholder="User naam"
+              required
+              readonly
+            />
+          </div>
 
           <input
             type="hidden"
@@ -248,13 +255,13 @@
               Opslaan
             </button>
             <button
-            type="button"
-            id=""
-            data-dismiss="modal"
-            class="btn btn-secondary"
-          >
-            Sluiten
-          </button>
+              type="button"
+              id=""
+              data-dismiss="modal"
+              class="btn btn-secondary"
+            >
+              Sluiten
+            </button>
           </div>
         </form>
       </div>
@@ -290,16 +297,15 @@
         <p>Weet je zeker dat je deze user wilt verwijderen?</p>
         <div class="modal-footer">
           <button
-          (click)="onDeleteUser(deleteUser?.id!)"
-          class="btn btn-danger"
-          data-dismiss="modal"
-        >
-          Ja
-        </button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">
-              Nee
-            </button>
-
+            (click)="onDeleteUser(deleteUser?.id!)"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Ja
+          </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Nee
+          </button>
         </div>
       </div>
     </div>
@@ -312,4 +318,8 @@
     <h4 class="alert-heading">Geen users!</h4>
     <p>Er zijn geen users gevonden.</p>
   </div>
+</div>
+
+<div class="wt">
+  <img src="./assets/images/wtachtergrond.svg" />
 </div>

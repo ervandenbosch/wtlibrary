@@ -1,15 +1,36 @@
 <body>
+<br /><br />
 <div class="container" id="main-container">
   <div id="topbar">
+  <br>
   <h2>
-    Boekenlijst &nbsp;&nbsp;&nbsp; <button 
+    Boekenlijst &nbsp;&nbsp;&nbsp;<button
+    id="AddBoekButton"
     style="color: black"
-    id="topbttn"
-    class="btn btn-success"
-    (click)="createBoek()"
-  >
-    <i class="fa fa book"></i> Boek Toevoegen
-  </button></h2>
+    id="topbttn"                                      
+    *ngIf="isAdmin"                                    
+      class="btn btn-success"
+      (click)="createBoek()"
+    ><fa-icon [icon]="faBookMedical"></fa-icon>
+    &nbsp; Boek Toevoegen 
+    </button>  &nbsp; 
+    <button 
+    id="archiveButton"
+    *ngIf="isAdmin && getArchive()"
+      class="btn btn-secondary "
+     (click)="getArchive()"
+    ><fa-icon [icon]="faBoxArchive"> </fa-icon>
+    &nbsp; Archief
+    </button> 
+    <button 
+    id="archiveButton2"
+    *ngIf="isAdmin && getArchive()"
+      class="btn btn-secondary"
+     (click)="getArchive()"
+    ><fa-icon [icon]="faBookOpenReader"></fa-icon>
+    &nbsp; Bibliotheek
+    </button> 
+  </h2>
   <input
     type="search"
     (ngModelChange)="searchBoek(key.value)"
@@ -18,14 +39,14 @@
     name="key"
     id="searchName"
     class="form-control mr-sm-2"
-    placeholder="Boek zoeken..."
+    placeholder="Boek zoeken ..."
     required
     autocomplete="off"
   />
 </div>
 
   <div class="row" id="main-row">
-    <div class="col-lg-12" >
+    <div class="col-lg-12">
       <div class="main-box clearfix">
         <div class="table-responsive">
           <table class="table user-list">
@@ -35,14 +56,14 @@
                 <th><span>ISBN</span></th>
                 <th class="text-center"><span>Beschikbaarheid</span></th>
                 <th><span>Categorie</span></th>
-                <th>&nbsp;</th>
+                <th><span>Acties</span></th>
               </tr>
             </thead>
-            <tbody *ngFor="let boek of boeken" >
-              <tr class="table-row">
+            <tbody *ngFor="let boek of boeken; get" >
+              <tr *ngIf="getArchive() && !archived(boek)" class="table-row">>
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
-                  <a href="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none">{{
+                  <a routerLink="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none">{{
                     boek?.title
                   }}</a>
                   <span class="user-subhead">{{ boek?.authors }}</span>
@@ -61,51 +82,130 @@
                   <a href="#" style="color: black; text-decoration: none">{{ boek?.categories }}</a>
                 </td>
                 <td style="width: 17%; background-color: rgb(130,130,130,255);">
-                  <a *ngIf="boek.available > 0" (click)="onOpenModal1(boek)">
+                  <a *ngIf="isReserved(boek)">
+                    <button
+                      id="reserveerknop"
+                      style="width: 175px"
+                      class="btn btn-outline-success" disabled
+                      >Gereserveerd
+                      <span class="fa-stack">
+                        <i class="fa fa-book fa -stack-1x"></i>
+                      </span>
+                    </button>
+                    </a>
+                  <a *ngIf="!isReserved(boek) && boek.available > 0" (click)="setReserved(boek)">
                   <button
-                    class="btn btn-outline-success" id="reserveerknop"
+                  id="reserveerButton"
+                  style="width: 175px"
+                    class="btn btn-outline-primary" 
                     >Reserveer
                     <span class="fa-stack">
                       <i class="fa fa-book fa-stack-1x"></i>
                     </span>
                   </button>
                   </a>
-                  <a *ngIf="boek.available == 0" (click)="setReserved(boek)">
+                  <a *ngIf="boek.available == 0 && !isReserved(boek)" >
                     <button
-                      class="btn btn-outline-success" disabled id="reserveerknop"
-                      >Reserveer
+                    style="width: 175px"
+                      class="btn btn-outline-secondary" disabled
+                      >Niet beschikbaar
                       <span class="fa-stack">
                         <i class="fa fa-book fa -stack-1x"></i>
                       </span>
                     </button>
                     </a>
-                  <a class="table-link" (click)="onOpenModal(boek, 'edit')">
+                  <a *ngIf="isAdmin" class="table-link" (click)="onOpenModal(boek, 'edit')">&nbsp;
                     <span class="fa-stack">
                       <i class="fa fa-square fa-stack-2x"></i>
                       <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                     </span>
                   </a>
                   <a
-                    class="table-link danger"
-                    (click)="onOpenModal(boek, 'delete')"
+                  *ngIf="isAdmin"
+                    class="table-link"
+                    (click)="onOpenModal(boek, 'archive')"
                   >
                     <span class="fa-stack">
-                      <i class="fa fa-square fa-stack-2x"></i>
-                      <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                      <i class="fa fa-square fa-stack-2x" style="color:lightslategrey"></i>
+                      <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              <tr *ngIf="getArchive() && archived(boek)">
+                <td>
+                  <img src="{{ boek?.thumbnailUrl }}" alt="" />
+                  <a href="/boek/{{ boek?.id }}" class="user-link">{{
+                    boek?.title
+                  }}</a>
+                  <span class="user-subhead">{{ boek?.authors }}</span>
+                </td>
+                <td>
+                  {{ boek?.isbn }}
+                </td>
+                <td class="text-center">
+                  <h3>
+                    <span class="label label-default"
+                      >{{ boek?.available }}/{{ boek?.copies }}</span
+                    >
+                  </h3>
+                </td>
+                <td>
+                  <a href="#">{{ boek?.categories }}</a>
+                </td>
+                <td style="width: 25%">
+                  <a *ngIf="isReserved(boek)">
+                    <button
+                    style="width: 175px"
+                      class="btn btn-outline-success" disabled
+                      >Gereserveerd
+                      <span class="fa-stack">
+                        <i class="fa fa-book fa -stack-1x"></i>
+                      </span>
+                    </button>
+                    </a>
+                  <a *ngIf="!isReserved(boek) && boek.available > 0" (click)="setReserved(boek)">
+                  <button
+                  id="reserveerButton"
+                  style="width: 175px"
+                    class="btn btn-outline-primary" 
+                    >Reserveer
+                    <span class="fa-stack">
+                      <i class="fa fa-book fa-stack-1x"></i>
+                    </span>
+                  </button>
+                  </a>
+                  
+                  <a *ngIf="boek.available == 0 && !isReserved(boek)" >
+                    <button
+                    style="width: 175px"
+                      class="btn btn-outline-secondary" disabled
+                      >Niet beschikbaar
+                      <span class="fa-stack">
+                        <i class="fa fa-book fa -stack-1x"></i>
+                      </span>
+                    </button>
+                    </a>
+                  <a
+                  *ngIf="isAdmin"
+                    class="table-link"
+                    (click)="onOpenModal(boek, 'bibliotheek')"
+                  >
+                    <span class="fa-stack">
+                      <i class="fa fa-square fa-stack-2x" style="color:lightskyblue"></i>
+                      <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                  <a *ngIf="isAdmin" class="table-link" (click)="onOpenModal(boek, 'delete')">
+                    <span class="fa-stack">
+                      <i class="fa fa-square fa-stack-2x" style="color:red"></i>
+                      <i class="fa fa-trash fa-stack-1x fa-inverse"></i>
                     </span>
                   </a>
                 </td>
               </tr>
             </tbody>
           </table>
-          <!-- </div>
-				<ul class="pagination pull-right">
-					<li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
-				</ul>
-			</div> -->
         </div>
       </div>
     </div>
@@ -204,19 +304,19 @@
               </div>
               <div class="modal-footer">
                 <button
+                [disabled]="addForm.invalid"
+                type="submit"
+                class="btn btn-success"
+              >
+                Boek Toevoegen
+              </button>
+                <button
                   type="button"
                   id="add-boek-form"
                   class="btn btn-secondary"
                   data-dismiss="modal"
                 >
                   Sluiten
-                </button>
-                <button
-                  [disabled]="addForm.invalid"
-                  type="submit"
-                  class="btn btn-success"
-                >
-                  Boek Toevoegen
                 </button>
               </div>
             </form>
@@ -314,7 +414,7 @@
                 <label for="authors">Beschikbaar</label>
                 <input
                   type="number"
-                  max = {{editBoek?.copies}}
+                  max="{{ editBoek?.copies }}"
                   ngModel="{{ editBoek?.available }}"
                   name="available"
                   class="form-control"
@@ -346,18 +446,18 @@
               </div>
               <div class="modal-footer">
                 <button
+                onclick="$('#confirmationModal').modal('toggle')"
+                class="btn btn-success"
+              >
+                Opslaan
+              </button>
+                <button
                   type="button"
                   id=""
                   data-dismiss="modal"
                   class="btn btn-secondary"
                 >
                   Sluiten
-                </button>
-                <button
-                  onclick="$('#confirmationModal').modal('toggle')"
-                  class="btn btn-success"
-                >
-                  Opslaan
                 </button>
               </div>
             </form>
@@ -393,20 +493,21 @@
           <p>Weet je zeker dat je de gegevens wilt opslaan?</p>
           <div class="modal-footer">
             <button
+            (click)="onUpdateBoek(editForm.value)"
+            onclick="$('#editBoekModal').modal('hide');"
+            class="btn btn-danger"
+            data-dismiss="modal"
+          >
+            Ja
+          </button>
+            <button
               type="button"
               class="btn btn-secondary"
               data-dismiss="modal"
             >
               Nee
             </button>
-            <button
-              (click)="onUpdateBoek(editForm.value)"
-              onclick="$('#editBoekModal').modal('hide');"
-              class="btn btn-danger"
-              data-dismiss="modal"
-            >
-              Ja
-            </button>
+
           </div>
         </div>
       </div>
@@ -414,6 +515,96 @@
   </div>
 </div>
 </body>
+
+<!-- Archive Boek Modal -->
+<div
+  class="modal fade"
+  id="archiveBoekModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="archiveBoekModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="archiveModelLabel">Boek archiveren</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Weet je zeker dat je het boek {{ archivedBoek?.title }} wilt
+          archiveren?
+        </p>
+        <div class="modal-footer">
+          <button
+          (click)="onArchivedBoek(archivedBoek!)"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >
+          Ja
+        </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Nee
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Library Boek Modal -->
+<div
+  class="modal fade"
+  id="libraryBoekModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="libraryBoekModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="libraryModelLabel">Boek terugplaatsen naar bibliotheek</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Weet je zeker dat je het boek {{ bibliotheekBoek?.title }} terug wilt
+          verplaatsen naar de bibliotheek?
+        </p>
+        <div class="modal-footer">
+          <button
+          (click)="onBibliotheekBoek(bibliotheekBoek!)"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >
+          Ja
+        </button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Nee
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Delete Boek Modal -->
 <div
@@ -427,7 +618,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModelLabel">Delete Boek</h5>
+        <h5 class="modal-title" id="deleteModelLabel">Boek verwijderen</h5>
         <button
           type="button"
           class="close"
@@ -443,16 +634,17 @@
           verwijderen?
         </p>
         <div class="modal-footer">
+          <button
+          (click)="onDeleteBoek(deleteBoek!)"
+          class="btn btn-danger"
+          data-dismiss="modal"
+        >
+          Ja
+        </button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Nee
           </button>
-          <button
-            (click)="onDeleteBoek(deleteBoek?.id!)"
-            class="btn btn-danger"
-            data-dismiss="modal"
-          >
-            Ja
-          </button>
+
         </div>
       </div>
     </div>
@@ -467,14 +659,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
     <!-- POP UP 1: WEET JE HET ZEKER-->
     <div>
       <div class="modal fade" id="deleteeBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
@@ -488,39 +672,71 @@
               </button>
             </div>
             <div class="modal-body">
-              <p>Weet je zeker dat je het boek
-              <p>
-              <p><b>{{editBoek?.title}}</b>
-              <p>wilt reserveren?</p>
+              <p>Weet je zeker dat je het boek '<b>{{editBoek?.title}}</b>' wilt reserveren?</p>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
                 <button (click)="onOpenModal2()" (click)="setReserved(editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-     <!-- POP UP 2: BEVESTIGING -->
-  <div>
-    <div class="modal fade" id="okkBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+        <div class="modal-body">
+          <p>Weet je zeker dat je het boek</p>
+          <p></p>
+          <p>
+            <b>{{ editBoek?.title }}</b>
+          </p>
+          <p>wilt reserveren?</p>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Nee
+            </button>
+            <button
+              (click)="onOpenModal2()"
+              (click)="setReserved(editBoek!)"
+              class="btn btn-success"
+              data-dismiss="modal"
+            >
+              Ja
             </button>
           </div>
-          <div class="modal-body">
-            <p>Uw reservering is succesvol!</p>
-            <div class="modal-footer">
-              <button class="btn btn-success" data-dismiss="modal">Ok</button>
-            </div>
+        </div>
+      </div>
+    </div>
+<!-- POP UP 2: BEVESTIGING -->
+<div>
+  <div
+    class="modal fade"
+    id="okkBoekModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="deleteBoekModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Uw reservering is succesvol!</p>
+          <div class="modal-footer">
+            <button class="btn btn-success" data-dismiss="modal">Ok</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

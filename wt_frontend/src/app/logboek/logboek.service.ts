@@ -16,9 +16,21 @@ export class logboekService {
     );
   }
 
+  public getBoekenExemplaar(exemplaar_id: number): Observable<StatusHistory[]> {
+    return this.http.get<StatusHistory[]>(
+      `${this.apiServerUrl}/statushistorie/find/exemplaar/${exemplaar_id}`
+    )
+  }
+
+  public getBoek(boek_id: number): Observable<StatusHistory[]> {
+    return this.http.get<StatusHistory[]>(
+      `${this.apiServerUrl}/statushistorie/find/boek/${boek_id}`
+    )
+  }
+
   public getBoekenUser(user_id: number): Observable<StatusHistory[]> {
     return this.http.get<StatusHistory[]>(
       `${this.apiServerUrl}/statushistorie/find/user/${user_id}`
-    )
+    );
   }
 }

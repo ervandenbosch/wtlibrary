@@ -208,5 +208,6 @@ td {
     left: 50%;
     top: 50%;
     transform: translateX(-50%);
+	z-index: -1;
   
 }

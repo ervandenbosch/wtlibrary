@@ -222,3 +222,6 @@ table tbody tr:hover{
 .table-stats .table-line-plus .status-social-icon {
 	color: #a75d54;
 } */
+.form-control{
+	margin-top: 5px;
+}

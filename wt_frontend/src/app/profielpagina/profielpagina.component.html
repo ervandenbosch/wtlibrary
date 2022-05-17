@@ -1,5 +1,5 @@
 <div class="wt">
-  <img src="./assets/images/wtachtergrond.svg">
+  <img src="./assets/images/wtachtergrond.svg" />
 </div>
 
 <!-- Edit user -->
@@ -49,14 +49,14 @@
             readonly
           />
         </div>
-          <input
-            type="hidden"
-            ngModel="{{ editUser?.email }}"
-            class="form-control"
-            id="email"
-            placeholder="..."
-            name="email"
-          />
+        <input
+          type="hidden"
+          ngModel="{{ editUser?.email }}"
+          class="form-control"
+          id="email"
+          placeholder="..."
+          name="email"
+        />
         <div class="mb-3 form-group">
           <label for="password" class="form-label"><b>Password</b></label>
           <input
@@ -118,7 +118,7 @@
           />
         </div>
         <div class="modal-footer">
-            <button
+          <button
             type="button"
             class="btn btn-primary"
             data-dismiss="modal"
@@ -362,37 +362,15 @@
 </ng-template>
 
 <div class="container-fluid" style="min-height: 100vh">
-  <!-- <div class="d-flex flex-wrap">
-    <div class="d-flex flex-row">
-      <div class="col-sm">
-        <button
-          class="btn btn-secondary my-2"
-          style="width: 100px; margin-left: 8px"
-          type="button"
-          (click)="open(mymodal3)"
-        >
-          Add User
-        </button>
-      </div>
-      <div class="col-sm">
-        <button
-          class="btn btn-secondary my-2"
-          style="width: 100px; margin-left: 8px"
-          type="button"
-          (click)="open(mymodal5)"
-        >
-          Add Boek
-        </button>
-      </div>
-    </div>
-  </div> -->
-
-  <div class="p-2 row ">
-    <div class="col-sm border border-dark rounded m-2" style="background-color: white;">
+  <div class="p-2 row">
+    <div
+      class="col-sm border border-dark rounded m-2"
+      style="background-color: white"
+    >
       <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
-        <div  class="pt-2 pb-4">
-          <img 
+        <div class="pt-2 pb-4">
+          <img
             src="{{ editUser?.photo }}"
             alt=""
             style="
@@ -417,12 +395,7 @@
                 <b>{{ editUser?.username }}</b>
               </td>
             </tr>
-            <!-- <tr>
-              <td>Email:</td>
-              <td>
-                <b>{{ editUser?.email }}</b>
-              </td>
-            </tr> -->
+
             <tr *ngIf="editUser?.phoneNumber">
               <td>Telefoonnummer:</td>
               <td>
@@ -456,64 +429,37 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="m-2 col-sm border rounded position-relative">
-    <div class="m-2 col-sm border border-dark rounded position-relative" style="background-color: white;">
+    <div
+      class="m-2 col-sm border border-dark rounded position-relative"
+      style="background-color: white">
       <h3 class="py-3 text-center">Mijn boeken</h3>
       <div class="col-sm mb-5">
-        <div *ngFor="let boek of boeken">
+        <div *ngFor="let boek of currentboekenActief">
           <a
-            routerLink="/bookdescription"
+            routerLink="/boek/{{ boek?.exemplaar?.boek?.id }}"
             class="link text-dark"
             style="cursor: pointer"
           >
-            <div class="container p-2 my-3 border border-dark rounded">
+            <div class="container p-2 my-3 border rounded">
               <div class="d-flex flex-row pt-2">
                 <div class="px-1">
                   <img
-                    src="{{ boek?.thumbnailUrl }}"
+                    src="{{ boek?.exemplaar?.boek?.thumbnailUrl }}"
                     alt="book"
                     style="max-height: 75px; border-radius: 10px"
                   />
                 </div>
                 <div class="px-2">
-                  <h6>{{ boek?.title }}</h6>
-                  <p class="mx-1">{{ boek?.authors }}</p>
+                  <h6>{{ boek?.exemplaar?.boek?.title }}</h6>
+                  <p class="mx-1">{{ boek?.exemplaar?.boek?.authors }}</p>
+                  <div *ngIf="boek?.status === 'gereserveerd'">
+                    <p class="small">Gereserveerd</p>
+                  </div>
                 </div>
               </div>
             </div>
           </a>
-        </div> -->
-
-        <div class="m-2 col-sm border rounded position-relative">
-          <h3 class="py-3 text-center">Mijn boeken</h3>
-          <div class="col-sm mb-5">
-            <div *ngFor="let boek of boekenActief">
-              <a
-                routerLink="/boek/{{boek?.exemplaar?.boek?.id}}"
-                class="link text-dark"
-                style="cursor: pointer"
-              >
-                <div class="container p-2 my-3 border rounded">
-                  <div class="d-flex flex-row pt-2">
-                    <div class="px-1">
-                      <img
-                        src="{{ boek?.exemplaar?.boek?.thumbnailUrl }}"
-                        alt="book"
-                        style="max-height: 75px; border-radius: 10px"
-                      />
-                    </div>
-                    <div class="px-2">
-                      <h6>{{ boek?.exemplaar?.boek?.title }}</h6>
-                        <p class="mx-1">{{ boek?.exemplaar?.boek?.authors }}</p>
-                        <div *ngIf="boek?.status === 'gereserveerd'">
-                          <p class="small">Gereserveerd</p>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
+        </div>
 
         <div
           *ngIf="boekenActief?.length == 0"
@@ -531,67 +477,41 @@
           type="button"
           class="btn btn-sm btn-warning position-absolute"
           style="bottom: 5px; right: 5px"
-          *ngIf="boeken?.length != 0"
+          *ngIf="moreBoeken"
         >
-          More..
+          Go to list..
         </button>
       </a>
     </div>
 
-    <!-- <div class="m-2 col-sm border rounded position-relative">
-    <div class="m-2 col-sm border border-dark rounded position-relative" style="background-color: white;">
+    <div
+      class="m-2 col-sm border border-dark rounded position-relative"
+      style="background-color: white">
       <h3 class="py-3 text-center">Mijn geschiedenis</h3>
       <div class="col-sm mb-5">
-        <div *ngFor="let boek of boeken">
+        <div *ngFor="let boek of currentboekenVroeger">
           <a
-            routerLink="/bookdescription"
+            routerLink="/boek/{{ boek?.exemplaar?.boek?.id }}"
             class="link text-dark"
             style="cursor: pointer"
           >
-            <div class="container p-2 my-3 border border-dark rounded">
+            <div class="container p-2 my-3 border rounded">
               <div class="d-flex flex-row pt-2">
                 <div class="px-1">
                   <img
-                    src="{{ boek?.thumbnailUrl }}"
+                    src="{{ boek?.exemplaar?.boek?.thumbnailUrl }}"
                     alt="book"
                     style="max-height: 75px; border-radius: 10px"
                   />
                 </div>
                 <div class="px-2">
-                  <h6>{{ boek?.title }}</h6>
-                  <p class="mx-1">{{ boek?.authors }}</p>
+                  <h6>{{ boek?.exemplaar?.boek?.title }}</h6>
+                  <p class="mx-1">{{ boek?.exemplaar?.boek?.authors }}</p>
                 </div>
               </div>
             </div>
           </a>
-        </div> -->
-
-        <div class="m-2 col-sm border rounded position-relative">
-          <h3 class="py-3 text-center">Mijn geschiedenis</h3>
-          <div class="col-sm mb-5">
-            <div *ngFor="let boek of boekenVroeger">
-              <a
-                routerLink="/boek/{{boek?.exemplaar?.boek?.id}}"
-                class="link text-dark"
-                style="cursor: pointer"
-              >
-                <div class="container p-2 my-3 border rounded">
-                  <div class="d-flex flex-row pt-2">
-                    <div class="px-1">
-                      <img
-                        src="{{ boek?.exemplaar?.boek?.thumbnailUrl }}"
-                        alt="book"
-                        style="max-height: 75px; border-radius: 10px"
-                      />
-                    </div>
-                    <div class="px-2">
-                      <h6>{{ boek?.exemplaar?.boek?.title }}</h6>
-                      <p class="mx-1">{{ boek?.exemplaar?.boek?.authors }}</p>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
+        </div>
 
         <div
           *ngIf="boekenVroeger?.length == 0"
@@ -609,10 +529,9 @@
           type="button"
           class="btn btn-sm btn-warning position-absolute"
           style="bottom: 5px; right: 5px"
-          *ngIf="boeken?.length != 0"
+          *ngIf="moreHistory"
         >
-       
-          More..
+          Go to list..
         </button>
       </a>
     </div>
