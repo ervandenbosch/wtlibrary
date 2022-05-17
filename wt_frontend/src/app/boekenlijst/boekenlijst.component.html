@@ -60,7 +60,7 @@
               </tr>
             </thead>
             <tbody *ngFor="let boek of boeken; get" >
-              <tr *ngIf="getArchive() && !archived(boek)" class="table-row">>
+              <tr *ngIf="getArchive() && !archived(boek)" class="table-row">
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
                   <a routerLink="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none">{{
