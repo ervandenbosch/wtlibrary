@@ -34,6 +34,9 @@ body{
 } */
 /* .table thead > tr > th {
 	border-bottom: 1px solid #C2C2C2;
+}
+.table thead > tr > th {
+	border-bottom: 1px solid black;
 	padding-bottom: 0;
 } */
 .table tbody > tr > td {
