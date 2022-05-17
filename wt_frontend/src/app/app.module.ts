@@ -22,6 +22,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { LogboekComponent } from './logboek/logboek.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { isAdmin, LoggedIn } from './service/auth.service';
+import { MijnhistoryComponent } from './mijnhistory/mijnhistory.component';
+import { MijnboekenComponent } from './mijnboeken/mijnboeken.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { isAdmin, LoggedIn } from './service/auth.service';
     BoardModeratorComponent,
     BoardUserComponent,
     LogboekComponent,
+    MijnhistoryComponent,
+    MijnboekenComponent,
   ],
   imports: [
     BrowserModule,
