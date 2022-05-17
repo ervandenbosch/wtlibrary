@@ -1,3 +1,4 @@
+<br /><br />
 <div class="container" id="main-container">
   <br>
   <h2>
@@ -36,13 +37,13 @@
     name="key"
     id="searchName"
     class="form-control mr-sm-2"
-    placeholder="Boek zoeken..."
+    placeholder="Boek zoeken ..."
     required
     autocomplete="off"
   />
 
   <div class="row" id="main-row">
-    <div class="col-lg-12" >
+    <div class="col-lg-12">
       <div class="main-box clearfix">
         <div class="table-responsive">
           <table class="table user-list">
@@ -52,14 +53,14 @@
                 <th><span>ISBN</span></th>
                 <th class="text-center"><span>Beschikbaarheid</span></th>
                 <th><span>Categorie</span></th>
-                <th>&nbsp;</th>
+                <th><span>Acties</span></th>
               </tr>
             </thead>
             <tbody *ngFor="let boek of boeken; get" >
               <tr *ngIf="getArchive() && !archived(boek)">
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
-                  <a href="/boek/{{ boek?.id }}" class="user-link">{{
+                  <a routerLink="/boek/{{ boek?.id }}" class="user-link">{{
                     boek?.title
                   }}</a>
                   <span class="user-subhead">{{ boek?.authors }}</span>
@@ -409,7 +410,7 @@
                 <label for="authors">Beschikbaar</label>
                 <input
                   type="number"
-                  max = {{editBoek?.copies}}
+                  max="{{ editBoek?.copies }}"
                   ngModel="{{ editBoek?.available }}"
                   name="available"
                   class="form-control"
@@ -654,14 +655,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
-
-
     <!-- POP UP 1: WEET JE HET ZEKER-->
     <div>
       <div class="modal fade" id="deleteeBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
@@ -683,28 +676,63 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-     <!-- POP UP 2: BEVESTIGING -->
-  <div>
-    <div class="modal fade" id="okkBoekModal" tabindex="-1" role="dialog" aria-labelledby="deleteBoekModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+        <div class="modal-body">
+          <p>Weet je zeker dat je het boek</p>
+          <p></p>
+          <p>
+            <b>{{ editBoek?.title }}</b>
+          </p>
+          <p>wilt reserveren?</p>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Nee
+            </button>
+            <button
+              (click)="onOpenModal2()"
+              (click)="setReserved(editBoek!)"
+              class="btn btn-success"
+              data-dismiss="modal"
+            >
+              Ja
             </button>
           </div>
-          <div class="modal-body">
-            <p>Uw reservering is succesvol!</p>
-            <div class="modal-footer">
-              <button class="btn btn-success" data-dismiss="modal">Ok</button>
-            </div>
+        </div>
+      </div>
+    </div>
+<!-- POP UP 2: BEVESTIGING -->
+<div>
+  <div
+    class="modal fade"
+    id="okkBoekModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="deleteBoekModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModelLabel">Boek Reserveren</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Uw reservering is succesvol!</p>
+          <div class="modal-footer">
+            <button class="btn btn-success" data-dismiss="modal">Ok</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

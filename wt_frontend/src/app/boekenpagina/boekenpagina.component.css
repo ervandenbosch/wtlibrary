@@ -16,11 +16,9 @@
 }
 
 body {
-    background-color: white;
-    border-style: solid;
-    border-color:white;
     border-width: 5px;
-    border-radius: 80px
+    border-radius: 25px
+    
 }
 
 .over {
@@ -66,3 +64,22 @@ body {
 .titel {
     color: black;
 }
+
+.wt {   
+    opacity: 0.4;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+  
+}
+
+
+
+.trgt {
+    opacity: 0.5;
+}
+
+
+
+/* <img src="./assets/images/wtlogo.svg" class="img1"> */

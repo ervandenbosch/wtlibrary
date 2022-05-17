@@ -30,3 +30,12 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.wt {   
+  opacity: 0.4;
+  position: fixed;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+
+}

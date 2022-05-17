@@ -12,7 +12,6 @@ export class UserDataService {
 
   constructor(private http: HttpClient) {}
 
-    
   public getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiServerUrl}/user/all`);
   }

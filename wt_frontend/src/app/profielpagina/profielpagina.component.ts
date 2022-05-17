@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenStorageService } from '../service/token-storage.service';
 import { CurrentUserService } from '../service/current-user.service';
 import { Token } from '@angular/compiler/src/ml_parser/tokens';
+import { logboekService } from '../logboek/logboek.service';
+import { StatusHistory } from '../reserveringen/statushistory';
 
 @Component({
   selector: 'app-profielpagina',
@@ -23,9 +25,16 @@ export class ProfielpaginaComponent implements OnInit {
   public addUser: User | undefined;
   public deleteUser: User | undefined;
   public boeken: Boek[] | undefined;
+  public currentboekenActief: StatusHistory[] | undefined;
+  public boekenActief: StatusHistory[] | undefined;
+  public currentboekenVroeger: StatusHistory[] | undefined;
+  public boekenVroeger: StatusHistory[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
   public currentUserId: number | undefined;
+  public moreBoeken: boolean | undefined;
+  public moreHistory: boolean | undefined;
+
   isLoggedIn = false;
   username?: string;
   id?: number;
@@ -45,7 +54,8 @@ export class ProfielpaginaComponent implements OnInit {
     private route: ActivatedRoute,
     private token: TokenStorageService,
     private CurrentUserService: CurrentUserService,
-    private TokenStorageService: TokenStorageService
+    private TokenStorageService: TokenStorageService,
+    private logboekService: logboekService
   ) {}
 
   open(content: any) {
@@ -56,6 +66,7 @@ export class ProfielpaginaComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.currentUser = this.TokenStorageService.getUser();
     this.getBooks();
+    this.getBoekenUser();
     this.getUser();
 
     this.isLoggedIn = !!this.token.getToken();
@@ -79,8 +90,6 @@ export class ProfielpaginaComponent implements OnInit {
     }
   }
 
-  
-
   public getUsers() {
     this.UserDataService.getUsers().subscribe(
       (response: User[]) => {
@@ -94,7 +103,10 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public getUser(): void {
-    if (this.route.snapshot.params['id'] == this.currentUser.id || this.currentUser.roles.includes('ROLE_ADMIN')){
+    if (
+      this.route.snapshot.params['id'] == this.currentUser.id ||
+      this.currentUser.roles.includes('ROLE_ADMIN')
+    ) {
       this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
         (response: User) => {
           this.editUser = response;
@@ -102,13 +114,40 @@ export class ProfielpaginaComponent implements OnInit {
         (error: HttpErrorResponse) => {
           alert(error.message);
         }
-      )
+      );
     } else {
-      window.alert("Je hebt geen toestemming om deze gebruiker te bekijken")
-      this.router.navigate(['/profielpagina/' + this.currentUser.id])
-      }
+      window.alert('Je hebt geen toestemming om deze gebruiker te bekijken');
+      this.router.navigate(['/profielpagina/' + this.currentUser.id]);
+    }
   }
 
+  public getBoekenUser() {
+    this.logboekService
+      .getBoekenUser(this.route.snapshot.params['id'])
+      .subscribe(
+        (response: StatusHistory[]) => {
+          this.boekenActief = response.filter(
+            (item) =>
+              item.active &&
+              (item.status == 'uitgeleend' || item.status == 'gereserveerd')
+          );
+          this.boekenVroeger = response.filter(
+            (item) => !item.active && item.status == 'uitgeleend'
+          );
+          this.currentboekenActief = this.boekenActief.slice(0, 3);
+          if (this.boekenActief.length > 3) {
+            this.moreBoeken = true;
+          }
+          if (this.boekenVroeger.length > 3) {
+            this.moreHistory = true;
+          }
+          this.currentboekenVroeger = this.boekenVroeger.slice(0, 3);
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+  }
 
   public getBooks() {
     this.boekService.getBoeken().subscribe(

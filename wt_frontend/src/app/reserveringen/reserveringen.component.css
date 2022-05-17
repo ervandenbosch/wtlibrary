@@ -28,7 +28,7 @@ body{margin-top:20px;}
 	background-color: #eee;
 }
 .table thead > tr > th {
-	border-bottom: 1px solid #C2C2C2;
+	border-bottom: 1px solid black;
 	padding-bottom: 0;
 }
 .table tbody > tr > td {
@@ -43,7 +43,7 @@ body{margin-top:20px;}
 	padding-left: 20px;
 }
 .table thead > tr > th span {
-	border-bottom: 2px solid #C2C2C2;
+	border-bottom: 2px solid black;
 	display: inline-block;
 	padding: 0 5px;
 	padding-bottom: 5px;
@@ -172,4 +172,14 @@ body{margin-top:20px;}
 }
 .table-stats .table-line-plus .status-social-icon {
 	color: #a75d54;
+}
+
+.wt {   
+    opacity: 0.4;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%);
+	z-index: -1;
+  
 }
