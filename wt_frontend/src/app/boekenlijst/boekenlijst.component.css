@@ -174,4 +174,6 @@ body{margin-top:20px;}
 	color: #a75d54;
 }
 
-
+.form-control{
+	margin-top: 5px;
+}
