@@ -1,9 +1,11 @@
 <body>
 <div class="container" id="main-container">
+  <div id="topbar">
   <h2>
     Boekenlijst &nbsp;&nbsp;&nbsp; <button 
+    style="color: black"
     id="topbttn"
-    class="btn btn-primary"
+    class="btn btn-success"
     (click)="createBoek()"
   >
     <i class="fa fa book"></i> Boek Toevoegen
@@ -20,6 +22,7 @@
     required
     autocomplete="off"
   />
+</div>
 
   <div class="row" id="main-row">
     <div class="col-lg-12" >
@@ -36,10 +39,10 @@
               </tr>
             </thead>
             <tbody *ngFor="let boek of boeken" >
-              <tr >
+              <tr class="table-row">
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
-                  <a href="/boek/{{ boek?.id }}" class="user-link">{{
+                  <a href="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none">{{
                     boek?.title
                   }}</a>
                   <span class="user-subhead">{{ boek?.authors }}</span>
@@ -55,12 +58,12 @@
                   </h3>
                 </td>
                 <td>
-                  <a href="#">{{ boek?.categories }}</a>
+                  <a href="#" style="color: black; text-decoration: none">{{ boek?.categories }}</a>
                 </td>
-                <td style="width: 25%">
+                <td style="width: 17%; background-color: rgb(130,130,130,255);">
                   <a *ngIf="boek.available > 0" (click)="onOpenModal1(boek)">
                   <button
-                    class="btn btn-outline-primary"
+                    class="btn btn-outline-success" id="reserveerknop"
                     >Reserveer
                     <span class="fa-stack">
                       <i class="fa fa-book fa-stack-1x"></i>
@@ -69,7 +72,7 @@
                   </a>
                   <a *ngIf="boek.available == 0" (click)="setReserved(boek)">
                     <button
-                      class="btn btn-outline-secondary" disabled
+                      class="btn btn-outline-success" disabled id="reserveerknop"
                       >Reserveer
                       <span class="fa-stack">
                         <i class="fa fa-book fa -stack-1x"></i>
@@ -211,7 +214,7 @@
                 <button
                   [disabled]="addForm.invalid"
                   type="submit"
-                  class="btn btn-primary"
+                  class="btn btn-success"
                 >
                   Boek Toevoegen
                 </button>
@@ -352,7 +355,7 @@
                 </button>
                 <button
                   onclick="$('#confirmationModal').modal('toggle')"
-                  class="btn btn-primary"
+                  class="btn btn-success"
                 >
                   Opslaan
                 </button>

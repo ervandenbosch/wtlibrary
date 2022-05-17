@@ -10,13 +10,13 @@
 
 <div class="User link" id="topbar">
   <h2>Userlijst &nbsp;&nbsp;&nbsp;
-  <button
+  <button style="color: black"
     id="topbttn"
-    class="btn btn-primary"
+    class="btn btn-success"
     routerLink="/register">
     <i class="fa fa book"></i> User Toevoegen
   </button></h2>
-  <!-- <button id="topbttn" class="btn btn-primary">
+  <!-- <button id="topbttn" class="btn btn-success">
     <i class="fa fa book"></i> Oude Users
   </button> -->
   <input
@@ -36,14 +36,14 @@
 <div class="container" id="main-container">
   <div class="row">
     <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-      <div class="card m-b-30 mt-3 border-secondary" style="background-color: rgb(16,211,16)">
+      <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
         <div class="card-body row"  style='height:120px;'>
           <div class="col-6">
             <img
               src="{{ user?.photo }}"
               style='height:100px;
               width:auto;/*maintain aspect ratio*/;
-              max-width:200px;'
+              max-width:200px; border-style: solid; border-width: 3px; border-color: gray;'
               alt=""
               class="img-fluid rounded-circle w-60"
             />
@@ -56,19 +56,19 @@
           </div>
         </div>
         <ul class="list-group list-group-flush border-0" style='height:80px;'>
-          <li class="list-group-item"  style="background-color: rgb(16,180,16)">
+          <li id="emailbox" class="list-group-item" >
             <i class="fa fa-envelope float-right"></i>{{ user.username }}
             <a href="#"></a>
           </li>
-          <li *ngIf="user.phoneNumber" class="list-group-item"  style="background-color: rgb(16,140,16)">
+          <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
             <i class="fa fa-phone float-right"></i>Nummer:
             {{ user.phoneNumber }}
         </ul>
-        <div class="card-body" style="background-color:rgb(16,100,16)">
+        <div class="card-body" style="background-color: rgb(130,130,130)">
           <div class="float-right btn-group btn-group-sm">
             <a
               (click)="onOpenModal(user, 'edit')"
-              class="btn btn-primary tooltips"
+              class="btn btn-success tooltips"
               data-placement="top"
               data-toggle="tooltip"
               data-original-naam="Edit"
@@ -76,7 +76,7 @@
             </a>
             <a
               (click)="onOpenModal(user, 'delete')"
-              class="btn btn-secondary tooltips"
+              class="btn btn-danger tooltips"
               data-placement="top"
               data-toggle="tooltip"
               data-original-naam="Delete"
@@ -243,7 +243,7 @@
             <button
               (click)="onUpdateUser(editForm.value)"
               data-dismiss="modal"
-              class="btn btn-primary"
+              class="btn btn-success"
             >
               Opslaan
             </button>

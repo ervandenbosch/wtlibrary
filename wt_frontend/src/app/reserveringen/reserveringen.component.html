@@ -1,13 +1,10 @@
-<<<<<<< HEAD
-<body>
-=======
 <div class="wt">
     <img src="./assets/images/wtachtergrond.svg">
   </div>
 
->>>>>>> 7d5ce2dc70026b9f866c740265649af04e904ef3
+<body>
 <div class = "container" id = "main-container">
-    <h2 class="item">Reserveringen ter goedkeuring</h2>
+    <h2 id="topbar" class="item">Reserveringen ter goedkeuring</h2>
 
 	<div class="row" id="main-row">
 		<div class="col-lg-12">
@@ -30,7 +27,7 @@
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
                                 <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
-                                <td class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
+                                <td style="background-color: rgb(130,130,130,255)" class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
                                     <!-- <button class="btn btn-danger btn-sm" (click)="openBevestigingModal(tempReservering, 'afkeuren')"><span><i class="fa fa-thumbs-down"></i></span></button> -->
                                 </td> 
                             </tr>

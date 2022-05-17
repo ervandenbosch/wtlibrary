@@ -1,3 +1,27 @@
+#topbar{
+    position: relative;
+	width:calc(100% + 20px);
+	right: 10px;
+    padding: 12px;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 75%, rgba(130, 130, 130, 0.85) 75%);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    box-shadow: 8px 8px 5px rgb(100, 100, 100);
+	margin-bottom: 10px;
+}
+
+#reserveerknop{
+	color: black;
+	border-color: black;
+}
+
+#reserveerknop:disabled{
+	color: black;
+	border-color: black;
+}
+
 body{
 	margin-top:20px;
 }
@@ -6,28 +30,57 @@ body{
     margin: 0px 5px 5px 0px;
 }
 
+.table a.table-link.danger {
+	color: #fe635f;
+}
+.table a.table-link.danger:hover {
+	color: #dd504c;
+}
+
 /* USER LIST TABLE */
-.user-list tbody td > img {
+td > img {
     position: relative;
 	max-width: 50px;
 	float: left;
 	margin-right: 15px;
 }
-.user-list tbody td .user-link {
+.user-link {
 	display: block;
 	font-size: 1.25em;
 	padding-top: 3px;
 	margin-left: 60px;
 }
+
+tbody tr td{
+	font-size: 0.875em;
+	background: rgba(170, 195, 170, 0.85);
+	/* border-top: 10px solid #fff; */
+	vertical-align: middle;
+	padding: 12px 8px;
+	border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+	box-shadow: 8px 8px 5px rgb(100, 100, 100);
+}
+
+
+table tbody tr:hover{
+	background-color: rgb(100, 100, 100);
+}
+
 /* .user-list tbody td .user-subhead {
 	font-size: 0.875em;
 	font-style: italic;
 } */
 
 /* TABLES */
+
 .table {
     border-collapse: separate;
+	border-spacing: 1px 20px;
 }
+
 /* .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
 	background-color: #eee;
@@ -39,13 +92,7 @@ body{
 	border-bottom: 1px solid black;
 	padding-bottom: 0;
 } */
-.table tbody > tr > td {
-	font-size: 0.875em;
-	background: #f5f5f5;
-	border-top: 10px solid #fff;
-	vertical-align: middle;
-	padding: 12px 8px;
-}
+
 /* .table tbody > tr > td:first-child,
 .table thead > tr > th:first-child {
 	padding-left: 20px;
@@ -107,17 +154,11 @@ body{
 	margin: 0 5px;
 	font-size: 1.125em;
 } */
-.table a.table-link:hover {
+/* .table a.table-link:hover {
 	text-decoration: none;
 	color: #2aa493;
 	cursor: pointer;
-}
-.table a.table-link.danger {
-	color: #fe635f;
-}
-.table a.table-link.danger:hover {
-	color: #dd504c;
-}
+} */
 /* 
 .table-products tbody > tr > td {
 	background: none;

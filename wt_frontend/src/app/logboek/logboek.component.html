@@ -1,10 +1,10 @@
 <body>
 <div class="container">
   <div class="row">
-    <div class="col-lg-12 card-margin">
+    <div id="topbar" class="col-lg-12 card-margin">
       <h2>Logboek &nbsp;&nbsp;&nbsp;</h2>
       <div class="card search-form">
-        <div class="card-body p-0">
+        <div class="p-0">
           <form id="search-form">
             <div class="row">
               <div class="col-12">
@@ -120,12 +120,7 @@
                 <div class="result-body">
                   <div class="table-responsive">
                     <table style="width: 100%">
-                      <thead
-                        style="
-                          border-bottom: 1px solid #e6e4e9;
-                          box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
-                        "
-                      >
+                      <thead>
                         <tr>
                           <th class="">Boek</th>
                           <th style="text-align: center">No.</th>
@@ -137,12 +132,7 @@
                         </tr>
                       </thead>
                       <tbody *ngFor="let log of logs">
-                        <tr
-                          style="
-                            border-bottom: 1px solid #e6e4e9;
-                            box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
-                          "
-                        >
+                        <tr>
                           <td>
                             <div class="d-flex flex-col py-2">
                               <img
@@ -151,6 +141,7 @@
                               />
                               <div class=".d-inline-flex flex-column">
                                 <div class="pl-1" style="font-size: 16px">
+                                  <style> a {color: black;text-decoration: none}</style>
                                   <a href="/boek/{{ log?.exemplaar?.boek?.id }}"
                                     >{{ log?.exemplaar?.boek?.title }}
                                   </a>
@@ -175,9 +166,7 @@
                               style="
                                 width: 120px;
                                 border-radius: 15px;
-                                text-align: center;
-                              "
-                            >
+                                text-align: center;">
                               <span>{{ log?.status }} </span>
                             </div>
                           </td>
@@ -206,25 +195,25 @@
             <ul
               class="pagination pagination-base pagination-boxed pagination-square mb-0"
             >
-              <li class="btn btn-sm btn-outline-primary">
+              <li class="btn btn-sm btn-outline-success">
                 <a (click)="back()">
                   <span aria-hidden="true">«</span>
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <button class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-success">
                 <a (click)="first100()">1</a>
               </button>
-              <button class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-success">
                 <a (click)="first200()">2</a>
               </button>
-              <button class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-success">
                 <a (click)="first300()">3</a>
               </button>
-              <button class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-success">
                 <a (click)="first400()">4</a>
               </button>
-              <button class="btn btn-sm btn-outline-primary">
+              <button class="btn btn-sm btn-outline-success">
                 <a (click)="next()">
                   <span aria-hidden="true">»</span>
                   <span class="sr-only">Next</span>
