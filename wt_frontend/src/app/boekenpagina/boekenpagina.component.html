@@ -11,45 +11,89 @@
           <!-- Dit moet nog verandert worden naar description -->
           {{editBoek?.title}}
         </p>
+
       </div>
     </div>
-    <div class="metaInformatie">
-      <br><br>
-      <h4 class="over">Over dit boek</h4>
-      <h6 >Auteur(s):</h6>
-      <p style = "width: 20%;">{{editBoek?.authors}}</p>
-      <h6 >Pagina's:</h6>
-      <p>{{editBoek?.pageCount}}</p>
-      <h6 >Categorie(ën):</h6>
-      <p class="categorie">{{editBoek?.categories}}</p>
-      <h6 >ISBN:</h6>
-      <p class="categorie">{{editBoek?.isbn}}</p>
-      <br><br>
-      <h6>Exemplaren beschikbaar:</h6>
-      <p> {{editBoek?.available}}</p>
+    <div class="d-flex align-items-start flex-column">
+      <div class="d-flex" >
+        <div class="p-2" style="width: 500px;"><div class="metaInformatie">
+          <br><br>
+          <h4 class="over">Over dit boek</h4>
+          <h6 >Auteur(s):</h6>
+          <p>{{editBoek?.authors}}</p>
+          <h6 >Pagina's:</h6>
+          <p>{{editBoek?.pageCount}}</p>
+          <h6 >Categorie(ën):</h6>
+          <p class="categorie">{{editBoek?.categories}}</p>
+          <h6 >ISBN:</h6>
+          <p class="categorie">{{editBoek?.isbn}}</p>
+          <br><br>
+          <h6>Exemplaren beschikbaar:</h6>
+          <p> {{editBoek?.available}}</p>
+        </div></div>
+        <div class="p-2"><div class="flex-grow" id="main-row">
+            <div *ngIf="isAdmin" class="main-box clearfix">
+              <div class="table-responsive">
+                <table class="table user-list">
+                  <thead>
+                    <tr>
+                      <th class="text-center"><span>Exemplaar</span></th>
+                      <th class="text-center"><span>User</span></th>
+                      <th class="text-center"><span>Staat</span></th>
+                      <th class="text-center"><span>Datum</span></th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let exemplaar of exemplaren; index as i" class="modal-body" >
+                    <tr>
+                      <td class="text-center">
+                        <h5>{{i+1}}</h5>
+                      </td>
+                      <td class="text-center" >
+                      <a *ngFor="let reservering of reserveringen"> 
+                        <a *ngIf="isReserved(reservering, exemplaar)" >
+                          {{reservering.user?.name}}
+                      </a>
+                    </a>
+                  </td>
+                      <td class="text-center">
+                        <h5>{{exemplaar?.staat}}</h5>
+                      </td>
+                      <td class="text-center">
+                        <a *ngFor="let reservering of reserveringen"> 
+                          <a *ngIf="isReserved(reservering, exemplaar)" >
+                            {{reservering?.timestamp}}
+                        </a>
+                      </a>
+                      </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+      </div>
+      <div class="p-2"><!-- KNOP -->
+          <a *ngIf="isAvailable && !boekGereserveerd" (click)="onOpenModal()"><button class="btn btn-outline-success"
+              style="width:400px; outline-width: 5px; border-color: black; color: #00e600; font-size: 20px; font-weight: bold;"
+              >Reserveer <span class="fa-stack">
+                <i class="fa fa-book fa-stack-1x" style="color: black"></i>
+              </span></button></a>
+          <a *ngIf="!isAvailable && !boekGereserveerd"><button class="btn btn-failure"
+              style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet
+              Beschikbaar</button></a>
+    
+          <button *ngIf="boekGereserveerd" class="btn btn-success"
+              style="width:400px; color: black; background-color: green; font-size: 20px; font-weight: bold;"
+              > Gereserveerd ☑️</button>
+        </div>
     </div>
-    <br><br>
-    <br><br>
-  
+
+      
+      
+      
 
 
-
-    <!-- KNOP -->
-    <div class="knop">
-      <a *ngIf="isAvailable && !boekGereserveerd" (click)="onOpenModal()"><button class="btn btn-outline-success"
-          style="width:400px; outline-width: 5px; border-color: black; color: #00e600; font-size: 20px; font-weight: bold;"
-          >Reserveer <span class="fa-stack">
-            <i class="fa fa-book fa-stack-1x" style="color: black"></i>
-          </span></button></a>
-      <a *ngIf="!isAvailable && !boekGereserveerd"><button class="btn btn-failure"
-          style="width:400px; color: white; background-color: red; font-size: 20px; font-weight: bold;">Niet
-          Beschikbaar</button></a>
-
-      <button *ngIf="boekGereserveerd" class="btn btn-success"
-          style="width:400px; color: black; background-color: green; font-size: 20px; font-weight: bold;"
-          > Gereserveerd ☑️</button>
-
-    </div>
+    
     <br><br>
 
 
@@ -71,8 +115,9 @@
               <p><b>{{editBoek?.title}}</b>
               <p>wilt reserveren?</p>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
                 <button (click)="onOpenModal2()" (click)="onUpdate(this.editBoek!)" class="btn btn-success" data-dismiss="modal">Ja</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
+
               </div>
             </div>
           </div>
@@ -103,7 +148,52 @@
       </div>
     </div>
   </div>
-
-
-</body>
+  <div>
+    <div class="modal fade" id="exemplaarModal" tabindex="-1" role="dialog" aria-labelledby="exemplaarModal"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div >
+              <div class="table-responsive">
+                <table class="table user-list">
+                  <thead>
+                    <tr>
+                      <th><span>Exemplaar</span></th>
+                      <th class="text-center"><span>User</span></th>
+                      <th class="text-center"><span>Staat</span></th>
+                      <th class="text-center"><span>Datum</span></th>
+                      <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let exemplaar of exemplaren; index as i" class="modal-body" >
+                    <tr >
+                      <td >
+                        <h5>{{i+1}}</h5>
+                      </td>
+                      <a *ngFor="let reservering of reserveringen"> 
+                        <a *ngIf="isReserved(reservering, exemplaar)" >
+                          {{reservering.user?.name}}
+                      </a>
+                    </a>
+                      <td>
+                        <h5>{{exemplaar?.staat}}</h5>
+                      </td>
+                      <td>
+                        <a *ngFor="let reservering of reserveringen"> 
+                          <a *ngIf="isReserved(reservering, exemplaar)" >
+                            {{exemplaar?.id}}/{{reservering?.timestamp}}
+                        </a>
+                      </a>
+                      </td>
+                      </tr>
+                      </tbody>
+                      </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
