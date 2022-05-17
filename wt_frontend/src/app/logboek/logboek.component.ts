@@ -202,19 +202,37 @@ export class LogboekComponent implements OnInit {
   public searchLogs(key: string): void {
     const results: StatusHistory[] = [];
     for (const log of this.logs!) {
-      if (
-        log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        log.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        log.exemplaar.boek.categories
-          .toLowerCase()
-          .indexOf(key.toLowerCase()) !== -1 ||
-        log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ) {
-        results.push(log);
+      if (log.user.name) {
+        if (
+          log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          log.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(log);
+        }
+      } else {
+        if (
+          log.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          log.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          log.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          log.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(log);
+        }
       }
     }
     this.logs = results;

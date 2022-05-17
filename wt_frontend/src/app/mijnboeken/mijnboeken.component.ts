@@ -25,20 +25,15 @@ export class MijnboekenComponent implements OnInit {
   public boekenActief: StatusHistory[] | undefined;
   public currentSort: string | undefined;
   public currentboekenActief: StatusHistory[] = [];
+  public currentboekenVroeger: StatusHistory[] = [];
   public currentUserId: number | undefined;
   public currentUser: any;
   public editUser: User | undefined;
   faArrowDown = faArrowDown;
   faArrowUp = faArrowUp;
+  public boekenVroeger: StatusHistory[] | undefined;
 
   constructor(
-    private modalService: NgbModal,
-    private UserDataService: UserDataService,
-    private boekService: boekService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private token: TokenStorageService,
-    private CurrentUserService: CurrentUserService,
     private TokenStorageService: TokenStorageService,
     private logboekService: logboekService
   ) {}
@@ -46,16 +41,21 @@ export class MijnboekenComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.TokenStorageService.getUser();
     this.getBoekenUser();
+    this.sortAz();
   }
 
   public getBoekenUser() {
     this.logboekService.getBoekenUser(this.currentUser.id).subscribe(
       (response: StatusHistory[]) => {
-        this.boekenActief = response.filter(
+        this.currentboekenActief = response.filter(
           (item) =>
             item.active &&
             (item.status == 'uitgeleend' || item.status == 'gereserveerd')
         );
+        this.currentboekenVroeger = response.filter(
+          (item) => !item.active && item.status == 'uitgeleend'
+        );
+        this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -66,19 +66,37 @@ export class MijnboekenComponent implements OnInit {
   public Search(key: string): void {
     const results: StatusHistory[] = [];
     for (const boek of this.boekenActief!) {
-      if (
-        boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        boek.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        boek.exemplaar.boek.categories
-          .toLowerCase()
-          .indexOf(key.toLowerCase()) !== -1 ||
-        boek.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ) {
-        results.push(boek);
+      if (boek.user.name) {
+        if (
+          boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          boek.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(boek);
+        }
+      } else {
+        if (
+          boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          boek.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(boek);
+        }
       }
     }
     this.boekenActief = results;

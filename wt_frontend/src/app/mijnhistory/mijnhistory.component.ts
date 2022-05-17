@@ -23,6 +23,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 export class MijnhistoryComponent implements OnInit {
   public boeken: Boek[] | undefined;
   public boekenActief: StatusHistory[] | undefined;
+  public currentboekenActief: StatusHistory[] | undefined;
   public boekenVroeger: StatusHistory[] | undefined;
   public currentboekenVroeger: StatusHistory[] = [];
   public currentSort: string | undefined;
@@ -33,12 +34,6 @@ export class MijnhistoryComponent implements OnInit {
   public editUser: User | undefined;
 
   constructor(
-    private UserDataService: UserDataService,
-    private boekService: boekService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private token: TokenStorageService,
-    private CurrentUserService: CurrentUserService,
     private TokenStorageService: TokenStorageService,
     private logboekService: logboekService
   ) {}
@@ -116,19 +111,37 @@ export class MijnhistoryComponent implements OnInit {
   public Search(key: string): void {
     const results: StatusHistory[] = [];
     for (const boek of this.boekenVroeger!) {
-      if (
-        boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        boek.exemplaar.boek.authors.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        boek.exemplaar.boek.categories
-          .toLowerCase()
-          .indexOf(key.toLowerCase()) !== -1 ||
-        boek.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ) {
-        results.push(boek);
+      if (boek.user.name) {
+        if (
+          boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          boek.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.user.name.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(boek);
+        }
+      } else {
+        if (
+          boek.exemplaar.boek.title.toLowerCase().indexOf(key.toLowerCase()) !==
+            -1 ||
+          boek.exemplaar.boek.authors
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.exemplaar.boek.categories
+            .toLowerCase()
+            .indexOf(key.toLowerCase()) !== -1 ||
+          boek.timestamp.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+          boek.status.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        ) {
+          results.push(boek);
+        }
       }
     }
     this.boekenVroeger = results;
@@ -140,9 +153,15 @@ export class MijnhistoryComponent implements OnInit {
   public getBoekenUser() {
     this.logboekService.getBoekenUser(this.currentUser.id).subscribe(
       (response: StatusHistory[]) => {
-        this.boekenVroeger = response.filter(
+        this.currentboekenActief = response.filter(
+          (item) =>
+            item.active &&
+            (item.status == 'uitgeleend' || item.status == 'gereserveerd')
+        );
+        this.currentboekenVroeger = response.filter(
           (item) => !item.active && item.status == 'uitgeleend'
         );
+        this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

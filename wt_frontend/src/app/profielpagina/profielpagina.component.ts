@@ -25,11 +25,16 @@ export class ProfielpaginaComponent implements OnInit {
   public addUser: User | undefined;
   public deleteUser: User | undefined;
   public boeken: Boek[] | undefined;
+  public currentboekenActief: StatusHistory[] | undefined;
   public boekenActief: StatusHistory[] | undefined;
+  public currentboekenVroeger: StatusHistory[] | undefined;
   public boekenVroeger: StatusHistory[] | undefined;
   public editBoek: Boek | undefined;
   public deleteBoek: Boek | undefined;
   public currentUserId: number | undefined;
+  public moreBoeken: boolean | undefined;
+  public moreHistory: boolean | undefined;
+
   isLoggedIn = false;
   username?: string;
   id?: number;
@@ -129,6 +134,14 @@ export class ProfielpaginaComponent implements OnInit {
           this.boekenVroeger = response.filter(
             (item) => !item.active && item.status == 'uitgeleend'
           );
+          this.currentboekenActief = this.boekenActief.slice(0, 3);
+          if (this.boekenActief.length > 3) {
+            this.moreBoeken = true;
+          }
+          if (this.boekenVroeger.length > 3) {
+            this.moreHistory = true;
+          }
+          this.currentboekenVroeger = this.boekenVroeger.slice(0, 3);
         },
         (error: HttpErrorResponse) => {
           alert(error.message);
