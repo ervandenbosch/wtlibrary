@@ -172,7 +172,6 @@ export class ExemplarenComponent implements OnInit {
     var statusUpdateJson = JSON.stringify(statusObj);
     this.logboekService.updateStatus(statusUpdateJson, this.pickedUser.id, this.currentExemplaar.id).subscribe(
       (response: StatusHistory) => {
-        console.log(response);
         this.getExemplaren();
       },
       (error: HttpErrorResponse) => {
@@ -197,10 +196,8 @@ export class ExemplarenComponent implements OnInit {
     
     this.currentExemplaar = exemplaar;
     var statusUpdateJson = JSON.stringify(statusObj);
-    console.log(statusUpdateJson);
     this.logboekService.updateStatus(statusUpdateJson, this.currentUser.id, this.currentExemplaar.id).subscribe(
       (response: StatusHistory) => {
-        console.log(response);
         this.getExemplaren();
       },
       (error: HttpErrorResponse) => {

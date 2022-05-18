@@ -200,8 +200,5 @@ export class LogboekComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLogs();
-
-    // console.log(this.currentSort);
-    // console.log(this.currentPage);
   }
 }

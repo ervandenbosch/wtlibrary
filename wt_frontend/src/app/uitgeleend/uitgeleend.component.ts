@@ -51,10 +51,8 @@ export class UitgeleendComponent implements OnInit {
       status: newStatus}
 
     var statusUpdateJson = JSON.stringify(statusObj);
-    console.log(statusUpdateJson);
     this.uitgeleendService.updateStatus(statusUpdateJson, statusHistory.user.id, statusHistory.exemplaar.id).subscribe(
       (response: StatusHistory) => {
-        console.log(response);
         this.getUitgeleend();
       },
       (error: HttpErrorResponse) => {

@@ -74,8 +74,6 @@ export class ProfielpaginaComponent implements OnInit {
     this.getBoekenUser();
     this.getUser();
     this.isCurrentUser();
-   
-    console.log(this.userDataService.getUser(this.token.getUser().id))
 
     this.isLoggedIn = !!this.token.getToken();
 
@@ -94,7 +92,6 @@ export class ProfielpaginaComponent implements OnInit {
     this.UserDataService.getUsers().subscribe(
       (response: User[]) => {
         this.users = response;
-        console.log(this.users);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -107,7 +104,6 @@ export class ProfielpaginaComponent implements OnInit {
       this.route.snapshot.params['id'] == this.currentUser.id) {
       this.profileOfCurrentUser = true;
     } else {this.profileOfCurrentUser = false;}
-    console.log(this.profileOfCurrentUser)
   }
 
   public getUser(): void {
@@ -180,7 +176,6 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public onEditUser(user: User) {
-    console.log(this.roles)
     const checkbox = document.getElementById('userRole',
     ) as HTMLInputElement | null;
     if (checkbox?.checked) {
@@ -207,7 +202,6 @@ export class ProfielpaginaComponent implements OnInit {
     document.getElementById('add-user-form')?.click();
     this.UserDataService.addUser(addForm.value).subscribe(
       (response: User) => {
-        console.log(response);
         this.getUsers();
         addForm.reset();
       },
@@ -228,7 +222,6 @@ export class ProfielpaginaComponent implements OnInit {
     document.getElementById('add-boek-form')?.click();
     this.boekService.addBoek(addForm.value).subscribe(
       (response: Boek) => {
-        console.log(response);
         this.getBooks();
         addForm.reset();
       },
