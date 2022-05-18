@@ -126,6 +126,17 @@
             #linkedinURL="ngModel"
           />
         </div>
+        <div class="form-group">
+          <label for="name">Admin/user</label>
+          <input
+            type="text"
+            class="form-control"
+            name="userRole"
+            [(ngModel)]="form.userRole"
+            placeholder="admin or user"
+            #userRole="ngModel"
+          />
+        </div>
       </div>
 
       <div class="form-group">

@@ -37,10 +37,14 @@ export class ProfielpaginaComponent implements OnInit {
 
   isLoggedIn = false;
   username?: string;
+  adminIsChecked = false;
+  isAdmin = false;
+  profileOfCurrentUser = false;
+  userIsAdmin = false;
   id?: number;
   name?: string;
   email?: string;
-  roles?: string[];
+  roles?: any;
   photo?: string;
   functie?: string;
   phoneNumber?: string;
@@ -55,7 +59,8 @@ export class ProfielpaginaComponent implements OnInit {
     private token: TokenStorageService,
     private CurrentUserService: CurrentUserService,
     private TokenStorageService: TokenStorageService,
-    private logboekService: logboekService
+    private logboekService: logboekService,
+    private userDataService: UserDataService
   ) {}
 
   open(content: any) {
@@ -68,6 +73,9 @@ export class ProfielpaginaComponent implements OnInit {
     this.getBooks();
     this.getBoekenUser();
     this.getUser();
+    this.isCurrentUser();
+   
+    console.log(this.userDataService.getUser(this.token.getUser().id))
 
     this.isLoggedIn = !!this.token.getToken();
 
@@ -75,18 +83,10 @@ export class ProfielpaginaComponent implements OnInit {
       this.currentUser = this.token.getUser();
       this.roles = this.currentUser.roles;
 
-      if (this.roles?.includes('ROLE_ADMIN')) {
-      } else {
-      }
+    }
 
-      this.username = this.currentUser.username;
-      this.name = this.currentUser.name;
-      this.email = this.currentUser.email;
-      this.roles = this.currentUser.roles;
-      this.photo = this.currentUser.photo;
-      this.functie = this.currentUser.functie;
-      this.phoneNumber = this.currentUser.phoneNumber;
-      this.linkedinURL = this.currentUser.linkedinURL;
+    if (!!this.token.getUser().roles.includes('ROLE_ADMIN') || this.token.getUser().userRole == 'admin') {
+      this.isAdmin = true;
     }
   }
 
@@ -102,10 +102,18 @@ export class ProfielpaginaComponent implements OnInit {
     );
   }
 
+  public isCurrentUser(): void{
+    if (
+      this.route.snapshot.params['id'] == this.currentUser.id) {
+      this.profileOfCurrentUser = true;
+    } else {this.profileOfCurrentUser = false;}
+    console.log(this.profileOfCurrentUser)
+  }
+
   public getUser(): void {
     if (
       this.route.snapshot.params['id'] == this.currentUser.id ||
-      this.currentUser.roles.includes('ROLE_ADMIN')
+      this.currentUser.roles.includes('ROLE_ADMIN') || this.token.getUser().userRole == 'admin'
     ) {
       this.UserDataService.getUser(this.route.snapshot.params['id']).subscribe(
         (response: User) => {
@@ -149,6 +157,17 @@ export class ProfielpaginaComponent implements OnInit {
       );
   }
 
+  public showlog(user:User){
+    console.log(user.roles)
+    this.roles = user.roles;
+    console.log(user)
+  }
+
+  public showlog2(user:User){
+    console.log(user.roles)
+    console.log(user)
+  }
+
   public getBooks() {
     this.boekService.getBoeken().subscribe(
       (response: Boek[]) => {
@@ -161,6 +180,13 @@ export class ProfielpaginaComponent implements OnInit {
   }
 
   public onEditUser(user: User) {
+    console.log(this.roles)
+    const checkbox = document.getElementById('userRole',
+    ) as HTMLInputElement | null;
+    if (checkbox?.checked) {
+      user.userRole = 'admin'
+    } else (user.userRole = 'user')
+
     this.UserDataService.updateUser(user).subscribe(
       (response: User) => {
         this.getUser();

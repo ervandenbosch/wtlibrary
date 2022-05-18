@@ -12,6 +12,8 @@ import { StatusHistory } from '../reserveringen/statushistory';
 import { CurrentUserService } from '../service/current-user.service';
 import { logboekService } from '../logboek/logboek.service';
 import { TokenStorageService } from '../service/token-storage.service';
+import { UserDataService } from '../service/user-data.service';
+import { User } from '../service/user';
 
 // COMPONENT EIGENSCHAPPEN
 @Component({
@@ -156,7 +158,8 @@ export class BoekenpaginaComponent implements OnInit {
     private reserveringService: reserveringService,
     private CurrentUserService: CurrentUserService,
     private logboekService: logboekService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private userDataService: UserDataService
   ) { }
 
 
@@ -199,14 +202,14 @@ export class BoekenpaginaComponent implements OnInit {
     container?.appendChild(button);
     button.click();
   }
-
   ngOnInit(): void {
     this.getBoek();
     this.getReserveringen();
     this.getExemplaren();
     this.CurrentUserService.getCurrentUser();
     this.currentUser = this.CurrentUserService.currentUser;
-    this.isAdmin = !!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN');
-
+    if (!!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN') || this.tokenStorageService.getUser().userRole == 'admin') {
+      this.isAdmin = true;
+    }
   }
 }

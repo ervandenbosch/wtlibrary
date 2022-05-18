@@ -18,6 +18,7 @@ export class CurrentUserService {
   functie?: string;
   phoneNumber?: string;
   linkedinURL?: string;
+  userRole?: string;
 
   constructor(private token: TokenStorageService) { }
 
@@ -41,6 +42,7 @@ export class CurrentUserService {
       this.functie     = this.currentUser.functie;
       this.phoneNumber = this.currentUser.phoneNumber;
       this.linkedinURL = this.currentUser.linkedinURL;  
+      this.userRole    = this.currentUser.userRole;
     }
   }
 }

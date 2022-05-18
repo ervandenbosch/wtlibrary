@@ -17,6 +17,7 @@ import { MijnhistoryComponent } from './mijnhistory/mijnhistory.component';
 import { UitgeleendComponent } from './uitgeleend/uitgeleend.component'
 import { ExemplarenComponent } from './exemplaren/exemplaren.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
