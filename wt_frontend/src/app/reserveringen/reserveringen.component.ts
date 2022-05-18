@@ -75,10 +75,8 @@ export class ReserveringenComponent implements OnInit {
       status: "uitgeleend"}
 
     var reserveringJson = JSON.stringify(resObj);
-    console.log(reserveringJson);
     this.reserveringService.goedkeurReservering(reserveringJson, reservering.user.id, reservering.exemplaar.id).subscribe(
       (response: StatusHistory) => {
-        console.log(response);
         this.getReserveringen();
       },
       (error: HttpErrorResponse) => {

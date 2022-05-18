@@ -94,8 +94,7 @@ export class UseraccountsComponent implements OnInit {
       this.updateUser = user;
       if (user.username == this.tokenStorageService.getUser().username){
         this.profileOfCurrentUser = true;
-        console.log(true)
-      } else {this.profileOfCurrentUser = false; console.log(false)}
+      } else {this.profileOfCurrentUser = false}
       button.setAttribute('data-target', '#editUserModal');
     }    
     if (mode === 'archive') {
@@ -125,7 +124,6 @@ export class UseraccountsComponent implements OnInit {
     document.getElementById('add-user-form')?.click();
     this.uds.addUser(addForm.value).subscribe(
       (response: User) => {
-        console.log(response);
         this.getUsers();
         addForm.reset();
       },
@@ -200,7 +198,6 @@ export class UseraccountsComponent implements OnInit {
   public onDeleteUser(id : number): void {
     this.uds.deleteUser(id).subscribe(
       (response: void) => {
-        console.log(response);
         this.getUsers();
       },
       (error: HttpErrorResponse) => {

@@ -69,10 +69,8 @@ export class BoekenpaginaComponent implements OnInit {
     );
     this.exemplaarService.getExemplarenBybookId(boek.id).subscribe(
       (response: Exemplaar[]) => {
-        console.log(response)
         for (var exemplaar of response) {
           if (exemplaar.staat === "beschikbaar") {
-            console.log(exemplaar)
             let resObj = {
 
               admin_modif: false,
@@ -167,7 +165,6 @@ export class BoekenpaginaComponent implements OnInit {
       this.editBoek2 = boek
       this.logboekService.getBoekenExemplaar(this.editBoek2.id).subscribe(
         (response: StatusHistory[]) => {
-          console.log(response)
           return true;
         },
         (error: HttpErrorResponse) => {

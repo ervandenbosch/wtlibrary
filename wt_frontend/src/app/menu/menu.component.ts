@@ -27,8 +27,6 @@ export class MenuComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
-      console.log(user);
-
     if (!!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN') || this.tokenStorageService.getUser().userRole == 'admin') {
       this.isAdmin = true;
     }
