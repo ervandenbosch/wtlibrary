@@ -3,9 +3,9 @@
 <br><br>
 <body>
   <div class="container" id="main-container">
-    <div class="wt">
+    <!-- <div class="wt">
       <img src="./assets/images/wtachtergrond.svg">
-    </div>
+    </div> -->
     <div class="tekstEnFoto">
       <img src={{editBoek?.thumbnailUrl}} class="img1">
       <div class="tekst">
@@ -13,7 +13,7 @@
         <h4 class="beschrijving_header">Beschrijving</h4>
         <p class="beschrijving">
           <!-- Dit moet nog verandert worden naar description -->
-          {{editBoek?.title}}
+          <!-- {{editBoek?.title}} -->
         </p>
 
       </div>
@@ -21,7 +21,6 @@
     <div class="d-flex align-items-start flex-column">
       <div class="d-flex" >
         <div class="p-2" style="width: 500px;"><div class="metaInformatie">
-          <br><br>
           <h4 class="over">Over dit boek</h4>
           <h6 >Auteur(s):</h6>
           <p>{{editBoek?.authors}}</p>
@@ -31,7 +30,6 @@
           <p class="categorie">{{editBoek?.categories}}</p>
           <h6 >ISBN:</h6>
           <p class="categorie">{{editBoek?.isbn}}</p>
-          <br><br>
           <h6>Exemplaren beschikbaar:</h6>
           <p> {{editBoek?.available}}</p>
         </div></div>
@@ -51,22 +49,22 @@
                   <tbody *ngFor="let exemplaar of exemplaren; index as i" class="modal-body" >
                     <tr>
                       <td class="text-center">
-                        <h5>{{i+1}}</h5>
+                        <span id="UserDate">{{i+1}}</span>
                       </td>
                       <td class="text-center" >
                       <a *ngFor="let reservering of reserveringen"> 
-                        <a *ngIf="isReserved(reservering, exemplaar)" >
-                          {{reservering.user?.name}}
+                        <a *ngIf="isReserved(reservering, exemplaar)">
+                          <span id="UserDate">{{reservering.user?.name}}</span>
                       </a>
                     </a>
                   </td>
                       <td class="text-center">
-                        <h5>{{exemplaar?.staat}}</h5>
+                        <span id="UserDate">{{exemplaar?.staat}}</span>
                       </td>
                       <td class="text-center">
                         <a *ngFor="let reservering of reserveringen"> 
                           <a *ngIf="isReserved(reservering, exemplaar)" >
-                            {{reservering?.timestamp}}
+                            <span id="UserDate">{{reservering?.timestamp}}</span>
                         </a>
                       </a>
                       </td>

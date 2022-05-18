@@ -46,7 +46,7 @@
 
 <!-- Notificatie voor geen reserveringen -->
 <div *ngIf="reserveringen?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-	<div class="alert alert-info" role="alert">
+	<div style= "border-color: rgba(130, 130, 130, 0.85)  ;color:black ;background-color: rgba(130, 130, 130, 0.85); box-shadow: 8px 8px 5px rgb(100, 100, 100) ; " class="alert alert-info" role="alert">
 	  <h4 class="alert-heading">Geen reserveringen!</h4>
 	  <p>Er zijn geen openstaande reserveringen gevonden.</p>
 	</div>
@@ -68,7 +68,7 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button  type="button" class="btn btn-danger" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
+                <button  type="button" class="btn btn-success" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
             </div>
 
