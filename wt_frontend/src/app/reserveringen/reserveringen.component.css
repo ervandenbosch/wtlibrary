@@ -1,4 +1,7 @@
-body{margin-top:20px;}
+body{
+	margin-top:20px;
+
+}
 
 
 #topbar{
@@ -44,6 +47,9 @@ table tbody tr:hover{
 .table {
     border-collapse: separate;
 	border-spacing: 1px 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	
 }
 /* .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
@@ -210,4 +216,8 @@ td {
     transform: translateX(-50%);
 	z-index: -1;
   
+}
+
+#y:hover {
+	transform: scale(1.015);
 }
