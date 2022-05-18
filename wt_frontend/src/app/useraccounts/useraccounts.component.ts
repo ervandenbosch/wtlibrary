@@ -4,7 +4,9 @@ import { NgForm } from '@angular/forms';
 import { User } from '../service/user';
 import { UserDataService } from '../service/user-data.service';
 import { TokenStorageService } from '../service/token-storage.service';
+import { logboekService } from '../logboek/logboek.service';
 import { faUserPlus,faBoxArchive, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { StatusHistory } from '../reserveringen/statushistory';
 
 @Component({
   selector: 'app-useraccounts',
@@ -30,8 +32,11 @@ export class UseraccountsComponent implements OnInit {
   faBoxArchive = faBoxArchive;
   faUsers = faUsers;
   public archive: boolean | undefined;
+  public currentboekenActief: StatusHistory[] | undefined;
   
-  constructor(private uds : UserDataService, private tokenStorageService: TokenStorageService) { }
+  constructor(private uds : UserDataService, 
+              private tokenStorageService: TokenStorageService,
+              private logboekService: logboekService) { }
 
   ngOnInit() {
     this.getUsers();
@@ -98,6 +103,9 @@ export class UseraccountsComponent implements OnInit {
       this.deleteUser = user;
       button.setAttribute('data-target', '#deleteUserModal');
     }
+    if (mode === 'archiveDenied'){
+      button.setAttribute('data-target', '#archiveDeniedModal');
+    }
     container?.appendChild(button);
     button.click();
   }
@@ -117,10 +125,28 @@ export class UseraccountsComponent implements OnInit {
   }
 
   public onArchivedUser(user: User): void {
-    user.functie = 'ARCHIVED';
-    this.uds.updateUser(user).subscribe(
-      (response: User) => {
-        this.getUsers();
+    this.archiveUser = user;
+    this.logboekService.getBoekenUser(this.archiveUser.id).subscribe(
+      (response: StatusHistory[]) => {
+        this.currentboekenActief = response.filter(
+          (item) =>
+            item.active &&
+            (item.status == 'uitgeleend' || item.status == 'gereserveerd')
+        );
+        if (this.currentboekenActief.length == 0) {
+          this.archiveUser!.functie = 'ARCHIVED';
+          this.uds.updateUser(this.archiveUser!).subscribe(
+            (response: User) => {
+              this.getUsers();
+            },
+            (error: HttpErrorResponse) => {
+              alert(error.message);
+            }
+          );
+        } 
+        else {
+          this.onOpenModal(this.archiveUser, "archiveDenied");
+        }
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

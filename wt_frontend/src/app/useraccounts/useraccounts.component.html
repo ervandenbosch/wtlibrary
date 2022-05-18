@@ -535,6 +535,26 @@
   </div>
 </div>
 
+<!-- Archiveren user Denied Modal -->
+<div class="modal fade" id="archiveDeniedModal" tabindex="-1" role="dialog" aria-labelledby="archiveDeniedModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="deniedLabel">Archivering user gecancelled</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <p>Deze user mag niet gearchiveerd worden, want deze user heeft nog openstaande reserveringen of uitgeleende boeken.</p>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 <!-- Notification for no users -->
 <div *ngIf="users?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
   <div class="alert alert-info" role="alert">
