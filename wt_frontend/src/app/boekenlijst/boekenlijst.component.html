@@ -16,7 +16,7 @@
     </button>  &nbsp; 
     <button 
     id="archiveButton"
-    *ngIf="isAdmin && getArchive()"
+    *ngIf="(isAdmin)&& getArchive()"
       class="btn btn-secondary "
      (click)="getArchive()"
     ><fa-icon [icon]="faBoxArchive"> </fa-icon>
@@ -24,7 +24,7 @@
     </button> 
     <button 
     id="archiveButton2"
-    *ngIf="isAdmin && getArchive()"
+    *ngIf="(isAdmin) && getArchive()"
       class="btn btn-secondary"
      (click)="getArchive()"
     ><fa-icon [icon]="faBookOpenReader"></fa-icon>

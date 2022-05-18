@@ -9,4 +9,5 @@ export interface User {
   functie: string;
   phoneNumber: string;
   linkedinURL: string;
+  userRole: string;
 }

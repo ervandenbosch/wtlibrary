@@ -28,6 +28,9 @@ export class UseraccountsComponent implements OnInit {
   public userlijstUser: User | undefined;
   username?: string;
   name?: string;
+  adminIsChecked = false;
+  isAdmin = false;
+  profileOfCurrentUser = false;
   faUserPlus = faUserPlus;
   faBoxArchive = faBoxArchive;
   faUsers = faUsers;
@@ -51,6 +54,10 @@ export class UseraccountsComponent implements OnInit {
       this.username = user.username;
       this.name = user.name;
       this.archive = false;
+    }
+
+    if (!!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN') || this.tokenStorageService.getUser().userRole == 'admin') {
+      this.isAdmin = true;
     }
   }
 
@@ -85,6 +92,10 @@ export class UseraccountsComponent implements OnInit {
       button.setAttribute('data-target', '#addUserModal');
     }if (mode === 'edit'){
       this.updateUser = user;
+      if (user.username == this.tokenStorageService.getUser().username){
+        this.profileOfCurrentUser = true;
+        console.log(true)
+      } else {this.profileOfCurrentUser = false; console.log(false)}
       button.setAttribute('data-target', '#editUserModal');
     }    
     if (mode === 'archive') {
@@ -199,6 +210,11 @@ export class UseraccountsComponent implements OnInit {
   }
 
   public onUpdateUser(user: User): void {
+    const checkbox = document.getElementById('userRole',
+    ) as HTMLInputElement | null;
+    if (checkbox?.checked) {
+      user.userRole = 'admin'
+    } else (user.userRole = 'user')
     this.uds.updateUser(user).subscribe(
       (response: User) => {
         this.getUsers();

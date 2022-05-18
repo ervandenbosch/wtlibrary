@@ -49,7 +49,7 @@
             id="last_name"
             placeholder="..."
             name="username"
-            readonly
+
           />
         </div>
         <input
@@ -69,7 +69,7 @@
             id="password"
             placeholder="..."
             name="password"
-            readonly
+
           />
         </div>
         <div class="mb-3 form-group">
@@ -120,12 +120,33 @@
             name="linkedinURL"
           />
         </div>
+        <!-- <div class="mb-3 form-group">
+          <label for="userRole" class="form-label"
+            ><b>role</b></label
+          >
+          <input
+            type="text"
+            ngModel="{{ editUser?.userRole}}"
+            class="form-control"
+            id="userRole"
+            placeholder="..."
+            name="userRole"
+          />
+        </div> -->
+        <div *ngIf="isAdmin && profileOfCurrentUser" class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="userRole"  name="userRole" checked disabled>
+          <label class="form-check-label" for="userRole">Admin</label>
+        </div>
+        <div *ngIf="isAdmin && !profileOfCurrentUser" class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="userRole"  name="userRole">
+          <label class="form-check-label" for="userRole">Admin</label>
+        </div>
         <div class="modal-footer">
           <button
             type="button"
             class="btn btn-success"
             data-dismiss="modal"
-            (click)="open(mymodal2)"
+            (click)="open(mymodal2); showlog2(editUser!)"
           >
             Opslaan
           </button>
@@ -427,7 +448,7 @@
             class="btn btn-success"
             style="width: 120px; color: black;"
             type="button"
-            (click)="open(mymodal1)"
+            (click)="open(mymodal1); showlog(editUser!)"
           >
             Wijzigen
           </button>

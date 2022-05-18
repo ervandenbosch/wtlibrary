@@ -8,18 +8,13 @@
         <img src="../assets/images/wtlogo.svg" />
       </a>
     </div>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item" *ngIf="showAdminBoard">
+    <!-- <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item" *ngIf="isAdmin" >
         <a href="/admin" class="nav-link text-dark" routerLink="admin"
           ><span style="font-weight: 650; font-size: medium;" >Admin-panel</span></a
         >
       </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link text-dark" routerLink="mod"
-          >Moderator Board</a
-        >
-      </li>
-    </ul>
+    </ul> -->
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
       <!-- <li class="nav-item">
@@ -31,18 +26,18 @@
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item" *ngIf="showAdminBoard">
+      <li class="nav-item" *ngIf="isAdmin">
         <i class="fa-solid fa-book-medical"></i>
         <a routerLink="/useraccounts" class="nav-link text-dark"
           ><span style="font-weight: 650; font-size: medium;"> User Accounts </span></a
         >
       </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
+      <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/reserveringen" class="nav-link text-dark">
           <span style="font-weight: 650; font-size: medium;"> Reserveringen</span></a
         >
       </li>      
-      <li class="nav-item" *ngIf="showAdminBoard">
+      <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/exemplaren" class="nav-link text-dark">
           <span style="font-weight: 650; font-size: medium;"> Exemplaren</span></a>
       </li>
@@ -50,9 +45,9 @@
         <a routerLink="/boekenlijst" class="nav-link text-dark">
           <span style="font-weight: 650; font-size: medium;"> Bibliotheek</span></a>
       </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
+      <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/logboek" class="nav-link text-dark">
-          <span style="font-weight: 650; font-size: medium;"> Logboek</span></a>
+        <span style="font-weight: 650; font-size: medium;"> Logboek</span></a>
       </li>
       <li>
         <a routerLink="/profielpagina/{{ id }}" class="nav-link text-dark">

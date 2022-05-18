@@ -12,6 +12,8 @@ import { TokenStorageService } from '../service/token-storage.service';
 import { Router } from '@angular/router';
 import * as icons from '@fortawesome/free-solid-svg-icons/'
 import { faBookMedical,faBoxArchive, faBookOpenReader  } from '@fortawesome/free-solid-svg-icons';
+import { UserDataService } from '../service/user-data.service';
+import { User } from '../service/user';
 
 @Component({
   selector: 'app-boekenlijst',
@@ -48,7 +50,8 @@ export class BoekenlijstComponent implements OnInit {
               private reserveringService: reserveringService,
               private CurrentUserService: CurrentUserService,
               private tokenStorageService: TokenStorageService,
-              private router: Router
+              private router: Router,
+              private userDataService: UserDataService
               ) {}
 
   public getBoeken(): void {
@@ -82,8 +85,10 @@ export class BoekenlijstComponent implements OnInit {
     this.getBoeken();
     this.CurrentUserService.getCurrentUser();
     this.currentUser = this.CurrentUserService.currentUser;
-    console.log(this.currentUser);
-    this.isAdmin = !!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN');
+
+    if (!!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN') || this.tokenStorageService.getUser().userRole == 'admin') {
+      this.isAdmin = true;
+    }
   }
 
   public getReserveringen(): void {

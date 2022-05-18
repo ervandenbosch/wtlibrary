@@ -11,8 +11,7 @@ export class MenuComponent implements OnInit {
   roles: string[] = [];
   
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+  isAdmin = false;
   username?: string;
   name?: string;
   email?: string;
@@ -30,8 +29,9 @@ export class MenuComponent implements OnInit {
 
       console.log(user);
 
-      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+    if (!!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN') || this.tokenStorageService.getUser().userRole == 'admin') {
+      this.isAdmin = true;
+    }
       this.username = user.username;
       this.name = user.name;
       this.email = user.email;

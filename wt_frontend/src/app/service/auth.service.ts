@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CanActivate, Router } from '@angular/router';
 import { TokenStorageService } from './token-storage.service';
 import { environment } from 'src/environments/environment';
+import { UserDataService } from './user-data.service';
+import { User } from './user';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -30,10 +32,10 @@ export class LoggedIn implements CanActivate {
   providedIn: 'root',
 })
 export class isAdmin implements CanActivate {
-  constructor(private token: TokenStorageService, private router: Router) {}
-
+  constructor(private token: TokenStorageService, private router: Router, private userDataService: UserDataService) {}
+  
   canActivate() {
-    if (this.token.getUser().roles.includes('ROLE_ADMIN')) {
+    if (this.token.getUser().roles.includes('ROLE_ADMIN') || this.token.getUser().userRole == 'admin') {
       return true;
     } else {
       this.router.navigateByUrl('/profielpagina/' + this.token.getUser().id);
@@ -70,7 +72,8 @@ export class AuthService {
     phoneNumber: string,
     functie: string,
     photo: string,
-    linkedinURL: string
+    linkedinURL: string,
+    userRole: string
   ): Observable<any> {
     return this.http.post(
       this.AUTH_API + 'signup',
@@ -83,6 +86,7 @@ export class AuthService {
         functie,
         photo,
         linkedinURL,
+        userRole
       },
       httpOptions
     );
