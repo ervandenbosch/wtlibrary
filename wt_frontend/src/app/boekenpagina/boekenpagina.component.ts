@@ -114,7 +114,7 @@ export class BoekenpaginaComponent implements OnInit {
   public getReserveringen (){
     this.logboekService.getBoek(this.route.snapshot.params['title']).subscribe(
       (response: StatusHistory[]) => {
-        this.reserveringen = response;
+        this.reserveringen = response.filter((item) => item.active);    
         for (var i = 0; i < this.reserveringen.length; i++) {
           this.reserveringen[i].timestamp = this.convertTimestamp(this.reserveringen[i].timestamp);
           if (this.reserveringen[i].user.id == this.currentUser.id) {
