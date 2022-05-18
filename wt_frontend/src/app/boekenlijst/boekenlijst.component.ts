@@ -82,7 +82,7 @@ export class BoekenlijstComponent implements OnInit {
     this.getBoeken();
     this.CurrentUserService.getCurrentUser();
     this.currentUser = this.CurrentUserService.currentUser;
-
+    console.log(this.currentUser);
     this.isAdmin = !!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN');
   }
 
