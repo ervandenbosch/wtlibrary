@@ -1,13 +1,13 @@
 body{
     margin-top:20px;
-    background: #f5f5f5;
 }
-.card {
-    /* border: none;
+
+/* .card {
+    border: none;
     -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
     box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
-    margin-bottom: 30px; */
-}
+    margin-bottom: 30px;
+} */
 .w-60 {
     width: 60px;
 }
@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .social-links li a {
     -webkit-border-radius: 50%;
-    background-color: rgba(89,206,181,.85);
+    background-color: rgba(25,135,84,255);
     border-radius: 50%;
     color: #fff;
     display: inline-block;
@@ -35,6 +35,17 @@ a {
     margin: 0px 5px 5px 0px;
 }
 
+#topbar{
+    position: relative;
+    padding: 12px;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 75%, rgba(130, 130, 130, 0.85) 75%);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    box-shadow: 8px 8px 5px rgb(100, 100, 100);
+}
+
 .wt {   
     opacity: 0.4;
     position: absolute;
@@ -44,3 +55,21 @@ a {
     z-index: -1;
   
 }
+
+#profielkaart {
+    box-shadow: 10px 10px 5px rgb(100, 100, 100);
+  }
+
+#profielkaart:hover {
+    transform: scale(1.015);
+ }
+
+#emailbox{
+    background-color: rgb(170, 195, 170, 0.85);
+}
+
+#phonebox{
+    background-color: rgb(170, 195, 170, 0.85);
+}
+
+ 

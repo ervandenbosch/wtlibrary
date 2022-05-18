@@ -4,6 +4,9 @@
     margin-right: 5%;
     margin-top: 3%;
 }
+.container{
+    
+}
 
 .tekstEnFoto {
     display: flex;
@@ -36,6 +39,8 @@ body {
 .knop {
     display: flex;
     justify-content: center;
+    flex-basis: 100%;
+    height: 0;
     
 }
 
