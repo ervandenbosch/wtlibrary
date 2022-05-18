@@ -10,6 +10,8 @@ import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { reserveringService } from '../reserveringen/reserveringen.service';
 import { StatusHistory } from '../reserveringen/statushistory';
 import { CurrentUserService } from '../service/current-user.service';
+import { logboekService } from '../logboek/logboek.service';
+import { TokenStorageService } from '../service/token-storage.service';
 
 // COMPONENT EIGENSCHAPPEN
 @Component({
@@ -22,12 +24,17 @@ import { CurrentUserService } from '../service/current-user.service';
 export class BoekenpaginaComponent implements OnInit {
 
   //Attributen
-  public exemplaren: Exemplaar[] | undefined 
+  public reserveringen!: StatusHistory[]
+  public exemplaren!: Exemplaar[];
   public editBoek: Boek | undefined;
+  public editBoek2: Boek | undefined;
+  public editExemplaar: Exemplaar | undefined;
+  public editReservering: StatusHistory | undefined;
   public isAvailable: boolean | undefined;
   public boekGereserveerd: boolean | undefined = false
   public aantal: number | undefined 
   public currentUser: any;
+  isAdmin = false;
 
 
   //Functie die het juiste boek ophaalt op basis van de id (title) in de URL
@@ -42,9 +49,7 @@ export class BoekenpaginaComponent implements OnInit {
     (error: HttpErrorResponse) => {
       alert(error.message);
     }
-    
     )
-    
   }
 
 
@@ -55,7 +60,6 @@ export class BoekenpaginaComponent implements OnInit {
     this.boekService.updateBoek(boek).subscribe(
       (response: Boek) => {
         this.getBoek();
-        this.boekGereserveerd = true;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -76,7 +80,8 @@ export class BoekenpaginaComponent implements OnInit {
             var reserveringJson = JSON.stringify(resObj);
             this.reserveringService.goedkeurReservering(reserveringJson, this.currentUser.id , exemplaar.id).subscribe(
               (response: StatusHistory) => {
- 
+                this.getReserveringen();
+                this.getExemplaren();
               },
               (error: HttpErrorResponse) => {
                 alert(error.message);
@@ -90,9 +95,57 @@ export class BoekenpaginaComponent implements OnInit {
         alert(error.message);
       }
     );
-
   }
-  
+
+  public convertTimestamp(timestamp: string) {
+    var date = new Date(timestamp);
+    var newTimestamp = [([
+        ("0" + date.getDate()).slice(-2),
+        ("0" + (date.getMonth()+1)).slice(-2),
+        date.getFullYear()
+      ].join('/')), ([
+        ("0" + date.getHours()).slice(-2),
+        ("0" + date.getMinutes()).slice(-2)
+      ].join(':'))
+      ].join(" ");
+    return newTimestamp
+  }
+
+  public getReserveringen (){
+    this.logboekService.getBoek(this.route.snapshot.params['title']).subscribe(
+      (response: StatusHistory[]) => {
+        this.reserveringen = response;
+        for (var i = 0; i < this.reserveringen.length; i++) {
+          this.reserveringen[i].timestamp = this.convertTimestamp(this.reserveringen[i].timestamp);
+          if (this.reserveringen[i].user.id == this.currentUser.id) {
+            this.boekGereserveerd = true;
+          }
+        }
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public getExemplaren () {
+    this.exemplaarService.getExemplarenBybookId(this.route.snapshot.params['title']).subscribe(
+      (response: Exemplaar[]) => {
+        this.exemplaren = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public isReserved(reservering: StatusHistory, exemplaar: Exemplaar): boolean{
+    var reserved = false;
+    if (exemplaar.id == reservering.exemplaar.id){
+      reserved = true;
+    }
+    return reserved;
+  }
 
   constructor(
     private router: Router,
@@ -101,14 +154,25 @@ export class BoekenpaginaComponent implements OnInit {
     private boekService: boekService,
     private exemplaarService: ExemplaarService,
     private reserveringService: reserveringService,
-    private CurrentUserService: CurrentUserService
+    private CurrentUserService: CurrentUserService,
+    private logboekService: logboekService,
+    private tokenStorageService: TokenStorageService
   ) { }
 
 
-
-
-
-
+    public getStatus(boek: Boek){
+      this.editBoek2 = boek
+      this.logboekService.getBoekenExemplaar(this.editBoek2.id).subscribe(
+        (response: StatusHistory[]) => {
+          console.log(response)
+          return true;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+      return false;
+    }
   
   closeResult: string = '';
 
@@ -136,12 +200,13 @@ export class BoekenpaginaComponent implements OnInit {
     button.click();
   }
 
-
-  
-
   ngOnInit(): void {
     this.getBoek();
+    this.getReserveringen();
+    this.getExemplaren();
     this.CurrentUserService.getCurrentUser();
     this.currentUser = this.CurrentUserService.currentUser;
+    this.isAdmin = !!this.tokenStorageService.getUser().roles.includes('ROLE_ADMIN');
+
   }
 }

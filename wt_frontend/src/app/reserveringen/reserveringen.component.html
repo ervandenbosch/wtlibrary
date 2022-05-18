@@ -1,6 +1,10 @@
+<div class="wt">
+   <img src="./assets/images/wtachtergrond.svg">
+</div>
+<body>
 <br><br>
 <div class = "container" id = "main-container">
-    <h2 style="text-align: center" class="item">Reserveringen ter goedkeuring</h2>
+    <h2 id="topbar" style="text-align: center" class="item">Reserveringen ter goedkeuring</h2>
 	<div class="row" id="main-row">
 		<div class="col-lg-12">
 			<div class="main-box clearfix">
@@ -21,9 +25,9 @@
                                 <td class="align-middle"><a routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
+                                <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
                                 <td class="align-middle">{{ tempReservering.exemplaar?.boek?.available }}</td>
-                                <td class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
-                                    <!-- <button class="btn btn-danger btn-sm" (click)="openBevestigingModal(tempReservering, 'afkeuren')"><span><i class="fa fa-thumbs-down"></i></span></button> -->
+                                <td style="background-color: rgb(130,130,130,255)" class="align-middle"> <button class="btn btn-success btn-sm mr-3" (click)="openBevestigingModal(tempReservering, 'goedkeuren')"><span><i class="fa fa-thumbs-up"></i></span></button> 
                                 </td> 
                             </tr>
                         </tbody>
@@ -33,6 +37,7 @@
         </div>
     </div>        
 </div>
+</body>
 
 <!-- Notificatie voor geen reserveringen -->
 <div *ngIf="reserveringen?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
@@ -58,8 +63,8 @@
                 </ul>
             </div>
             <div class="modal-footer">
+                <button  type="button" class="btn btn-danger" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
-                <button  type="button" class="btn btn-primary" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
             </div>
 
         </div>

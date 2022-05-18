@@ -28,6 +28,8 @@ export class MenuComponent implements OnInit {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 
+      console.log(user);
+
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.username = user.username;
