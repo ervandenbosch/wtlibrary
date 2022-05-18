@@ -18,6 +18,7 @@ export class UseraccountsComponent implements OnInit {
   showAdminBoard = false;
   public users!: User[];
   public archivedUsers!: User[];
+  public activeUsers!: User[];
   public updateUser: User | undefined;
   public deleteUser: User | undefined;
   public archiveUser: User | undefined;
@@ -53,6 +54,7 @@ export class UseraccountsComponent implements OnInit {
       (response : User[]) => {
         this.users = response;
         this.archivedUsers = response.filter((item) => item.functie == 'ARCHIVED')
+        this.activeUsers = response.filter((item) => item.functie !== 'ARCHIVED')
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

@@ -43,156 +43,156 @@
 </div>
 
 <div class="container" id="main-container">
-  <div class="row">
-    <div *ngFor="let user of users" class="col-md-6 col-xl-3">
-      <div *ngIf="!archive && user.functie !== 'ARCHIVED'">
-        <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
-          <div class="card-body row" style="height: 120px">
-            <div class="col-6">
-              <img
-                src="{{ user?.photo }}"
-                style="
-                  height: 100px;
-                  width: auto; /*maintain aspect ratio*/
-                  max-width: 120px;
-                  border-style: solid; border-width: 3px; border-color: gray;"
-                alt=""
-                class="img-fluid rounded-circle w-60"
-              />
-            </div>
-            <div class="col-6 card-naam align-self-center mb-0 ">
-              <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
-                ><h5 style="color: black;">{{ user.name }}</h5></a>
-              <p class="m-0">{{ user.functie }}</p>
-            </div>
+  <div class="row" *ngIf="!archive">
+    <div *ngFor="let user of activeUsers" class="col-md-6 col-xl-3">
+      <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
+        <div class="card-body row" style="height: 120px">
+          <div class="col-6">
+            <img
+              src="{{ user?.photo }}"
+              style="
+                height: 100px;
+                width: auto; /*maintain aspect ratio*/
+                max-width: 120px;
+                border-style: solid; border-width: 3px; border-color: gray;"
+              alt=""
+              class="img-fluid rounded-circle w-60"
+            />
           </div>
-          <ul class="list-group list-group-flush border-0" style="height: 80px">
-            <li id="emailbox" class="list-group-item">
-              <i class="fa fa-envelope float-right"></i>{{ user.username }}
-              <a href="#"></a>
-            </li>
-            <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
-              <i class="fa fa-phone float-right"></i>Nummer:
-              {{ user.phoneNumber }}
-            </li>
-          </ul>
-          <div class="card-body" style="background-color: rgb(130,130,130)">
-            <div class="float-right btn-group btn-group-sm">
-              <a
-                (click)="onOpenModal(user, 'edit')"
-                class="btn btn-success tooltips"
-                data-placement="top"
-                data-toggle="tooltip"
-                data-original-naam="Edit"
-                ><i class="fa fa-pencil"></i>
-              </a>
-              <a
-                (click)="onOpenModal(user, 'archive')"
-                class="btn btn-danger tooltips"
-                data-placement="top"
-                data-toggle="tooltip"
-                data-original-naam="Archive"
-                ><i class="fa fa-archive"></i
-              ></a>
-            </div>
-            <ul class="social-links list-inline mb-0">
-              <style>
-                #toHover {
-                  cursor: pointer;
-                }
-              </style>
-              <li
-                *ngIf="user.linkedinURL"
-                id="toHover"
-                (click)="openURLWindow(user.linkedinURL)"
-                class="list-inline-item"
-              >
-                <a
-                  naam=""
-                  data-placement="top"
-                  data-toggle="tooltip"
-                  class="tooltips"
-                  data-original-naam="LinkedIn"
-                  ><i class="fa fa-linkedin"></i
-                ></a>
-              </li>
-            </ul>
+          <div class="col-6 card-naam align-self-center mb-0 ">
+            <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
+              ><h5 style="color: black;">{{ user.name }}</h5></a>
+            <p class="m-0">{{ user.functie }}</p>
           </div>
         </div>
-      </div>
-      <div *ngIf="archive && user.functie == 'ARCHIVED'">
-        <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
-          <div class="card-body row" style="height: 120px">
-            <div class="col-6">
-              <img
-                src="{{ user?.photo }}"
-                style="
-                  height: 100px;
-                  width: auto; /*maintain aspect ratio*/
-                  max-width: 120px;
-                  border-style: solid; border-width: 3px; border-color: gray;"
-                alt=""
-                class="img-fluid rounded-circle w-60"
-              />
-            </div>
-            <div class="col-6 card-naam align-self-center mb-0 ">
-              <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
-                ><h5 style="color: black;">{{ user.name }}</h5></a>
-              <p class="m-0">{{ user.functie }}</p>
-            </div>
+        <ul class="list-group list-group-flush border-0" style="height: 80px">
+          <li id="emailbox" class="list-group-item">
+            <i class="fa fa-envelope float-right"></i>{{ user.username }}
+            <a href="#"></a>
+          </li>
+          <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
+            <i class="fa fa-phone float-right"></i>Nummer:
+            {{ user.phoneNumber }}
+          </li>
+        </ul>
+        <div class="card-body" style="background-color: rgb(130,130,130)">
+          <div class="float-right btn-group btn-group-sm">
+            <a
+              (click)="onOpenModal(user, 'edit')"
+              class="btn btn-success tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-naam="Edit"
+              ><i class="fa fa-pencil"></i>
+            </a>
+            <a
+              (click)="onOpenModal(user, 'archive')"
+              class="btn btn-danger tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-naam="Archive"
+              ><i class="fa fa-archive"></i
+            ></a>
           </div>
-          <ul class="list-group list-group-flush border-0" style="height: 80px">
-            <li id="emailbox" class="list-group-item">
-              <i class="fa fa-envelope float-right"></i>{{ user.email }}
-              <a href="#"></a>
-            </li>
-            <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
-              <i class="fa fa-phone float-right"></i>Nummer:
-              {{ user.phoneNumber }}
+          <ul class="social-links list-inline mb-0">
+            <style>
+              #toHover {
+                cursor: pointer;
+              }
+            </style>
+            <li
+              *ngIf="user.linkedinURL"
+              id="toHover"
+              (click)="openURLWindow(user.linkedinURL)"
+              class="list-inline-item"
+            >
+              <a
+                naam=""
+                data-placement="top"
+                data-toggle="tooltip"
+                class="tooltips"
+                data-original-naam="LinkedIn"
+                ><i class="fa fa-linkedin"></i
+              ></a>
             </li>
           </ul>
-          <div class="card-body" style="background-color: rgb(130,130,130)">
-            <div class="float-right btn-group btn-group-sm">
-              <a
-                (click)="onOpenModal(user, 'userlijst')"
-                class="btn btn-success tooltips"
-                data-placement="top"
-                data-toggle="tooltip"
-                data-original-naam="Userlijst"
-                ><i class="fa fa-users"></i>
-              </a>
-              <!-- <a
-                (click)="onOpenModal(user, 'deleteData')"
-                class="btn btn-danger tooltips"
-                data-placement="top"
-                data-toggle="tooltip"
-                data-original-naam="DeleteData"
-                ><i class="fa fa-trash"></i
-              ></a> -->
-            </div>
-            <ul class="social-links list-inline mb-0">
-              <style>
-                #toHover {
-                  cursor: pointer;
-                }
-              </style>
-              <li
-                *ngIf="user.linkedinURL"
-                id="toHover"
-                (click)="openURLWindow(user.linkedinURL)"
-                class="list-inline-item"
-              >
-                <a
-                  naam=""
-                  data-placement="top"
-                  data-toggle="tooltip"
-                  class="tooltips"
-                  data-original-naam="LinkedIn"
-                  ><i class="fa fa-linkedin"></i
-                ></a>
-              </li>
-            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="archive">
+    <div *ngFor="let user of archivedUsers" class="col-md-6 col-xl-3">
+      <div id="profielkaart" class="card m-b-30 mt-3 border-secondary" style="background-color: rgba(170, 195, 170, 0.85)">
+        <div class="card-body row" style="height: 120px">
+          <div class="col-6">
+            <img
+              src="{{ user?.photo }}"
+              style="
+                height: 100px;
+                width: auto; /*maintain aspect ratio*/
+                max-width: 120px;
+                border-style: solid; border-width: 3px; border-color: gray;"
+              alt=""
+              class="img-fluid rounded-circle w-60"
+            />
           </div>
+          <div class="col-6 card-naam align-self-center mb-0 ">
+            <a style="text-decoration: none" routerLink="/profielpagina/{{ user.id }}"
+              ><h5 style="color: black;">{{ user.name }}</h5></a>
+            <p class="m-0">{{ user.functie }}</p>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush border-0" style="height: 80px">
+          <li id="emailbox" class="list-group-item">
+            <i class="fa fa-envelope float-right"></i>{{ user.email }}
+            <a href="#"></a>
+          </li>
+          <li *ngIf="user.phoneNumber" id="phonebox" class="list-group-item">
+            <i class="fa fa-phone float-right"></i>Nummer:
+            {{ user.phoneNumber }}
+          </li>
+        </ul>
+        <div class="card-body" style="background-color: rgb(130,130,130)">
+          <div class="float-right btn-group btn-group-sm">
+            <a
+              (click)="onOpenModal(user, 'userlijst')"
+              class="btn btn-success tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-naam="Userlijst"
+              ><i class="fa fa-users"></i>
+            </a>
+            <!-- <a
+              (click)="onOpenModal(user, 'deleteData')"
+              class="btn btn-danger tooltips"
+              data-placement="top"
+              data-toggle="tooltip"
+              data-original-naam="DeleteData"
+              ><i class="fa fa-trash"></i
+            ></a> -->
+          </div>
+          <ul class="social-links list-inline mb-0">
+            <style>
+              #toHover {
+                cursor: pointer;
+              }
+            </style>
+            <li
+              *ngIf="user.linkedinURL"
+              id="toHover"
+              (click)="openURLWindow(user.linkedinURL)"
+              class="list-inline-item"
+            >
+              <a
+                naam=""
+                data-placement="top"
+                data-toggle="tooltip"
+                class="tooltips"
+                data-original-naam="LinkedIn"
+                ><i class="fa fa-linkedin"></i
+              ></a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
