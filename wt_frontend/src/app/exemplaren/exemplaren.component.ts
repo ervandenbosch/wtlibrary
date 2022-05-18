@@ -42,6 +42,7 @@ export class ExemplarenComponent implements OnInit {
         this.currentExemplaren = response;
         this.sortAz();
         this.currentStatus = "alle exemplaren";
+        this.first100();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -88,9 +89,7 @@ export class ExemplarenComponent implements OnInit {
     else {
       this.exemplaren = this.currentExemplaren;
     }
-
   }  
-
 
   sortAz() {
     this.exemplaren = this.currentExemplaren.sort((a, b) => a.boek.title.localeCompare(b.boek.title));
@@ -105,21 +104,21 @@ export class ExemplarenComponent implements OnInit {
 
   first200() {
     if (this.currentExemplaren.length > 200) {
-      this.exemplaren = this.currentExemplaren.slice(1, 199);
+      this.exemplaren = this.currentExemplaren.slice(100, 199);
       this.currentPage = 2;
     }
   }
 
   first300() {
     if (this.currentExemplaren.length > 300) {
-      this.exemplaren = this.currentExemplaren.slice(2, 299);
+      this.exemplaren = this.currentExemplaren.slice(200, 299);
       this.currentPage = 3;
     }
   }
 
   first400() {
     if (this.currentExemplaren.length > 400) {
-      this.exemplaren = this.currentExemplaren.slice(3, 399);
+      this.exemplaren = this.currentExemplaren.slice(300, 399);
       this.currentPage = 4;
     }
   }
