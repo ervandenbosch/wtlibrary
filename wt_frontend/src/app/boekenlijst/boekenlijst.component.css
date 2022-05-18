@@ -37,6 +37,10 @@ body{
 	color: #dd504c;
 }
 
+.table-link {
+	cursor: pointer;
+}
+
 /* USER LIST TABLE */
 td > img {
     position: relative;
