@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../service/user';
 import { UserDataService } from '../service/user-data.service';
 import { TokenStorageService } from '../service/token-storage.service';
-
+import { faUserPlus,faBoxArchive, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-useraccounts',
@@ -16,12 +16,20 @@ export class UseraccountsComponent implements OnInit {
   private roles: string[] = [];
   isLoggedIn = false;
   showAdminBoard = false;
-  public users: User[] | undefined;
+  public users!: User[];
+  public archivedUsers!: User[];
+  public activeUsers!: User[];
   public updateUser: User | undefined;
   public deleteUser: User | undefined;
+  public archiveUser: User | undefined;
+  public currentUser: User | undefined;
+  public userlijstUser: User | undefined;
   username?: string;
   name?: string;
-
+  faUserPlus = faUserPlus;
+  faBoxArchive = faBoxArchive;
+  faUsers = faUsers;
+  public archive: boolean | undefined;
   
   constructor(private uds : UserDataService, private tokenStorageService: TokenStorageService) { }
 
@@ -37,6 +45,7 @@ export class UseraccountsComponent implements OnInit {
 
       this.username = user.username;
       this.name = user.name;
+      this.archive = false;
     }
   }
 
@@ -44,11 +53,21 @@ export class UseraccountsComponent implements OnInit {
     this.uds.getUsers().subscribe(
       (response : User[]) => {
         this.users = response;
+        this.archivedUsers = response.filter((item) => item.functie == 'ARCHIVED')
+        this.activeUsers = response.filter((item) => item.functie !== 'ARCHIVED')
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
     )
+  }
+  
+  public getArchive(): boolean {
+    if (this.archive) {
+      this.archive = false;
+    } else {
+      this.archive = true}
+    return this.archive;
   }
 
   public onOpenModal(user:any, mode: string): void{
@@ -62,6 +81,18 @@ export class UseraccountsComponent implements OnInit {
     }if (mode === 'edit'){
       this.updateUser = user;
       button.setAttribute('data-target', '#editUserModal');
+    }    
+    if (mode === 'archive') {
+      this.archiveUser = user;
+      button.setAttribute('data-target', '#archiveUserModal');
+    }
+    if (mode === 'userlijst') {
+      this.userlijstUser = user;
+      button.setAttribute('data-target', '#userlijstUserModal');
+    }    
+    if (mode === 'deleteData'){
+      this.deleteUser = user;
+      button.setAttribute('data-target', '#deleteDataUserModal');
     }
     if (mode === 'delete'){
       this.deleteUser = user;
@@ -78,6 +109,49 @@ export class UseraccountsComponent implements OnInit {
         console.log(response);
         this.getUsers();
         addForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    )
+  }
+
+  public onArchivedUser(user: User): void {
+    user.functie = 'ARCHIVED';
+    this.uds.updateUser(user).subscribe(
+      (response: User) => {
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onUserlijstUser(user: User): void {
+    this.userlijstUser = user;
+    this.userlijstUser.functie = '?';
+    this.uds.updateUser(this.userlijstUser).subscribe(
+      (response: User) => {
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public onDeleteDataUser(user : User): void {
+    this.deleteUser = user;
+    this.deleteUser.name = "";
+    this.deleteUser.username = "default@wt.nl";    
+    this.deleteUser.linkedinURL = "";
+    this.deleteUser.photo = "";
+    this.deleteUser.phoneNumber = "";
+    this.deleteUser.functie = "DELETED"
+    this.uds.updateUser(this.deleteUser).subscribe(
+      (response: User) => {
+        this.getUsers();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
