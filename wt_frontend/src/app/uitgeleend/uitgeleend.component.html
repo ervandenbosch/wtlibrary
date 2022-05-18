@@ -1,0 +1,40 @@
+<div class = "container" id = "main-container">
+    <h2 class="item">Uitgeleende exemplaren</h2>
+
+	<div class="row" id="main-row">
+		<div class="col-lg-12">
+			<div class="main-box clearfix">
+				<div class="table-responsive">    
+                    <table class = "table user-list" id = "uitgeleend">
+                        <thead> 
+                            <tr>
+                                <th><span>Boek</span></th>
+                                <th><span>Exemplaar</span> </th>    
+                                <th><span>User</span></th>
+                                <th><span>Datum uitgeleend</span></th>            
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                    
+                        <tbody>
+                            <tr *ngFor="let tempUitgeleend of uitgeleend">
+                                <td class="align-middle">{{ tempUitgeleend.exemplaar.boek.title }}</td>
+                                <td class="align-middle">{{ tempUitgeleend.exemplaar.id}}</td>
+                                <td class="align-middle">{{ tempUitgeleend.user.name }}</td>
+                                <td class="align-middle">{{ tempUitgeleend.timestamp }}</td>
+                                <td class="align-middle"> <button class="btn btn-secondary btn-sm mr-3 dropdown-toggle" 
+                                    type="button" id="dropdownStatus" data-toggle="dropdown">Update status</button>
+                                    <div class="dropdown-menu">
+                                        <button class = "dropdown-item" type="button" (click)="updateStatus(tempUitgeleend, 'beschikbaar')">Beschikbaar</button>
+                                        <button class = "dropdown-item" type="button" (click)="updateStatus(tempUitgeleend, 'beschadigd')">Beschadigd</button>
+                                        <button class = "dropdown-item" type="button" (click)="updateStatus(tempUitgeleend, 'kwijt')">Kwijt</button>
+                                    </div>
+                                </td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div>

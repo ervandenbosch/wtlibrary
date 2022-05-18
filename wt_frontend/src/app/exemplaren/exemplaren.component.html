@@ -1,0 +1,294 @@
+<div class="wt">
+    <img src="./assets/images/wtachtergrond.svg">
+</div>
+
+<br><br>
+<h2 style="text-align: center">Exemplaren</h2>
+<div class = "container" id = "main-container">
+    <div class="row">
+        <div class="col-lg-12 card-margin">
+          <div class="card search-form">
+            <div class="card-body p-0">
+              <form id="search-form">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="row no-gutters">
+                      <div class="">
+                        <input
+                          type="search"
+                          (ngModelChange)="searchExemplaren(key.value)"
+                          #key="ngModel"
+                          ngModel
+                          name="key"
+                          id="searchLog"
+                          class="width-full outline-transparant"
+                          placeholder="Zoeken.."
+                          required
+                        />
+                      </div>
+                      <div class="col-lg-1 col-md-3 col-sm-12 p-0"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card card-margin">
+            <div class="card-body">
+              <div class="row search-body">
+                <div class="col-lg-12">
+                  <div class="search-result position-relative">
+                    <div
+                      class="d-flex justify-content-between flex-row result-header"
+                    >
+                      <div class="col">
+                        <div class="records p-2" style="font-size: 14px">
+                          Showing: <b>1- {{ exemplaren?.length }} </b> of
+                          <b>{{ exemplaren?.length }} </b>
+                          results
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="result-actions">
+                            <div class = "result-sorting ml-auto">
+                                <span style="font-size: 14px">Filter status:</span>
+                                <div class="dropdown">
+                                <button
+                                    class="btn dropdown-toggle pb-1"
+                                    type="button"
+                                    id="dropdownMenu2"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                    style="font-size: 14px"
+                                >
+                                    {{ currentStatus }}
+                                </button>
+                                <div
+                                    class="dropdown-menu"
+                                    style="font-size: 14px"
+                                    aria-labelledby="dropdownMenu2"
+                                >
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('alle exemplaren')"
+                                    >
+                                        alle exemplaren
+                                    </button>
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('beschikbaar')"
+                                    >
+                                        beschikbaar
+                                    </button>
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('gereserveerd')"
+                                    >
+                                        gereserveerd
+                                    </button>
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('uitgeleend')"
+                                    >
+                                        uitgeleend
+                                    </button>
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('beschadigd')"
+                                    >
+                                        beschadigd
+                                    </button>
+                                    <button
+                                    class="dropdown-item"
+                                    type="button"
+                                    (click)="filterStatus('kwijt')"
+                                    >
+                                        kwijt
+                                    </button>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                    <div class="result-body">
+                            <div class="table-responsive">    
+                                <table style="width: 100%" 
+                                class = "table user-list" 
+                                id = "exemplaren">
+                                    <thead
+                                    style="
+                                    border-bottom: 1px solid #e6e4e9;
+                                    box-shadow: 0 1px 1px rgb(0 0 0 / 0.2);
+                                    "
+                                    >
+                                        <tr>
+                                            <th><span>Boek</span></th>
+                                            <th style="text-align: center"><span>Exemplaar</span> </th>    
+                                            <th style="text-align: center"><span>Huidige status</span></th>     
+                                            <th style="text-align: center">&nbsp;</th>
+                                        </tr>
+                                    </thead>
+                                
+                                    <tbody>
+                                        <tr *ngFor="let exemplaar of exemplaren">
+                                            <td>
+                                                <div class="d-flex flex-col py-2">
+                                                <img
+                                                  src="{{ exemplaar.boek?.thumbnailUrl }}"
+                                                  style="max-width: 50px; border-radius: 0%"
+                                                />
+                                                <div class=".d-inline-flex flex-column">
+                                                  <div class="pl-1" style="font-size: 16px">
+                                                    <a href="/boek/{{ exemplaar.boek?.id }}"
+                                                      >{{ exemplaar.boek?.title }}
+                                                    </a>
+                                                  </div>
+                                                  <div class="pl-1" style="font-size: 12px">
+                                                    {{ exemplaar.boek?.authors }}
+                                                  </div>
+                                                  <div class="pt-2 pl-1" style="font-size: 10px">
+                                                    ISBN: {{ exemplaar.boek?.isbn }}
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            <td class="align-middle">{{ exemplaar.id }}</td>
+                                            <td class="align-middle">
+                                                <div *ngIf="exemplaar.staat == 'beschikbaar'"
+                                                class="widget-26-job-category bg-soft-base mt-2 p-1 m-auto"
+                                                style="
+                                                  width: 120px;
+                                                  border-radius: 15px;
+                                                  text-align: center;
+                                                "
+                                                >{{ exemplaar.staat }}
+                                                </div>
+                                                <div *ngIf="exemplaar.staat !== 'beschikbaar'"
+                                                class="widget-26-job-category bg-soft-danger mt-2 p-1 m-auto"
+                                                style="
+                                                width: 120px;
+                                                border-radius: 15px;
+                                                text-align: center;
+                                                "
+                                                >{{ exemplaar.staat }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle"> 
+                                                <button class="btn dropdown-toggle pb-1" 
+                                                type="button" id="dropdownStatus" data-toggle="dropdown" style="font-size: 14px">Update status</button>
+                                                <div class="dropdown-menu" style="font-size: 14px">
+                                                    <button *ngIf="exemplaar.staat !== 'beschikbaar'" class = "dropdown-item" type="button" (click)="updateStatus(exemplaar, 'beschikbaar')">Beschikbaar</button>
+                                                    <button *ngIf="exemplaar.staat !== 'uitgeleend'" class = "dropdown-item" type="button" (click)="openUserPickModal(exemplaar, 'uitgeleend')">Uitgeleend</button>
+                                                    <button *ngIf="exemplaar.staat !== 'beschadigd'" class = "dropdown-item" type="button" (click)="updateStatus(exemplaar, 'beschadigd')">Beschadigd</button>
+                                                    <button *ngIf="exemplaar.staat !== 'kwijt'" class = "dropdown-item" type="button" (click)="updateStatus(exemplaar, 'kwijt')">Kwijt</button>
+                                                </div>                                                
+                                            </td> 
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>        
+            </div>
+            <nav class="d-flex justify-content-center">
+                <ul
+                  class="pagination pagination-base pagination-boxed pagination-square mb-0"
+                >
+                  <li class="btn btn-sm btn-outline-primary">
+                    <a (click)="back()">
+                      <span aria-hidden="true">«</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <button class="btn btn-sm btn-outline-primary">
+                    <a (click)="first100()">1</a>
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary">
+                    <a (click)="first200()">2</a>
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary">
+                    <a (click)="first300()">3</a>
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary">
+                    <a (click)="first400()">4</a>
+                  </button>
+                  <button class="btn btn-sm btn-outline-primary">
+                    <a (click)="next()">
+                      <span aria-hidden="true">»</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </button>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div
+    class="modal fade"
+    id="userPickModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="userPickModalLabel"
+    aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="userPickModalLabel">Kies user voor uitlening</h5>
+            <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+            >
+             <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <div class="modal-body">
+        <button class="btn pb-1 dropdown-toggle" 
+            type="button" 
+            id="dropdownStatus" 
+            data-toggle="dropdown" 
+            *ngIf="pickedUser == undefined">
+             Kies user...
+        </button>        
+        <button class="btn pb-1 dropdown-toggle" 
+            type="button" 
+            id="dropdownStatus" 
+            data-toggle="dropdown"
+            *ngIf="pickedUser !== undefined">
+            {{pickedUser.name}}
+        </button>
+        <button class="btn pb-1 dropdown-toggle" 
+        type="button" 
+        id="dropdownStatus" 
+        data-toggle="dropdown" *ngIf(pickedUser.isDefined)>
+         {{pickedUser.name}}
+    </button>
+            <div class="dropdown-menu">
+                <button *ngFor="let user of users" 
+                    class = "dropdown-item" 
+                    type="button" 
+                    (click)="setUser(user)">{{user.name}}
+                </button>
+            </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="uitlenen()">Exemplaar uitlenen</button>
+        <!-- <button type="button" class="btn btn-danger" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button> -->
+    </div>
+</div>
