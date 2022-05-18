@@ -170,11 +170,12 @@ export class UseraccountsComponent implements OnInit {
   public onDeleteDataUser(user : User): void {
     this.deleteUser = user;
     this.deleteUser.name = "";
-    this.deleteUser.username = "default@wt.nl";    
+    this.deleteUser.username = "default" + user.id.toString() + "@wt.nl";  
+    this.deleteUser.email = "default" + user.id.toString() + "@wt.nl";  
     this.deleteUser.linkedinURL = "";
     this.deleteUser.photo = "";
     this.deleteUser.phoneNumber = "";
-    this.deleteUser.functie = "DELETED"
+    // this.deleteUser.functie = "DELETED";
     this.uds.updateUser(this.deleteUser).subscribe(
       (response: User) => {
         this.getUsers();
