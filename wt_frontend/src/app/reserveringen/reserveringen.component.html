@@ -2,9 +2,13 @@
    <img src="./assets/images/wtachtergrond.svg">
 </div>
 <body>
-<br><br>
-<div class = "container" id = "main-container">
-    <h2 id="topbar" class="item">Reserveringen ter goedkeuring &nbsp;&nbsp;&nbsp;</h2>
+<br /><br />
+
+<div id="topbar" class="col-lg-12 card-margin">
+    <br>
+    <h2>Reserveringen ter goedkeuring &nbsp;&nbsp;&nbsp;</h2>
+</div>
+<div class = "container" id = "main-container">  
 	<div class="row" id="main-row">
 		<div class="col-lg-12">
 			<div class="main-box clearfix">
@@ -21,8 +25,8 @@
                         </thead>
                     
                         <tbody>
-                            <tr *ngFor="let tempReservering of reserveringen">
-                                <td class="align-middle"><a routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
+                            <tr  id="y" *ngFor="let tempReservering of reserveringen">
+                                <td class="align-middle"><a style="color: black;text-decoration: none" routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
                                 <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
@@ -37,11 +41,12 @@
         </div>
     </div>        
 </div>
+
 </body>
 
 <!-- Notificatie voor geen reserveringen -->
 <div *ngIf="reserveringen?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-	<div class="alert alert-info" role="alert">
+	<div style= "border-color: rgba(130, 130, 130, 0.85)  ;color:black ;background-color: rgba(130, 130, 130, 0.85); box-shadow: 8px 8px 5px rgb(100, 100, 100) ; " class="alert alert-info" role="alert">
 	  <h4 class="alert-heading">Geen reserveringen!</h4>
 	  <p>Er zijn geen openstaande reserveringen gevonden.</p>
 	</div>
@@ -63,38 +68,13 @@
                 </ul>
             </div>
             <div class="modal-footer">
-                <button  type="button" class="btn btn-danger" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
+                <button  type="button" class="btn btn-success" (click)="onGoedgekeurd(goedReservering)" onclick="$('#goedgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
             </div>
 
         </div>
     </div>
 </div> 
-
-
-<!-- Afkeuren Modal -->
-<!-- <div class="modal fade" id="afkeurModal" tabindex="-1" role="dialog" aria-labelledby="afkeurModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"id="modal-basic-title">Reservering afkeuren?</h5>
-                <button type="button" class="close" aria-label="Close" data-dissmiss="modal"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Titel: afReservering?.title</li>
-                    <li class="list-group-item">User: afReservering?.name</li>
-                    <li class="list-group-item">Datum: afReservering?.dateReserved</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Nee</button>
-                <button  type="button" class="btn btn-danger" (click)="onAfgekeurd(afReservering)" onclick="$('#afgekeurdModal').modal('toggle');" data-dismiss="modal" >Ja</button>
-            </div>
-
-        </div>
-    </div>
-</div>  -->
 
 <!-- Bevestiging goedkeuring Modal -->
 <div class="modal fade" id="goedgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="goedgekeurdModalLabel" aria-hidden="true">
@@ -119,24 +99,3 @@
 <div class="wt">
     <img src="./assets/images/wtachtergrond.svg">
 </div>
-
-
-<!-- Bevestiging afkeuring Modal -->
-<!-- <div class="modal fade" id="afgekeurdModal" tabindex="-1" role="dialog" aria-labelledby="afgekeurdModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bevestigdLabel">Reservering afgekeurd</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>De reservering is afgekeurd.</p>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->

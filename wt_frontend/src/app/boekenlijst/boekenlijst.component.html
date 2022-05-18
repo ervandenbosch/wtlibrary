@@ -63,7 +63,7 @@
               <tr *ngIf="getArchive() && !archived(boek)" class="table-row">
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
-                  <a routerLink="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none">{{
+                  <a routerLink="/boek/{{ boek?.id }}" class="user-link" style="color: black; text-decoration: none; font-weight: 500;">{{
                     boek?.title
                   }}</a>
                   <span class="user-subhead">{{ boek?.authors }}</span>
@@ -97,11 +97,9 @@
                   <button
                   id="reserveerButton"
                   style="width: 175px"
-                    class="btn btn-outline-primary" 
+                    class="btn btn-success text-dark" 
                     >Reserveer
-                    <span class="fa-stack">
-                      <i class="fa fa-book fa-stack-1x"></i>
-                    </span>
+
                   </button>
                   </a>
                   <a *ngIf="boek.available == 0 && !isReserved(boek)" >
@@ -115,7 +113,7 @@
                     </button>
                     </a>
                   <a *ngIf="isAdmin" class="table-link" (click)="onOpenModal(boek, 'edit')">&nbsp;
-                    <span class="fa-stack">
+                    <span class="fa-stack" id = "kleineKnopjes">
                       <i class="fa fa-square fa-stack-2x"></i>
                       <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
                     </span>
@@ -126,7 +124,7 @@
                     (click)="onOpenModal(boek, 'archive')"
                   >
                     <span class="fa-stack">
-                      <i class="fa fa-square fa-stack-2x" style="color:lightslategrey"></i>
+                      <i class="fa fa-square fa-stack-2x"></i>
                       <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
                     </span>
                   </a>
@@ -135,7 +133,7 @@
               <tr *ngIf="getArchive() && archived(boek)">
                 <td>
                   <img src="{{ boek?.thumbnailUrl }}" alt="" />
-                  <a href="/boek/{{ boek?.id }}" class="user-link">{{
+                  <a style="color: black; text-decoration: none ; font-weight: 500" href="/boek/{{ boek?.id }}" class="user-link">{{
                     boek?.title
                   }}</a>
                   <span class="user-subhead">{{ boek?.authors }}</span>
@@ -151,9 +149,9 @@
                   </h3>
                 </td>
                 <td>
-                  <a href="#">{{ boek?.categories }}</a>
+                  <a style="color: black; text-decoration: none" href="#">{{ boek?.categories }}</a>
                 </td>
-                <td style="width: 25%">
+                <td style="width: 17%; background-color: rgb(130,130,130,255);">
                   <a *ngIf="isReserved(boek)">
                     <button
                     style="width: 175px"
@@ -167,8 +165,8 @@
                   <a *ngIf="!isReserved(boek) && boek.available > 0" (click)="setReserved(boek)">
                   <button
                   id="reserveerButton"
-                  style="width: 175px"
-                    class="btn btn-outline-primary" 
+                  style="width: 175px;"
+                    class="btn btn-success text-dark"  
                     >Reserveer
                     <span class="fa-stack">
                       <i class="fa fa-book fa-stack-1x"></i>
@@ -495,7 +493,7 @@
             <button
             (click)="onUpdateBoek(editForm.value)"
             onclick="$('#editBoekModal').modal('hide');"
-            class="btn btn-danger"
+            class="btn btn-success"
             data-dismiss="modal"
           >
             Ja
@@ -546,7 +544,7 @@
         <div class="modal-footer">
           <button
           (click)="onArchivedBoek(archivedBoek!)"
-          class="btn btn-danger"
+          class="btn btn-success"
           data-dismiss="modal"
         >
           Ja
@@ -591,7 +589,7 @@
         <div class="modal-footer">
           <button
           (click)="onBibliotheekBoek(bibliotheekBoek!)"
-          class="btn btn-danger"
+          class="btn btn-success"
           data-dismiss="modal"
         >
           Ja
@@ -636,7 +634,7 @@
         <div class="modal-footer">
           <button
           (click)="onDeleteBoek(deleteBoek!)"
-          class="btn btn-danger"
+          class="btn btn-success"
           data-dismiss="modal"
         >
           Ja

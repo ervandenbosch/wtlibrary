@@ -4,11 +4,13 @@
     left: 50%;
     top: 50%;
     transform: translateX(-50%);
-  
 }
 
 tr {
     display: table-row;
     vertical-align: inherit;
-    border-color: black;
   }
+
+.container{
+    padding-bottom: 24px;
+}

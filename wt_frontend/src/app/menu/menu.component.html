@@ -1,5 +1,5 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-light border">
+  <nav class="navbar sticky-top navbar-expand navbar-dark bg-light border border-secondary">
     <div>
       <a *ngIf="isLoggedIn" routerLink="/profielpagina/{{ id }}" class="navbar-brand m-2">
         <img src="../assets/images/wtlogo.svg" />
@@ -11,7 +11,7 @@
     <!-- <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item" *ngIf="isAdmin" >
         <a href="/admin" class="nav-link text-dark" routerLink="admin"
-          >Admin-panel</a
+          ><span style="font-weight: 650; font-size: medium;" >Admin-panel</span></a
         >
       </li>
     </ul> -->
@@ -29,29 +29,32 @@
       <li class="nav-item" *ngIf="isAdmin">
         <i class="fa-solid fa-book-medical"></i>
         <a routerLink="/useraccounts" class="nav-link text-dark"
-          >User Accounts </a
+          ><span style="font-weight: 650; font-size: medium;"> User Accounts </span></a
         >
       </li>
       <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/reserveringen" class="nav-link text-dark">
-          Reserveringen</a
+          <span style="font-weight: 650; font-size: medium;"> Reserveringen</span></a
         >
       </li>      
       <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/exemplaren" class="nav-link text-dark">
-          Exemplaren</a>
+          <span style="font-weight: 650; font-size: medium;"> Exemplaren</span></a>
       </li>
       <li>
-        <a routerLink="/boekenlijst" class="nav-link text-dark">Bibliotheek</a>
+        <a routerLink="/boekenlijst" class="nav-link text-dark">
+          <span style="font-weight: 650; font-size: medium;"> Bibliotheek</span></a>
       </li>
       <li class="nav-item" *ngIf="isAdmin">
         <a routerLink="/logboek" class="nav-link text-dark">Logboek</a>
       </li>
       <li>
-        <a routerLink="/profielpagina/{{ id }}" class="nav-link text-dark">Mijn account</a>
+        <a routerLink="/profielpagina/{{ id }}" class="nav-link text-dark">
+          <span style="font-weight: 650; font-size: medium;"> Mijn account</span></a>
       </li>
       <li class="nav-item">
-        <a href class="nav-link text-dark" (click)="logout()">Uitloggen</a>
+        <a href class="nav-link text-dark" (click)="logout()">
+          <span style="font-weight: 650; font-size: medium;"> Uitloggen</span></a>
       </li>
     </ul>
   </nav>

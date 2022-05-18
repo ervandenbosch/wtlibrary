@@ -291,7 +291,6 @@ export class BoekenlijstComponent implements OnInit {
     }
     if (mode === 'archive') {
       this.archivedBoek = boek;
-      console.log(this.archivedBoek)
       button.setAttribute('data-target', '#archiveBoekModal');
     }
     if (mode === 'bibliotheek') {

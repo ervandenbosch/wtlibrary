@@ -1,4 +1,7 @@
-body{margin-top:20px;}
+body{
+	margin-top:20px;
+
+}
 
 
 #topbar{
@@ -6,7 +9,8 @@ body{margin-top:20px;}
 	width:calc(100% + 20px);
 	right: 10px;
     padding: 12px;
-    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 74%, rgba(130, 130, 130, 0.85) 74%);
+	padding-top: 0;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 73%, rgba(130, 130, 130, 0.85) 73%);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
@@ -44,6 +48,9 @@ table tbody tr:hover{
 .table {
     border-collapse: separate;
 	border-spacing: 1px 20px;
+	padding-right: 20px;
+	padding-left: 20px;
+	
 }
 /* .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
@@ -210,4 +217,8 @@ td {
     transform: translateX(-50%);
 	z-index: -1;
   
+}
+
+#y:hover {
+	transform: scale(1.015);
 }

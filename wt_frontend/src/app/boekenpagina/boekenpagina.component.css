@@ -4,15 +4,31 @@
     margin-right: 5%;
     margin-top: 3%;
 }
-.container{
-    
-}
 
 .tekstEnFoto {
     display: flex;
     left: 0;
     color: black;
-    
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 30px;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 82%, rgba(130, 130, 130, 0.85) 82%);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    box-shadow: 8px 8px 5px rgb(100, 100, 100);
+}
+
+.metaInformatie{
+    position: relative;
+    padding: 30px;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 82%, rgba(130, 130, 130, 0.85) 82%);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+    box-shadow: 8px 8px 5px rgb(100, 100, 100);
 }
 
 body {
@@ -74,6 +90,10 @@ body {
   
 }
 
+#UserDate{
+    font-weight: 500;
+    font-size: 1.25rem;
+}
 
 
 .trgt {

@@ -85,6 +85,7 @@ const routes: Routes = [
   { path: 'uitgeleend', 
     component: UitgeleendComponent, 
     canActivate: [LoggedIn, isAdmin]},
+    
   { path: 'exemplaren', 
     component: ExemplarenComponent, 
     canActivate: [LoggedIn, isAdmin]},

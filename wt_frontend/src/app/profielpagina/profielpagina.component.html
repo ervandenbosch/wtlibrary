@@ -144,7 +144,7 @@
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-success"
             data-dismiss="modal"
             (click)="open(mymodal2); showlog2(editUser!)"
           >
@@ -389,7 +389,8 @@
   <div class="p-2 row">
     <div
       class="col-sm border border-dark rounded m-2"
-      style="background-color: white"
+      style="box-shadow: 8px 8px 5px rgb(100, 100, 100);
+      background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 86%, rgba(130, 130, 130, 0.85) 86%);"
     >
       <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
@@ -402,7 +403,8 @@
               max-width: 150px;
               border-radius: 50px;
               margin: auto;
-            "
+              border-style: solid; border-width: 3px; border-color: gray;"
+              class="img-fluid rounded-circle w-60"
           />
         </div>
         <table class="table">
@@ -443,8 +445,8 @@
 
         <div class="mt-3 text-center">
           <button
-            class="btn btn-primary"
-            style="width: 120px"
+            class="btn btn-success"
+            style="width: 120px; color: black;"
             type="button"
             (click)="open(mymodal1); showlog(editUser!)"
           >
@@ -455,7 +457,8 @@
     </div>
     <div
       class="m-2 col-sm border border-dark rounded position-relative"
-      style="background-color: white">
+      style="box-shadow: 8px 8px 5px rgb(100, 100, 100);
+      background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 86%, rgba(130, 130, 130, 0.85) 86%);">
       <h3 class="py-3 text-center">Mijn boeken</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of currentboekenActief">
@@ -489,28 +492,29 @@
           *ngIf="boekenActief?.length == 0"
           class="pb-5 col-lg-12 col-md-12 col-xl-12"
         >
-          <div class="alert alert-info" role="alert">
+          <div style= "border-color: black  ;color:black ;background-color: rgba(130, 130, 130, 0.85); " class="alert alert-info" role="alert">
             <h4 class="alert-heading">Geen boeken!</h4>
             <p>Er zijn geen geleende boeken gevonden.</p>
           </div>
         </div>
       </div>
 
-      <a routerLink="/mijnboeken" class="link">
+      <a routerLink="/mijnboeken" class="link" id="knopje">
         <button
           type="button"
-          class="btn btn-sm btn-warning position-absolute"
+          class="btn btn-sm btn btn-success position-absolute "
           style="bottom: 5px; right: 5px"
           *ngIf="moreBoeken"
         >
-          Go to list..
+          Meer..
         </button>
       </a>
     </div>
 
     <div
       class="m-2 col-sm border border-dark rounded position-relative"
-      style="background-color: white">
+      style="box-shadow: 8px 8px 5px rgb(100, 100, 100);
+      background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 86%, rgba(130, 130, 130, 0.85) 86%);">
       <h3 class="py-3 text-center">Mijn geschiedenis</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of currentboekenVroeger">
@@ -541,7 +545,7 @@
           *ngIf="boekenVroeger?.length == 0"
           class="pb-5 col-lg-12 col-md-12 col-xl-12"
         >
-          <div class="alert alert-info" role="alert">
+          <div style= "border-color: black  ;color:black ;background-color: rgba(130, 130, 130, 0.85); " class="alert alert-info" role="alert">
             <h4 class="alert-heading">Geen geschiedenis!</h4>
             <p>Er zijn geen boeken gevonden.</p>
           </div>

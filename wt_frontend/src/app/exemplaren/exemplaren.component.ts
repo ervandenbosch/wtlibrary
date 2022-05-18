@@ -187,7 +187,6 @@ export class ExemplarenComponent implements OnInit {
         alert(error.message);
       }
     );
-
   }
 
   public updateStatus(exemplaar: Exemplaar, newStatus: string): void {

@@ -33,12 +33,14 @@ a {
 
 #topbttn{
     margin: 0px 5px 5px 0px;
+    color: black;
 }
 
 #topbar{
     position: relative;
     padding: 12px;
-    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 75%, rgba(130, 130, 130, 0.85) 75%);
+    padding-top: 0;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 73%, rgba(130, 130, 130, 0.85) 73%);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
@@ -52,12 +54,13 @@ a {
     left: 50%;
     top: 50%;
     transform: translateX(-50%);
-    z-index: -1;
+    z-index: 0;
   
 }
 
 #profielkaart {
     box-shadow: 10px 10px 5px rgb(100, 100, 100);
+    z-index: 1;
   }
 
 #profielkaart:hover {
