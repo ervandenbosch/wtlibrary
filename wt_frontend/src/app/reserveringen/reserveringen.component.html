@@ -22,7 +22,7 @@
                     
                         <tbody>
                             <tr *ngFor="let tempReservering of reserveringen">
-                                <td class="align-middle"><a routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
+                                <td class="align-middle"><a style="color: black;text-decoration: none" routerLink="/boek/{{tempReservering.exemplaar.boek.id}}"> {{ tempReservering.exemplaar.boek.title }}</a></td>
                                 <td class="align-middle">{{ tempReservering.user.name }}</td>
                                 <td class="align-middle">{{ tempReservering.timestamp }}</td>
                                 <!-- <td class="align-middle">{{ tempReservering.available }}</td> -->
