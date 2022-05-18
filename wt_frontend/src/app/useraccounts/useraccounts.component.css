@@ -33,12 +33,14 @@ a {
 
 #topbttn{
     margin: 0px 5px 5px 0px;
+    color: black;
 }
 
 #topbar{
     position: relative;
     padding: 12px;
-    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 75%, rgba(130, 130, 130, 0.85) 75%);
+    padding-top: 0;
+    background: linear-gradient(45deg, rgba(170, 195, 170, 0.85) 73%, rgba(130, 130, 130, 0.85) 73%);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;

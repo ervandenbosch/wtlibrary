@@ -9,5 +9,8 @@
 tr {
     display: table-row;
     vertical-align: inherit;
-    border-color: black;
   }
+
+.container{
+    padding-bottom: 24px;
+}
