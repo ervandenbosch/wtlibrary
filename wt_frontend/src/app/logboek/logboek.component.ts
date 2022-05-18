@@ -99,6 +99,7 @@ export class LogboekComponent implements OnInit {
           );
         }
         this.sortDatumDown();
+        this.first100();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -113,21 +114,21 @@ export class LogboekComponent implements OnInit {
 
   first200() {
     if (this.currentLogs.length > 200) {
-      this.logs = this.currentLogs.slice(1, 199);
+      this.logs = this.currentLogs.slice(100, 199);
       this.currentPage = 2;
     }
   }
 
   first300() {
     if (this.currentLogs.length > 300) {
-      this.logs = this.currentLogs.slice(2, 299);
+      this.logs = this.currentLogs.slice(200, 299);
       this.currentPage = 3;
     }
   }
 
   first400() {
     if (this.currentLogs.length > 400) {
-      this.logs = this.currentLogs.slice(3, 399);
+      this.logs = this.currentLogs.slice(300, 399);
       this.currentPage = 4;
     }
   }
