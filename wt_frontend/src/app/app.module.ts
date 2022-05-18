@@ -22,6 +22,8 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { LogboekComponent } from './logboek/logboek.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { isAdmin, LoggedIn } from './service/auth.service';
+import { UitgeleendComponent } from './uitgeleend/uitgeleend.component';
+import { ExemplarenComponent } from './exemplaren/exemplaren.component';
 import { MijnhistoryComponent } from './mijnhistory/mijnhistory.component';
 import { MijnboekenComponent } from './mijnboeken/mijnboeken.component';
 
@@ -42,6 +44,8 @@ import { MijnboekenComponent } from './mijnboeken/mijnboeken.component';
     BoardModeratorComponent,
     BoardUserComponent,
     LogboekComponent,
+    UitgeleendComponent,
+    ExemplarenComponent,
     MijnhistoryComponent,
     MijnboekenComponent,
   ],

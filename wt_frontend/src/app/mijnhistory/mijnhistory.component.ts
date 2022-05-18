@@ -161,6 +161,11 @@ export class MijnhistoryComponent implements OnInit {
         this.currentboekenVroeger = response.filter(
           (item) => !item.active && item.status == 'uitgeleend'
         );
+        for (var i = 0; i < this.currentboekenVroeger.length; i++) {
+          this.currentboekenVroeger[i].timestamp = this.convertTimestamp(
+            this.currentboekenVroeger[i].timestamp
+          );
+        }
         this.sortDatumDown();
       },
       (error: HttpErrorResponse) => {

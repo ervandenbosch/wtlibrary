@@ -4,4 +4,4 @@ export interface Exemplaar {
     staat: String;
     availability: boolean;
     bookCode: String;
-  }
+  }    

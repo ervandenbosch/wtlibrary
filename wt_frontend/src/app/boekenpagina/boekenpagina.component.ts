@@ -5,7 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Boek } from '../boekenlijst/boek';
 import { boekService } from './boekenpagina.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Exemplaar } from '../exemplaar/exemplaar';
+import { Exemplaar } from '../reserveringen/exemplaar';
 import { ExemplaarService } from '../exemplaar/exemplaar.service';
 import { reserveringService } from '../reserveringen/reserveringen.service';
 import { StatusHistory } from '../reserveringen/statushistory';
@@ -56,7 +56,7 @@ export class BoekenpaginaComponent implements OnInit {
 
   //Functie het aantal beschikbare exemplaren met 1 verminderd na een reservering
   public onUpdate(boek : Boek) {
-    boek.available = boek.available - 1
+    boek.available = boek.available - 1;
     this.boekService.updateBoek(boek).subscribe(
       (response: Boek) => {
         this.getBoek();
@@ -114,7 +114,7 @@ export class BoekenpaginaComponent implements OnInit {
   public getReserveringen (){
     this.logboekService.getBoek(this.route.snapshot.params['title']).subscribe(
       (response: StatusHistory[]) => {
-        this.reserveringen = response;
+        this.reserveringen = response.filter((item) => item.active);    
         for (var i = 0; i < this.reserveringen.length; i++) {
           this.reserveringen[i].timestamp = this.convertTimestamp(this.reserveringen[i].timestamp);
           if (this.reserveringen[i].user.id == this.currentUser.id) {

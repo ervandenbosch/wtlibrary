@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { Exemplaar } from './exemplaar';
+// import { Exemplaar } from './exemplaar';
+import { Exemplaar } from '../reserveringen/exemplaar';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class ExemplaarService {
   constructor(private http: HttpClient) {}
 
   public getExemplaren(): Observable<Exemplaar[]> {
-    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/all`);
+    return this.http.get<Exemplaar[]>(`${this.apiServerUrl}/exemplaar/exemplaren/all`);
   }
 
   public addExemplaar(exemplaar: Exemplaar): Observable<Exemplaar> {

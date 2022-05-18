@@ -14,6 +14,8 @@ import { LogboekComponent } from './logboek/logboek.component';
 import { LoggedIn, isAdmin } from './service/auth.service';
 import { MijnboekenComponent } from './mijnboeken/mijnboeken.component';
 import { MijnhistoryComponent } from './mijnhistory/mijnhistory.component';
+import { UitgeleendComponent } from './uitgeleend/uitgeleend.component'
+import { ExemplarenComponent } from './exemplaren/exemplaren.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -79,6 +81,12 @@ const routes: Routes = [
     component: MijnhistoryComponent,
     canActivate: [LoggedIn],
   },
+  { path: 'uitgeleend', 
+    component: UitgeleendComponent, 
+    canActivate: [LoggedIn, isAdmin]},
+  { path: 'exemplaren', 
+    component: ExemplarenComponent, 
+    canActivate: [LoggedIn, isAdmin]},
 ];
 
 @NgModule({

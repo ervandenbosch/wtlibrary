@@ -44,6 +44,7 @@ export class MijnboekenComponent implements OnInit {
     this.sortAz();
   }
 
+  
   public getBoekenUser() {
     this.logboekService.getBoekenUser(this.currentUser.id).subscribe(
       (response: StatusHistory[]) => {
@@ -52,6 +53,11 @@ export class MijnboekenComponent implements OnInit {
             item.active &&
             (item.status == 'uitgeleend' || item.status == 'gereserveerd')
         );
+        for (var i = 0; i < this.currentboekenActief.length; i++) {
+          this.currentboekenActief[i].timestamp = this.convertTimestamp(
+            this.currentboekenActief[i].timestamp
+          );
+        }
         this.currentboekenVroeger = response.filter(
           (item) => !item.active && item.status == 'uitgeleend'
         );
