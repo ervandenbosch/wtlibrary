@@ -365,7 +365,7 @@
   <div class="p-2 row">
     <div
       class="col-sm border border-dark rounded m-2"
-      style="background-color: white"
+      style="background-color: rgba(170, 195, 170)"
     >
       <div class="container">
         <h3 class="py-3 text-center">Personalia</h3>
@@ -431,7 +431,7 @@
     </div>
     <div
       class="m-2 col-sm border border-dark rounded position-relative"
-      style="background-color: white">
+      style="background-color: rgba(170, 195, 170);">
       <h3 class="py-3 text-center">Mijn boeken</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of currentboekenActief">
@@ -472,21 +472,21 @@
         </div>
       </div>
 
-      <a routerLink="/mijnboeken" class="link">
+      <a routerLink="/mijnboeken" class="link" id="knopje">
         <button
           type="button"
-          class="btn btn-sm btn-warning position-absolute"
+          class="btn btn-sm btn btn-primary position-absolute "
           style="bottom: 5px; right: 5px"
           *ngIf="moreBoeken"
         >
-          Go to list..
+          Meer..
         </button>
       </a>
     </div>
 
     <div
       class="m-2 col-sm border border-dark rounded position-relative"
-      style="background-color: white">
+      style="background-color: rgba(170, 195, 170); z-index: 1;">
       <h3 class="py-3 text-center">Mijn geschiedenis</h3>
       <div class="col-sm mb-5">
         <div *ngFor="let boek of currentboekenVroeger">
@@ -517,7 +517,7 @@
           *ngIf="boekenVroeger?.length == 0"
           class="pb-5 col-lg-12 col-md-12 col-xl-12"
         >
-          <div class="alert alert-info" role="alert">
+          <div style= "border-color: black  ;color:black ;background-color: rgba(130, 130, 130, 0.85); " class="alert alert-info" role="alert">
             <h4 class="alert-heading">Geen geschiedenis!</h4>
             <p>Er zijn geen boeken gevonden.</p>
           </div>
