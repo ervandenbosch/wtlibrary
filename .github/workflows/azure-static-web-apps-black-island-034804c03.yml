@@ -29,7 +29,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: 'wt_frontend'
           api_location: ''
-          output_location: wt_frontend/dist/wt_frontend'
+          output_location: dist/wt_frontend'
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
